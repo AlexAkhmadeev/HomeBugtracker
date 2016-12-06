@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html ng-app="homeApp">
+<head>
+    <title>Прототип</title>
+    <!-- lib -->
+    <script type="text/javascript" src="js/lib/jquery-3.1.1.js"></script>
+    <script type="text/javascript" src="js/lib/angular.min.js"></script>
+    <script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+        <!-- /bootstrap -->
+    <!-- /lib -->
+
+    <!-- app files -->
+    <script type="text/javascript" src="js/app/homeApp.js"></script>
+    <script type="text/javascript" src="js/app/controllers/MenuCtrl.js"></script>
+    <script type="text/javascript" src="js/app/controllers/PianoCtrl.js"></script>
+    <script type="text/javascript" src="js/app/controllers/BugTrackerCtrl.js"></script>
+    <!-- /app files -->
+    
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="private" about="Запрет кэширования">
+    
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/components/dropdown.js"></script>
+    <script type="text/javascript" src="js/components/tableEditor.js"></script>
+    
+    <link href="css/main.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<!--form action="0index.html" method="POST">
+    <input name="exit" value="true" hidden>
+    <input type="submit" value="&nbsp;&nbsp;&nbsp;&nbsp;Exit&nbsp;&nbsp;&nbsp;&nbsp;" style="position: fixed; top: 10px; right: 10px" class="btn btn-danger pull-right">
+</form-->
+<header class="navbar-inverse">
+       <p>HSERVER</p>
+</header>
+<div id="main">
+
+    <div ng-controller="MenuCtrl" id="menu">
+        <br>
+        <a href="#/main"><button class="btn btn-primary">Главная</button></a>
+        <hr>
+        <a href="#"><button class="btn btn-warning menu-button">Спорт</button></a>
+        <a href="#/piano"><button class="btn btn-warning menu-button">Клавиши</button></a>
+        <hr>
+        <a href="#/bugtracker/select"><button class="btn btn-danger menu-button">Баг-трекер</button></a>
+    </div>
+
+
+    <div id="mainfield">
+        <ng-view></ng-view>
+    </div>
+
+</div>
+<footer class="navbar-inverse">
+</footer>
+</body>
+</html>

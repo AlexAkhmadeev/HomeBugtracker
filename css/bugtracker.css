@@ -1,0 +1,85 @@
+/*===================================================================================================================*/
+/*                                              ¡¿√-“–≈ ≈–                                                           */
+/*===================================================================================================================*/
+
+#bugtracker_wrapper .ticket_name {
+    padding-top: 10px;
+    padding-left: 10px;
+    color: #1cdaff;
+    font-size: 20px;
+}
+
+#bugtracker_wrapper .ticket_code {
+    color: #7ecacd;
+    font-size: 25px;
+}
+
+#bugtracker_wrapper .ticket {
+    color: #e4dd83;
+    font-size: 25px;
+}
+
+#bugtracker_wrapper .ticket_code:hover {
+    color: #abfcff;
+    cursor: pointer;
+}
+
+.ticket_head {
+    width: 100%;
+}
+
+hr.bugtracker {
+    border-color: ghostwhite;
+}
+
+td.ticket_status {
+    color: #7ecacd;
+    font-size: 25px;
+    width: 200px;
+    text-align: center;
+}
+
+td.ticket_status span {
+    color: #414443;
+    background: linear-gradient(to top, #577eba, #79e7ff);
+    padding: 2px 5px 2px 5px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+td.ticket_data {
+    color: #56000b;
+    padding: 2px 5px 2px 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+#bugtracker_wrapper .description {
+    padding-left: 5px;
+    color: #fffc9b;
+    font-size: 20px;
+}
+
+.ticket_contain {
+    color: #cacaca;
+    border: 1px solid ghostwhite;
+    border-radius: 0px;
+    padding: 15px 15px 15px 15px;
+    height: 500px;
+    overflow: auto;
+}
+
+.ticket_create {
+    color: green;
+}
+
+.create_ticket_form [name=title] {
+    width: 1000px;
+}
+
+.create_ticket_form [name=contain] {
+    width: 1000px;
+    height: 500px;
+    max-width: 1000px;
+    max-height: 500px;
+}

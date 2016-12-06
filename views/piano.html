@@ -1,0 +1,52 @@
+<link href="/css/piano.css" type="text/css" rel="stylesheet">
+<div id="piano_wrapper" ng-controller="PianoCtrl">
+
+    <div class="table_wrap">
+        <table id="beats" class="table table-bordered">
+            <thead>
+            <tr>
+                <td>#</td>
+                <td>Такты</td>
+                <td>Минуты</td>
+                <td>Сложность</td>
+                <td>Статус</td>
+                <td>Обновлено</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="beat in beats">
+                <td>{{beat.id}}</td>
+                <td>{{beat.beats}}</td>
+                <td>{{beat.minutes}}</td>
+                <td>{{beat.complexity}}</td>
+                <td>{{beat.status}}</td>
+                <td>{{beat.updated}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <script>new TableEditor(document.querySelector(".table_wrap"))</script>
+    </div>
+
+    <br>
+
+    <div id="add_beats">
+        <div class="add_beats_form_wrap">
+            <form name="add_beats_form">
+                <table>
+                    <tr>
+                        <td><label>Такты <b>c</b><input ng-model="beat.beat_from" name="beat_from" type="text" class="form-control" required></label></td>
+                        <td><label>Такты <b>по</b><input ng-model="beat.beat_to" name="beat_to" type="text" class="form-control" required></label></td>
+                        <td><label>Сложность<input ng-model="beat.complexity" name="complexity" type="text" class="form-control" required></label></td>
+                        <td><label>Статус<input ng-model="beat.status" name="status" type="text" class="form-control" required></label></td>
+                    </tr>
+                    <tr>
+                        <td><input ng-click="addbeats(beat, add_beats_form)" type="submit" value="Добавить такты" class="btn btn-primary"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+
+</div>

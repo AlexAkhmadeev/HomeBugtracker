@@ -1,0 +1,162 @@
+﻿        body {
+            background: rgba(60, 60, 60, 1);
+        }
+
+        @font-face {
+            font-family: a_LCDNova; /* Гарнитура шрифта */
+            src: url(/fonts/a_LCDNova.ttf); /* Путь к файлу со шрифтом */
+        }
+
+        /* Заголовки */
+        h4 {
+            color: ghostwhite;
+        }
+        /* /Заголовки */
+
+        hr {
+            border-color: rgba(80, 80, 80, 1);
+        }
+
+        /* Header */
+        header {
+            border-radius: 5px;
+            border: 1px solid black;
+            height: 50px;
+            background: rgba(50, 50, 50, 1);
+        }
+        
+        header p {
+            padding-left: 10px;
+            transition-property: all;
+            transition-duration: 1s;
+            color: #2d6d8b;
+            font-size: 40px;
+            font-family: a_LCDNova;
+            cursor: pointer;
+        }
+
+        header p:hover {
+            color: #6dc6ff;
+            text-shadow: 2px 0px #199ceb;
+            padding-left: 30px;
+        }
+        /* /Header */
+
+        /* Footer */
+        footer {
+            border-radius: 5px;
+            border: 1px solid black;
+            height: 50px;
+            background:rgba(50, 50, 50, 1);
+            padding: 5px 5px 5px 5px;
+        }
+        /* /Footer */
+
+        div#main {
+            width: 100%;
+            height: 660px;
+            margin-left: 0px;
+            margin-right: auto;
+        }
+
+
+        /* Menu */
+        div#menu {
+            border-radius: 5px;
+            height: 100%;
+            width:200px;
+            float: left;
+            background: rgba(50, 50, 50, 1);
+
+        }
+        div#menu ul {
+            padding-top:10px;
+            padding-left: 10px;
+        }
+        div#menu li {
+            width: 180px;
+            margin-bottom: 4px;
+        }
+        div#menu button {
+            width: 180px;
+            margin-left: 10px;
+        }
+
+        .menu-button {
+            margin-bottom: 10px;
+        }
+        /* /Menu */
+
+
+        div#mainfield {
+            height: 100%;
+            width: 87%;
+            margin-left: 200px;
+            background: rgba(80, 80, 80, 1);
+            padding: 10px 10px 10px 10px;
+        }
+
+/*===================================================================================================================
+/*                                          ГРАФИЧЕСКИЕ КОМПОНЕНТЫ
+/*===================================================================================================================
+
+
+        /* Dropdown */
+        button.dropdown-title {
+            height: 35px;
+            width: 350px;
+            border: 1px solid blue;
+            border-radius: 5px;
+            background: -webkit-linear-gradient(top, #52aefd 0%, #428bca 45%, #1976bf 45%, #1976bf 100%);
+            color: white;
+            font-weight: bold;
+        }
+
+        button.dropdown-title:hover {
+            background: -webkit-linear-gradient(top, #77c2fd 0%, #47aef2 45%, #1ba0f7 45%, #199ceb 100%);
+        }
+
+        div.list-div {
+            position: fixed;
+            z-index: 11;
+            display: none;
+            padding-bottom: 0px;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+
+        div.list-div::-webkit-scrollbar { background: #47aef2; border-radius: 5px  }
+        div.list-div::-webkit-scrollbar-button { background: #47aef2; border: 1px solid ghostwhite; border-radius: 5px }
+        div.list-div::-webkit-scrollbar-track { background: #77c2fd}
+        div.list-div::-webkit-scrollbar-thumb { background: #47aef2; border: 1px solid ghostwhite; border-radius: 5px }
+
+        ul.list-ul {
+            padding-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        li.list-item {
+            height: 35px;
+            width: 350px;
+            border: 1px solid rgba(255,255,255,0);
+            border-radius: 5px;
+            background: -webkit-linear-gradient(top, #52aefd 0%, #3c84bf 100%);
+            color: black;
+            text-align: center;
+            padding: 5px 5px 5px 5px;
+            z-index: 12;
+            transition-property: padding;
+            transition-duration: 1s;
+        }
+
+        li.list-item:hover {
+            background: -webkit-linear-gradient(top, #53afff 0%, #50b0ff 100%);
+            cursor: pointer;
+            padding-left: 10px;
+        }
+        /*/Dropdown */
+
+        /* TableEditor */
+
+
+        /* /TableEditor */
