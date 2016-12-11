@@ -2,7 +2,7 @@
 <table class="select_ticket_head_table">
     <tr>
         <td><input style="width: 350px;" ng-model="currentProject" type="text" placeholder="Фильтр..." class="form-control" ng-model="searchFilter"></td>
-        <td><button ng-click="getTargetView('/bugtracker/create')" style="width: 200px; float: right" class="btn btn-info">Создать</button></td>
+        <td><button ng-click="getTargetView('/bugtracker/create')" style="width: 200px; float: right" class="btn btn-success">Новый тикет</button></td>
     </tr>    
 </table>
 
@@ -10,6 +10,7 @@
 <table class="table table-bordered tickets head">
     <tr>
         <td class="code">Код</td>
+        <td class="type">Тип</td>
         <td class="title">Название</td>
         <td class="created">Статус</td>
         <td class="status">Создан</td>
@@ -18,10 +19,11 @@
 </table>
 <div class="ticket_select_wrap">     
 <table class="table table-bordered tickets">
-    <tr ng-click="selectTicket(ticket.id)" class="ticket_row" ng-repeat="ticket in tickets | filter:currentProject">
+    <tr ng-click="selectTicket(ticket.id, ticket.type)" class="ticket_row" ng-repeat="ticket in tickets | filter:currentProject">
         <td class="code">{{ticket.code}}-{{ticket.id}}</td>
+        <td ng-style="typeOfTicket(ticket.type)" class="type">{{ticket.type}}</td>
         <td class="title">{{ticket.title}}</td>
-        <td class="created">{{ticket.status}}</td>
+        <td ng-style="statusOfTicket(ticket.status)" class="created">{{ticket.status}}</td>
         <td class="status">{{ticket.created}}</td>
     </tr>
 </table>

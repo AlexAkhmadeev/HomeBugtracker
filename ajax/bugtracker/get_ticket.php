@@ -20,7 +20,8 @@ $currentTicket = array(
     "code" => $db->data['CODE'],
     "contain" => $db->data['CONTAIN'],
     "status" => $db->data['STATUS'],
-    "created" => $db->data['CREATED']
+    "created" => $db->data['CREATED'],
+    "type" => $db->data['TYPE']
 );
 
 echo json_encode($currentTicket);

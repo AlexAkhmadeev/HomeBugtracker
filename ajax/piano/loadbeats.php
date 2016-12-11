@@ -1,4 +1,4 @@
-<? require_once($_SERVER['DOCUMENT_ROOT']."/cfg/core.php"); // подключение ядра
+<?php require_once($_SERVER['DOCUMENT_ROOT']."/cfg/core.php"); // подключение ядра
 // ПОДКЛЮЧЕНИЕ К БД
 $db = new MyDB();
 $db->connect();
@@ -10,12 +10,12 @@ $beats = array();
 
 while($db->fetch()) {
     array_push($beats, array(
-        "id" => $db->data[ROW_ID],
-        "beats" => $db->data[BEATS],
-        "minutes" => $db->data[SPENT_TIME_MIN],
-        "complexity" => $db->data[COMPLEXITY],
-        "status" => $db->data[STATUS],
-        "updated" => $db->data[UPDATED],
+        "id" => $db->data['ROW_ID'],
+        "beats" => $db->data['BEATS'],
+        "minutes" => $db->data['SPENT_TIME_MIN'],
+        "complexity" => $db->data['COMPLEXITY'],
+        "status" => $db->data['STATUS'],
+        "updated" => $db->data['UPDATED'],
     ));
 }
 

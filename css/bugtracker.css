@@ -39,13 +39,14 @@ hr.bugtracker {
     cursor: pointer;
 }
 
-
-
 td.ticket_status {
     color: #7ecacd;
     font-size: 25px;
     width: 300px;
-    text-align: center;
+}
+
+td.ticket_type {
+    font-size: 25px;
 }
 
 td.ticket_status option {
@@ -80,19 +81,25 @@ td.ticket_create {
     border-radius: 2px;
     padding: 25px 15px 15px 15px;
     height: 500px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     cursor: pointer;
+    word-wrap: break-word;
 }
 
 pre {
-    border: 0px;
+    border: 0px solid red;
     border-radius: 0px;
     padding: 0px 0px 0px 0px;
     margin: 0px 0px 0px 0px;
     color: ghostwhite;
     font-size: 18px;
     background: #434343;
-    font-family: arial;
+    overflow-x: hidden;
+    font-family: "Helvetica Neue";
+    white-space: pre-wrap;
+
+
 }
 /*======================================= /currentTicketView ============================================*/
 
@@ -116,7 +123,11 @@ pre {
 }
 
 .tickets .code {
-    width: 100px;
+    width: 80px;
+}
+
+.tickets .type {
+    width: 80px;
 }
 
 .tickets .title {
@@ -143,9 +154,9 @@ pre {
 }
 
 .ticket_select_wrap {
-    border: 1px solid #e6b634;
+    border: 0px solid #e6b634;
     max-height: 510px;
-    overflow: auto;
+    overflow-y: scroll;
 }
 
 /*======================================= /selectTicketView ============================================*/

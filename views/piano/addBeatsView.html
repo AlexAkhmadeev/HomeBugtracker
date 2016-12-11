@@ -1,0 +1,18 @@
+<link href="/css/piano.css" type="text/css" rel="stylesheet">
+<div id="add_beats">
+    <div class="add_beats_form_wrap">
+        <form name="add_beats_form">
+            <table>
+                <tr>
+                    <td><label>Такты <b>c</b><input ng-model="beat.beat_from" name="beat_from" type="text" class="form-control" required></label></td>
+                    <td><label>Такты <b>по</b><input ng-model="beat.beat_to" name="beat_to" type="text" class="form-control" required></label></td>
+                    <td><label>Сложность<input ng-model="beat.complexity" name="complexity" type="text" class="form-control" required></label></td>
+                    <td><label>Статус<input ng-model="beat.status" name="status" type="text" class="form-control" required></label></td>
+                </tr>
+                <tr>
+                    <td><input ng-click="addbeats(beat, add_beats_form)" type="submit" value="Добавить такты" class="btn btn-primary"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

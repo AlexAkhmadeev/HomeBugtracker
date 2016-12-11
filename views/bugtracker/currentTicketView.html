@@ -2,12 +2,13 @@
     <table class="ticket_head">
         <tr>
             <td><span class="ticket">Тикет  </span><span class="ticket_code">{{currentTicket.code + "-" + currentTicket.id}}</span></td>
+            <td class="ticket_type" ng-style="currentTicketType()">{{currentTicket.type}}</td>
             <td class="ticket_status" id="list_of_status"></td>
             <td class="ticket_data"><span>{{currentTicket.created}}</span></td>
-            <td class="ticket_create"><button ng-click="getTargetView('/bugtracker/create')" style="float:right; width: 200px" class="btn btn-info">Новый тикет</button></td>
+            <td class="ticket_create"><button ng-click="getTargetView('/bugtracker/create')" style="float:right; width: 200px" class="btn btn-success">Новый тикет</button></td>
         </tr>
         <tr>
-    <td colspan="4" class="ticket_name">{{currentTicket.title}}</td>
+    <td colspan="5" class="ticket_name">{{currentTicket.title}}</td>
         </tr>
     </table>
 

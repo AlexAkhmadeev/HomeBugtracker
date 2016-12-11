@@ -13,9 +13,14 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
 
 
     /* Клавиши */
-    $routeProvider.when('/piano',
+    $routeProvider.when('/piano/all',
         {
-            templateUrl: 'views/piano.html',
+            templateUrl: 'views/piano/allBeatsView.html',
+            controller: 'PianoCtrl'
+        });
+    $routeProvider.when('/piano/add',
+        {
+            templateUrl: 'views/piano/addBeatsView.html',
             controller: 'PianoCtrl'
         });
     /* /Клавиши */
@@ -39,6 +44,14 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
         });
     /* /Багтрекер */
 
+
+    /* Упражнения */
+    $routeProvider.when('/sport/exercises',
+        {
+            templateUrl: 'views/sport/allExercisesView.html',
+            controller: 'SportCtrl'
+        });
+    /* /Упражнения */
 
     $routeProvider.otherwise({redirectTo: '/main'});
 

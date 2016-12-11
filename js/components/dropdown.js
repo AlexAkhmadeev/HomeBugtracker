@@ -102,7 +102,7 @@ function Dropdown(options) { // конструктор дропдауна
 function DropdownModern(options) { // конструктор дропдауна
     var title = options.title;
     var items = options.items;
-    this.width = "350px";
+    this.width = "200px";
 
     var container; // создаваемый элемент
 

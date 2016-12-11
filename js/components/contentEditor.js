@@ -18,7 +18,7 @@ function ContentEditor(contentFieldElement) {
     contentFieldElement.addEventListener("mouseenter", renderHint);
     contentFieldElement.addEventListener("mouseleave", removeHint);
 
-
+    // Рисуем табличку edit
     function renderHint() {
         if (options.editMode) return;
 
@@ -31,12 +31,14 @@ function ContentEditor(contentFieldElement) {
             hint.addEventListener("click", editContain);
     }
 
+    // Убираем табличку edit
     function removeHint() {
         if(!hint) return;
         contentFieldElement.removeChild(hint);
         //hint.removeEventListener("click", editContain);
     }
 
+    // Включаем режим редактирования
     function editContain() {
         options.editMode = true;
         removeHint();
@@ -49,10 +51,11 @@ function ContentEditor(contentFieldElement) {
         renderButtonPanel();
     }
 
+    // Рисуем textarea
     function renderTextArea() {
         textarea = document.createElement('TEXTAREA');
         textarea.classList.add("edit_window");
-        textarea.style.paddingTop = 30  + "px";
+        textarea.style.padding = "30px 20px 20px 20px";
         textarea.style.top = contentFieldElement.getBoundingClientRect().top  + "px";
         textarea.style.left = contentFieldElement.getBoundingClientRect().left + "px";
         textarea.style.maxWidth = textarea.style.width = contentFieldElement.offsetWidth + "px";
@@ -61,6 +64,7 @@ function ContentEditor(contentFieldElement) {
         contentFieldElement.appendChild(textarea);
     }
 
+    // Рисуем панель с кнопками ОК и X
     function renderButtonPanel() {
         panelButton = document.createElement('DIV');
         panelButton.classList.add("panel_button");
@@ -92,16 +96,19 @@ function ContentEditor(contentFieldElement) {
         contentFieldElement.appendChild(panelButton);
     }
 
-
+    // Убираем textarea
     function removeTextArea() {
         contentFieldElement.removeChild(textarea);
     }
 
+    // Убираем панель с кнопками
     function removeButtonPanel() {
         contentFieldElement.removeChild(panelButton);
         okButton.style.display = "none";
     }
 
+
+    // Откат изменений
     function rollBack() {
 
         removeTextArea();
@@ -112,6 +119,7 @@ function ContentEditor(contentFieldElement) {
 
     }
 
+    // Сохранение изменений
     function save() {
 
         var saveContent = textarea.value;

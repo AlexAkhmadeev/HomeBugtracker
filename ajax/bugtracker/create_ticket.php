@@ -9,10 +9,11 @@ $data = json_decode($postData, true);
 $title = $data['title'];
 $code = $data['code'];
 $contain = addslashes($data['contain']);
-$created = '10.10.2016';
+$created = date('d.m.Y');
 $status = 'Новый';
+$type = $data['type'];
 
-$query = "insert into HOME.H_BUGTRACKER (TITLE, CODE, CONTAIN, CREATED, STATUS) values ('$title','$code','$contain','$created','$status')";
+$query = "insert into HOME.H_BUGTRACKER (TITLE, CODE, CONTAIN, CREATED, STATUS, TYPE) values ('$title','$code','$contain','$created','$status','$type')";
 $db->run($query);
 
 echo json_encode($data);
