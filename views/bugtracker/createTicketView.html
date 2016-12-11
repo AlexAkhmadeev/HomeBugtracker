@@ -1,18 +1,22 @@
 <link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
-<div id="bugtracker_wrapper">
-
     <form name="create_ticket_form">
         <table class="create_ticket_form">
             <tr>
-                <td><label>Название<input ng-model="ticket.title" name="title" type="text" class="form-control" required></label></td>
+                <td class="ticket_form_label">Название</td>
+                <td></td>
             </tr>
             <tr>
-                <td><label>Описание<textarea ng-model="ticket.contain" name="contain" type="text" class="form-control" required></textarea></label></td>
+                <td><input ng-model="ticket.title" name="title" type="text" class="form-control" required></td>
+                <td id="project_list"></td>
             </tr>
             <tr>
-                <td><input ng-click="createTicket(ticket, create_ticket_form)" type="submit" class="form-control btn-primary" value="Создать"></td>
+                <td colspan="2" class="ticket_form_label">Описание</td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea ng-model="ticket.contain" name="contain" type="text" class="form-control" required></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><br><input ng-click="createTicket(ticket, create_ticket_form)" type="submit" class="form-control btn-info" value="Создать"></td>
             </tr>
         </table>
     </form>
-
-</div>

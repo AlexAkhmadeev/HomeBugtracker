@@ -101,6 +101,7 @@
 /*===================================================================================================================
 
 
+
         /* Dropdown */
         button.dropdown-title {
             height: 35px;
@@ -110,6 +111,11 @@
             background: -webkit-linear-gradient(top, #52aefd 0%, #428bca 45%, #1976bf 45%, #1976bf 100%);
             color: white;
             font-weight: bold;
+        }
+
+        button.clickable {
+            height: 35px;
+            width: 350px;
         }
 
         button.dropdown-title:hover {
@@ -154,9 +160,70 @@
             cursor: pointer;
             padding-left: 10px;
         }
+
+        li.list-item-modern {
+            height: 34px;
+            width: 350px;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 12;
+            transition-property: padding;
+            transition-duration: 1s;
+        }
         /*/Dropdown */
+
+
+
 
         /* TableEditor */
 
 
         /* /TableEditor */
+
+
+
+
+        /* ContentEditor */
+        .hint {
+            position: absolute;
+            width: 45px;
+            height: 25px;
+            color: #2a2c2f;
+            padding: 0px 2px 2px 4px;
+            font-size: 20px;
+            transition-property: color;
+            transition-duration: 0.2s;
+            background: -webkit-linear-gradient(top, #fff207 0%, #bfb91f 100%);
+        }
+
+        .hint:hover {
+            height: 25px;
+            color: #66e0fd;
+        }
+
+        .edit_window {
+            position: absolute;
+            color: black;
+        }
+
+        .panel_button {
+            position: absolute;
+            height: 27px;
+            z-index: 10;
+        }
+
+        .ok_button {
+            width: 50px;
+            position: relative;
+            color: black;
+            z-index: 11;
+        }
+
+        .cancel_button {
+            width: 50px;
+            position: relative;
+            color: black;
+            left: 50px;
+        }
+
+        /* /ContentEditor */

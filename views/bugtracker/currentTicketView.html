@@ -1,15 +1,13 @@
 <link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
-<div id="bugtracker_wrapper">
-
     <table class="ticket_head">
         <tr>
-            <td><span class="ticket">Тикет  </span><span class="ticket_code">SF-1</span></td>
-            <td class="ticket_status"><span>В работе</span></td>
-            <td class="ticket_data"><span>28.11.2016</span></td>
-            <td class="ticket_create"><a href="#/create_ticket">Создать</a></td>
+            <td><span class="ticket">Тикет  </span><span class="ticket_code">{{currentTicket.code + "-" + currentTicket.id}}</span></td>
+            <td class="ticket_status" id="list_of_status"></td>
+            <td class="ticket_data"><span>{{currentTicket.created}}</span></td>
+            <td class="ticket_create"><button ng-click="getTargetView('/bugtracker/create')" style="float:right; width: 200px" class="btn btn-info">Новый тикет</button></td>
         </tr>
         <tr>
-    <td class="ticket_name">Создать представление selectDoneExercisesView</td>
+    <td colspan="4" class="ticket_name">{{currentTicket.title}}</td>
         </tr>
     </table>
 
@@ -17,10 +15,13 @@
 
     <div class="description">Описание</div>
 
-    <div class="ticket_contain">
-        {{contain}}
+
+    <div ng-click="saveContent()" class="btn btn-success ok_button">ОК</div>
+    <div id="ticket_content" class="ticket_contain">
+        <pre id="ticket_content_pre">
+        {{currentTicket.contain}}
+        </pre>
     </div>
-
-
-
-</div>
+    <script>
+        new ContentEditor(document.querySelector("#ticket_content")); // Редактор контента
+    </script>

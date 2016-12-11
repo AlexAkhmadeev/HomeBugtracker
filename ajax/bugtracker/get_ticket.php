@@ -1,16 +1,26 @@
-<? require_once($_SERVER['DOCUMENT_ROOT']."/cfg/core.php"); // подключение ядра
+<?php require_once($_SERVER['DOCUMENT_ROOT']."/cfg/core.php"); // подключение ядра
 // ПОДКЛЮЧЕНИЕ К БД
+
 $db = new MyDB();
 $db->connect();
 
 $postData = file_get_contents('php://input');
 $data = json_decode($postData, true);
 
-$containFormated = addslashes($data[contain]);
+$ticketId = $data['ticket_id'];
 
-$query = "SELECT * FROM HOMEBASE.H_BUGTRACKER WHERE ROW_ID=2";
+$query = "select * from HOME.H_BUGTRACKER where row_id='$ticketId'";
 $db->run($query);
 
-$db->fetch();
+$db->row();
 
-echo $db->data;
+$currentTicket = array(
+    "id" => $db->data['ROW_ID'],
+    "title" => $db->data['TITLE'],
+    "code" => $db->data['CODE'],
+    "contain" => $db->data['CONTAIN'],
+    "status" => $db->data['STATUS'],
+    "created" => $db->data['CREATED']
+);
+
+echo json_encode($currentTicket);
