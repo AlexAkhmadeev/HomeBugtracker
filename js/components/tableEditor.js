@@ -1,10 +1,12 @@
 /**
  * Created by Александр on 27.11.2016.
  */
-function TableEditor(tableWrapElement) {
+function TableEditor(tableWrapElement, buttonPanel) {
 
         var table = tableWrapElement.children[0]; // Сама таблица
+        var panel = buttonPanel;
 
+        $(panel).hide();
 
         //alert(t.offsetTop + " " + t.offsetLeft);
 
@@ -15,26 +17,27 @@ function TableEditor(tableWrapElement) {
             var target = event.target;
 
             if(target.tagName != 'TD') {
-                remove();
+                remove(target);
                 return;
             }
 
-
-
             if(textField) {
-                remove();
+                remove(target);
             }
+
+            if(!$(target).hasClass("editable")) return;
 
 
             render(target);
-
         }
 
         function render(target) {
 
             textField = document.createElement('INPUT');
             textField.type = 'text';
-            textField.classList.add("form-control")
+            textField.classList.add("form-control");
+            $(textField).css("border-radius", "0px");
+            $(textField).val($(target).html());
             textField.style.position = 'fixed';
             textField.style.height = target.offsetHeight + 'px';
             textField.style.width = target.offsetWidth + 'px';
@@ -43,12 +46,29 @@ function TableEditor(tableWrapElement) {
             tableWrapElement.appendChild(textField);
             textField.focus();
 
+            $(panel).css({
+               "top" : textField.getBoundingClientRect().bottom + 5,
+               "left" : textField.getBoundingClientRect().left + 35
+            });
+            $(panel).show();
         }
 
-        function remove() {
+        function remove(target) {
             if(!textField) return;
             tableWrapElement.removeChild(textField);
             textField = null;
+            $(panel).hide();
+        }
+
+
+        function save() {
+
+
+        }
+
+
+        function rollback() {
+
         }
 
         tableWrapElement.addEventListener('scroll', remove); // Обработка скрола

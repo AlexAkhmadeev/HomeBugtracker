@@ -5,10 +5,12 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
 
     $scope.beats = {};
 
+
     // Загрузка данных с сервера
         $http.get('ajax/piano/loadbeats.php').success(function(data) {
                 $scope.beats = data;
             });
+
 
     // Загрузка данных на сервер
     $scope.addbeats = function(beat, beatform) {
@@ -20,9 +22,18 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
         }
     };
 
+
     // Переключение экранов
     $scope.getTargetView = function(path) {
         $location.path(path);
     };
+
+
+    // Сохранение изменений
+    $scope.save = function() {
+        alert(1);
+    };
+
+
 
 });
