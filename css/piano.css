@@ -109,4 +109,8 @@ div.table_wrap td {
     max-height: 510px;
     overflow-y: scroll;
 }
+
+.editable {
+    background: #f4fef1;
+}
 /*--------------------------------------/allBeatsView------------------------------*/

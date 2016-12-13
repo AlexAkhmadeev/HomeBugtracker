@@ -28,6 +28,7 @@ function TableEditor(tableWrapElement, buttonPanel) {
             }
 
             if(textField) {
+                rollback();
                 remove(target);
             }
 
@@ -39,12 +40,19 @@ function TableEditor(tableWrapElement, buttonPanel) {
 
         function clickHandler(event) {
             clickTarget = event.target;
+
             if(textField) {
                 console.log(clickTarget);
                 console.log(textField);
-                if(clickTarget == textField || target == textField) return;
+
+                if(clickTarget == textField || target == textField) {
+                    return;
+                }
+
+                rollback();
                 remove();
             }
+
         }
 
 
@@ -61,7 +69,7 @@ function TableEditor(tableWrapElement, buttonPanel) {
             textField.style.top = target.getBoundingClientRect().top + 'px';
             textField.style.left = target.getBoundingClientRect().left + 'px';
 
-            textField.setAttribute("id", "active_cell");
+            target.setAttribute("id", "active_cell");
 
             tableWrapElement.appendChild(textField);
             textField.focus();
@@ -87,7 +95,7 @@ function TableEditor(tableWrapElement, buttonPanel) {
 
 
         function rollback() {
-
+            target.removeAttribute("id");
         }
 
         tableWrapElement.addEventListener('scroll', remove); // Обработка скрола

@@ -16,8 +16,9 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
     $scope.addbeats = function(beat, beatform) {
         if(beatform.$valid) {
             $http.post("ajax/piano/addbeats.php", beat).success(function(data) {
-                alert(JSON.stringify(data, null, 8));
-                //document.body.innerHTML = JSON.stringify(data, null, 8);
+
+                $scope.getTargetView("/piano/all");
+
             });
         }
     };
@@ -31,7 +32,21 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
 
     // Сохранение изменений
     $scope.save = function() {
-        alert($("#active_cell").val() );
+
+        var $ac = $("#active_cell"); // Выбранная ячейка таблицы
+
+        //alert($ac.attr("data-col_name") + "\n" + $ac.attr("data-row_id") + "\n" + $ac.html());
+
+        $http.post("ajax/piano/edit_beats.php", {
+            "row_id" : $ac.attr("data-row_id"),
+            "value" : $ac.html(),
+            "col_name" : $ac.attr("data-col_name")
+        }).success(function(data) {
+
+            console.log(data);
+
+        });
+
     };
 
 

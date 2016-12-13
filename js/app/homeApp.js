@@ -23,6 +23,11 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
             templateUrl: 'views/piano/addBeatsView.html',
             controller: 'PianoCtrl'
         });
+    $routeProvider.when('/piano/stat',
+        {
+            templateUrl: 'views/piano/statisticsView.html',
+            controller: 'PianoCtrl'
+        });
     /* /Клавиши */
 
 
