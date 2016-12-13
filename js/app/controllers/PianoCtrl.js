@@ -31,7 +31,7 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
 
     // Сохранение изменений
     $scope.save = function() {
-        alert(1);
+        alert($("#active_cell").val() );
     };
 
 

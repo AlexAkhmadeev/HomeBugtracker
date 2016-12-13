@@ -8,13 +8,19 @@ function TableEditor(tableWrapElement, buttonPanel) {
 
         $(panel).hide();
 
+        $(panel).find(".ok_button").click(save);
+        $(panel).find(".cancel_button").click(rollback);
+
         //alert(t.offsetTop + " " + t.offsetLeft);
 
         // Рендеринг поля для редактирования
         var textField;
+        var target;
+        var clickTarget;
 
-        function clickHandler(event) {
-            var target = event.target;
+
+        function dblClickHandler(event) {
+            target = event.target;
 
             if(target.tagName != 'TD') {
                 remove(target);
@@ -27,9 +33,20 @@ function TableEditor(tableWrapElement, buttonPanel) {
 
             if(!$(target).hasClass("editable")) return;
 
-
             render(target);
         }
+
+
+        function clickHandler(event) {
+            clickTarget = event.target;
+            if(textField) {
+                console.log(clickTarget);
+                console.log(textField);
+                if(clickTarget == textField || target == textField) return;
+                remove();
+            }
+        }
+
 
         function render(target) {
 
@@ -43,6 +60,9 @@ function TableEditor(tableWrapElement, buttonPanel) {
             textField.style.width = target.offsetWidth + 'px';
             textField.style.top = target.getBoundingClientRect().top + 'px';
             textField.style.left = target.getBoundingClientRect().left + 'px';
+
+            textField.setAttribute("id", "active_cell");
+
             tableWrapElement.appendChild(textField);
             textField.focus();
 
@@ -62,8 +82,7 @@ function TableEditor(tableWrapElement, buttonPanel) {
 
 
         function save() {
-
-
+            $(target).html($(textField).val());
         }
 
 
@@ -72,10 +91,6 @@ function TableEditor(tableWrapElement, buttonPanel) {
         }
 
         tableWrapElement.addEventListener('scroll', remove); // Обработка скрола
-        document.addEventListener('dblclick', clickHandler); // Обработка двойного клика
-        document.addEventListener('click', function () {
-            if(textField) {
-                remove();
-            }
-        }); // Обработка двойного клика
+        document.addEventListener('dblclick', dblClickHandler); // Обработка двойного клика
+        document.addEventListener('click', clickHandler); // Обработка  клика
 }

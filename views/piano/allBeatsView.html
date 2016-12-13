@@ -27,20 +27,20 @@
         <table class="table table-bordered tickets">
             <tr ng-repeat="beat in beats"class="beat_row">
                 <td class="beats">{{beat.beats}}</td>
-                <td class="minutes editable">{{beat.minutes}}</td>
+                <td data-col_name="SPENT_TIME_MIN" data-row_id="{{beat.id}}" class="minutes editable">{{beat.minutes}}</td>
                 <td class="complexity">{{beat.complexity}}</td>
-                <td class="status editable">{{beat.status}}</td>
+                <td data-col_name="STATUS" data-row_id="{{beat.id}}" class="status editable">{{beat.status}}</td>
                 <td class="updated">{{beat.updated}}</td>
             </tr>
         </table>
     </div>
 
-    <script>new TableEditor(document.querySelector("#piano_table_wrap"), document.querySelector("#piano_button_panel"));
+    <script>
+        new TableEditor(document.querySelector("#piano_table_wrap"), document.querySelector("#piano_button_panel"));
         $(".panel_button").offset({
            "top" : document.querySelector("#asdad").getBoundingClientRect().bottom,
            "left" : $("#asdad").offset().left
         });
-
     </script>
 
 
