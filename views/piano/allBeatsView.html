@@ -7,7 +7,7 @@
 
 <table class="piano_head_table">
     <tr>
-        <td><span class="beats_title">Такты <span style="color: red">Внимание: база с продуктива</span></span></td>
+        <td class="beats_title">Такты <span style="color: red">Внимание: база с продуктива</span></td>
         <td><button ng-click="getTargetView('/piano/stat')" class="btn btn-success  add_beats_button">Статистика</button></td>
         <td><button ng-click="getTargetView('/piano/add')" class="btn btn-success  add_beats_button">Добавить такты</button></td>
     </tr>
@@ -26,7 +26,7 @@
 
     <div id="piano_table_wrap" class="beats_select_wrap">
         <table class="table table-bordered tickets">
-            <tr ng-repeat="beat in beats"class="beat_row">
+            <tr ng-repeat="beat in beats" class="beat_row">
                 <td class="beats">{{beat.beats}}</td>
                 <td data-col_name="SPENT_TIME_MIN" data-row_id="{{beat.id}}" class="minutes editable">{{beat.minutes}}</td>
                 <td class="complexity">{{beat.complexity}}</td>

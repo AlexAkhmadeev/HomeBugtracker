@@ -13,7 +13,6 @@ while($db->fetch()) {
         "id" => $db->data['ROW_ID'],
         "title" => $db->data['TITLE'],
         "code" => $db->data['CODE'],
-        //"contain" => $db->data['CONTAIN'],
         "status" => $db->data['STATUS'],
         "created" => $db->data['CREATED'],
         "type" => $db->data['TYPE']

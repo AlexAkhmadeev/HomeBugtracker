@@ -20,8 +20,6 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     // Задача или ошибка
     $scope.currentTicketType = function() {
 
-        console.log($rootScope.currentTypeOfTicket);
-
         if($rootScope.currentTypeOfTicket == "Задача") {
             return $scope.taskStyle;
         } else {
@@ -85,8 +83,8 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
             $rootScope.currentTicketId = ticketId;
             $rootScope.currentTypeOfTicket = ticketType;
             reloadCurrentTicket();
-            $location.path("/bugtracker/current");
-
+            console.log(angular.element(document.querySelector("#curViewTemplate")));
+            $scope.getTargetView("/bugtracker/current");
 
     };
 
@@ -95,8 +93,10 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     function reloadCurrentTicket() {
         $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $rootScope.currentTicketId}).success(function(data) {
 
+            //alert(JSON.stringify(data, null, 8));
             $rootScope.currentTicket = data;
             $rootScope.currentTypeOfTicket = data.type;
+
 
         });
     }
@@ -122,6 +122,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
             $rootScope.currentProject = item.innerHTML;
         }
     });
+
 
     // Получаем список типов тикета
     $http.post("ajax/lov/get_values.php", {"lov_type" : "TICKET_TYPE"}).success(function(data) {

@@ -17,6 +17,10 @@
             border-color: rgba(80, 80, 80, 1);
         }
 
+        hr.white {
+            border-color: ghostwhite;
+        }
+
         /* Header */
         header {
             border-radius: 5px;

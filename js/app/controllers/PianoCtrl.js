@@ -6,6 +6,25 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
     $scope.beats = {};
 
 
+    // Статистика
+    $scope.stat = {
+
+      "totalBeats" : 200,
+      "doneBeats" : 147,
+      "totalHours" : null,
+      "totalDays" : null
+
+    };
+
+    // Получение кол-ва минут
+    $http.get("ajax/piano/get_stat.php").success(function(data) {
+
+        $scope.stat.totalHours = (data/60).toFixed(1); // часы
+        $scope.stat.totalDays = (data/(60*24)).toFixed(1); // сутки
+
+    });
+
+
     // Загрузка данных с сервера
         $http.get('ajax/piano/loadbeats.php').success(function(data) {
                 $scope.beats = data;

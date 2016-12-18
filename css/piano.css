@@ -39,14 +39,15 @@ div.table_wrap td {
 
 /*-------------------------------------- allBeatsView------------------------------*/
 .piano_head_table {
-    margin-top: 5px;
+    margin-top: 10px;
     width: 100%;
 }
 
 .beats_title {
     color: #f7f67e;
-    padding-left: 50px;
+    padding-left: 10px;
     font-size: 25px;
+    width: 70%;
     transition-property: color;
     transition-duration: 500ms;
 }
@@ -58,7 +59,7 @@ div.table_wrap td {
 .add_beats_button {
     float: right;
     width: 200px;
-    margin-top: 5px;
+    padding-left: 10px;
 }
 
 .tickets {
@@ -114,3 +115,62 @@ div.table_wrap td {
     background: #f4fef1;
 }
 /*--------------------------------------/allBeatsView------------------------------*/
+
+
+
+/*--------------------------------------statisticsView------------------------------*/
+   .statistics_wrap {
+
+    }
+
+    .statistics_wrap .add_beats_button {
+        float: right;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .statistics_wrap .title {
+        text-align: left;
+        font-size: 25px;
+        width: 80%;
+        padding-left: 10px;
+        color: #f7f67e;
+    }
+
+    .statistics_wrap .label {
+        font-size: 25px;
+        color: lightblue;
+    }
+
+     .statistics_wrap .value {
+        font-size: 25px;
+        color: orange;
+    }
+/*--------------------------------------/statisticsView------------------------------*/
+
+
+
+
+/*--------------------------------------addBeatsView------------------------------*/
+    .add_beats_table td {
+
+        color: ghostwhite;
+        font-size: 20px;
+    }
+
+    #add_beats {
+        margin-top: 10px;
+    }
+
+    #add_beats .title {
+        color: #f7f67e;
+        font-size: 25px;
+        width: 90%;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    #add_beats .add_beats_button {
+        float: right;
+    }
+/*--------------------------------------/addBeatsView------------------------------*/

@@ -25,9 +25,13 @@ function ContentEditor(contentFieldElement) {
             hint = document.createElement('DIV');
             hint.innerHTML = "Edit";
             hint.classList.add("hint");
-            hint.style.top = contentFieldElement.getBoundingClientRect().top - hint.offsetHeight + "px";
-            hint.style.left = contentFieldElement.getBoundingClientRect().left - hint.offsetWidth + "px";
-            contentFieldElement.appendChild(hint);
+
+                setTimeout(function () {
+                    hint.style.top = contentFieldElement.getBoundingClientRect().top - hint.offsetHeight + "px";
+                    hint.style.left = contentFieldElement.getBoundingClientRect().left - hint.offsetWidth + "px";
+                    contentFieldElement.appendChild(hint);
+                }, 1);
+
             hint.addEventListener("click", editContain);
     }
 
@@ -89,6 +93,7 @@ function ContentEditor(contentFieldElement) {
         cancelButton.classList.add("btn-danger");
         cancelButton.classList.add("btn");
         cancelButton.classList.add("cancel_button");
+        cancelButton.style.marginLeft = "52px";
         cancelButton.innerHTML = "X";
         cancelButton.addEventListener("click", rollBack);
         panelButton.appendChild(cancelButton);
