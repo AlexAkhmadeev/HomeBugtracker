@@ -1,4 +1,4 @@
 .idea/
 logs/
-access.log
-error.log
+logs/access.log
+logs/error.log
