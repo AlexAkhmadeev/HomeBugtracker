@@ -1,2 +1,4 @@
 .idea/
 logs/
+access.log
+error.log
