@@ -17,13 +17,12 @@
 
         <div class="description">Описание</div>
 
+        <!-- КОСТЫЛЬ div ng-click="saveContent()" class="btn btn-success ok_button">ОК</div-->
 
-        <div ng-click="saveContent()" class="btn btn-success ok_button">ОК</div>
-
-        <div id="ticket_content" class="ticket_contain">
+        <div content-editor class="ticket_contain">
             <pre id="ticket_content_pre" ng-bind="currentTicket.contain"></pre>
         </div>
-        <script>
+        <!--  КОСТЫЛЬ  script>
             new ContentEditor(document.querySelector("#ticket_content")); // Редактор контента
-        </script>
+        </script-->
 </div>

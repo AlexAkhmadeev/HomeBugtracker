@@ -4,14 +4,22 @@
 var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($document, $rootScope, $scope, $http, $location, $templateCache, $routeParams) {
 
     // Объект текущего тикета
-    $rootScope.currentTicket = null;
+    $scope.currentTicket = null;
+
+    $scope.lolo = "asdkkasdsajdklsadklsad";
+
+    $scope.currentTicket = {"title" : "aaaaaaasss"};
+
+
+
+    $scope.lala = "13123123123123";
 
 
     // Идентификатор текущего тикета
-    $rootScope.currentTicketId = 1;
-    $rootScope.currentProject = "";
-    $rootScope.currentStatus = null;
-    $rootScope.currentTypeOfTicket = "";
+    $scope.currentTicketId = 1;
+    $scope.currentProject = "";
+    $scope.currentStatus = null;
+    $scope.currentTypeOfTicket = "";
 
     $scope.taskStyle = { color: "lightblue"};
     $scope.errorStyle = { color: "red"};
@@ -20,7 +28,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     // Задача или ошибка
     $scope.currentTicketType = function() {
 
-        if($rootScope.currentTypeOfTicket == "Задача") {
+        if($scope.currentTypeOfTicket == "Задача") {
             return $scope.taskStyle;
         } else {
             return $scope.errorStyle;
@@ -53,16 +61,16 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
 
 
     // Lists of values
-    $rootScope.listOfProjects = null;
-    $rootScope.listOfStatus = null;
+    $scope.listOfProjects = null;
+    $scope.listOfStatus = null;
 
 
     // Создание тикета
     $scope.createTicket = function (ticket, createTicketForm) {
         if(createTicketForm.$valid) {
-            if($rootScope.currentProject == "") return;
-            ticket.code = $rootScope.currentProject;
-            ticket.type = $rootScope.currentTypeOfTicket;
+            if($scope.currentProject == "") return;
+            ticket.code = $scope.currentProject;
+            ticket.type = $scope.currentTypeOfTicket;
             $http.post("ajax/bugtracker/create_ticket.php", ticket).success(function(data) {
                 $location.path("/bugtracker/select");
             });
@@ -80,22 +88,21 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     // Выбор тикета из списка
     $scope.selectTicket  = function(ticketId, ticketType) {
 
-            $rootScope.currentTicketId = ticketId;
-            $rootScope.currentTypeOfTicket = ticketType;
+            $scope.currentTicketId = ticketId;
+            $scope.currentTypeOfTicket = ticketType;
             reloadCurrentTicket();
-            console.log(angular.element(document.querySelector("#curViewTemplate")));
             $scope.getTargetView("/bugtracker/current");
 
     };
 
 
-    // Перезагрузка текущего тикета
+    // Загрузка текущего тикета
     function reloadCurrentTicket() {
-        $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $rootScope.currentTicketId}).success(function(data) {
+        $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $scope.currentTicketId}).success(function(data) {
 
             //alert(JSON.stringify(data, null, 8));
-            $rootScope.currentTicket = data;
-            $rootScope.currentTypeOfTicket = data.type;
+            $scope.currentTicket = data;
+            $scope.currentTypeOfTicket = data.type;
 
 
         });
@@ -119,7 +126,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
         $("#project_list").append(projects.getElement()); // Рисуем
 
         projects.onSelect = function(item) {
-            $rootScope.currentProject = item.innerHTML;
+            $scope.currentProject = item.innerHTML;
         }
     });
 
@@ -135,7 +142,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
         $("#ticket_type").append(types.getElement()); // Рисуем
 
         types.onSelect = function(item) {
-            $rootScope.currentTypeOfTicket = item.innerHTML;
+            $scope.currentTypeOfTicket = item.innerHTML;
         }
     });
 
@@ -143,7 +150,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     // Получаем список статусов тикета
     $http.post("ajax/lov/get_values.php", {"lov_type" : "TICKET_STATUS"}).success(function(data) {
         var options = {};
-        options.title = $rootScope.currentTicket ? $rootScope.currentTicket.status : "Статус";
+        options.title = $scope.currentTicket ? $scope.currentTicket.status : "Статус";
         //alert(JSON.stringify(data, null, 8));
         options.items = data;
         var updates = new DropdownModern(options); // Конструируем дропдаун
@@ -151,9 +158,9 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
 
         updates.onSelect = function(item) {
 
-            $rootScope.currentTicket.status = item.innerHTML;
+            $scope.currentTicket.status = item.innerHTML;
 
-            $http.post("ajax/bugtracker/update_ticket_status.php", {"status": $rootScope.currentTicket.status, "id" : $rootScope.currentTicket.id}).success(function(data) {
+            $http.post("ajax/bugtracker/update_ticket_status.php", {"status": $scope.currentTicket.status, "id" : $scope.currentTicket.id}).success(function(data) {
 
             });
         }
@@ -164,7 +171,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     $scope.saveContent = function() {
         var $newContent = $("#ticket_content_pre").html();
 
-        $http.post("ajax/bugtracker/update_ticket_contain.php", {"contain": $newContent, "id" : $rootScope.currentTicket.id}).success(function(data) {
+        $http.post("ajax/bugtracker/update_ticket_contain.php", {"contain": $newContent, "id" : $scope.currentTicket.id}).success(function(data) {
 
         });
 
