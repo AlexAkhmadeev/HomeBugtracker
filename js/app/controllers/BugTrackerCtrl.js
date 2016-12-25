@@ -6,17 +6,8 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     // Объект текущего тикета
     $scope.currentTicket = null;
 
-    $scope.lolo = "asdkkasdsajdklsadklsad";
-
-    $scope.currentTicket = {"title" : "aaaaaaasss"};
-
-
-
-    $scope.lala = "13123123123123";
-
-
     // Идентификатор текущего тикета
-    $scope.currentTicketId = 1;
+    $scope.currentTicketId = 4;
     $scope.currentProject = "";
     $scope.currentStatus = null;
     $scope.currentTypeOfTicket = "";
@@ -90,13 +81,14 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
 
             $scope.currentTicketId = ticketId;
             $scope.currentTypeOfTicket = ticketType;
-            reloadCurrentTicket();
+            //reloadCurrentTicket();
+            //console.log($scope.currentTicketId);
             $scope.getTargetView("/bugtracker/current");
 
     };
 
 
-    // Загрузка текущего тикета
+    /** / Загрузка текущего тикета
     function reloadCurrentTicket() {
         $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $scope.currentTicketId}).success(function(data) {
 
@@ -107,7 +99,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
 
         });
     }
-
+    */
 
     // Переключение экранов
     $scope.getTargetView = function(path) {

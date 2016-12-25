@@ -2,25 +2,29 @@
  * Created by Александр on 25.12.2016.
  */
 
-homeApp.directive("contentEditor", function() {
+homeApp.directive("contentEditor", function($http, $rootScope) {
 
-    return function($scope, element, attrs) {
+    return {
+        controller: function($scope, $element) {
+            console.log("currentTicketId", $scope.currentTicketId);
+        },
 
-        alert($scope.currentTicketId);
+        link : function($scope, element, attrs) {
 
-
-        function loadCurrentTicket() {
             $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $scope.currentTicketId}).success(function(data) {
-
                 //alert(JSON.stringify(data, null, 8));
+                console.log("id", $scope.currentTicketId);
                 $scope.currentTicket = data;
                 $scope.currentTypeOfTicket = data.type;
-
-
             });
+
         }
 
 
+        }
+
+
+});
 
 
 
@@ -33,9 +37,17 @@ homeApp.directive("contentEditor", function() {
 
 
 
-        /** ******************************************************************************************************** */
 
-        function kostili() {
+
+
+
+
+
+
+
+/** ********************************************************************************************************
+
+ function kostili() {
                     var okButton = contentFieldElement.previousElementSibling;
                     okButton.style.display = "none";
                     okButton.addEventListener("click", save);
@@ -159,10 +171,4 @@ homeApp.directive("contentEditor", function() {
                     }
 
         }
-
-
-
-        }
-
-
-});
+ */
