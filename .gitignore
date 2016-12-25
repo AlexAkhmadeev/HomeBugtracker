@@ -1,4 +1,4 @@
-.idea/
-logs/
+.idea/*
+logs/*
 logs/access.log
 logs/error.log
