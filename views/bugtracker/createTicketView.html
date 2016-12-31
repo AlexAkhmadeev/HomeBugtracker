@@ -1,12 +1,29 @@
 <link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
-<table class="create_ticket_head">
-    <tr>
-        <td class="title">Новый тикет</td>
-        <td><button ng-click="getTargetView('/bugtracker/select')" class="btn btn-success">К списку тикетов</button></td>
-    </tr>
-</table>
 
-<hr class="white">
+<script>
+    /**
+     * Created by Александр on 28.12.2016.
+     */
+    var hServer = angular.module('hServer', []);
+
+
+    /** Директива header */
+    hServer.directive('hsHeader', function() {
+        return {
+            restrict: 'AECM',
+            templateUrl: '/app/general/templates/_header.html',
+            replace: true,
+            controller: function($scope, $element) {
+                alert(1111);
+            }
+        }
+    });
+
+</script>
+
+<div ng-app="hServer">
+    <hs-header></hs-header>
+</div>
 
     <form name="create_ticket_form">
         <table class="create_ticket_table">

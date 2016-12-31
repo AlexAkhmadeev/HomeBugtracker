@@ -4,12 +4,13 @@
 
 homeApp.directive("contentEditor", function($http, $rootScope) {
 
-    return {
-        controller: function($scope, $element) {
-            console.log("currentTicketId", $scope.currentTicketId);
+    var contentEditor = {
+
+        scope: {
+            contentEditor: '='
         },
 
-        link : function($scope, element, attrs) {
+        controller : function($scope) {
 
             $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $scope.currentTicketId}).success(function(data) {
                 //alert(JSON.stringify(data, null, 8));
@@ -21,9 +22,9 @@ homeApp.directive("contentEditor", function($http, $rootScope) {
         }
 
 
-        }
+    };
 
-
+    return contentEditor;
 });
 
 

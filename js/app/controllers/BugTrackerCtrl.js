@@ -82,7 +82,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
             $scope.currentTicketId = ticketId;
             $scope.currentTypeOfTicket = ticketType;
             //reloadCurrentTicket();
-            //console.log($scope.currentTicketId);
+            console.log($scope.currentTicketId);
             $scope.getTargetView("/bugtracker/current");
 
     };

@@ -87,3 +87,16 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
 
     });
 });
+
+homeApp.directive('hsHeader', function() {
+        return {
+            restrict: 'AECM',
+            templateUrl: 'app/general/templates/_header.html',
+            transinclude: true,
+
+            replace: true,
+            controller: function($scope, $element) {
+                alert(1111);
+            }
+        }
+    });
