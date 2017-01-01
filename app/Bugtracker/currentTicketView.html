@@ -1,0 +1,23 @@
+<div id="curViewTemplate">
+    <link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
+    <table class="ticket_head">
+        <tr>
+            <td><span class="ticket">Тикет  </span><span class="ticket_code">{{currentTicket.code + "-" + currentTicket.id}}</span></td>
+            <td class="ticket_type" ng-style="currentTicketType()">{{currentTicket.type}}</td>
+            <td class="ticket_status" id="list_of_status"></td>
+            <td class="ticket_data"><span>{{currentTicket.created}}</span></td>
+            <td class="ticket_create"><button ng-click="getTargetView('/bugtracker/create')" style="float:right; width: 200px" class="btn btn-success">Новый тикет</button></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="ticket_name">{{currentTicket.title}}</td>
+        </tr>
+    </table>
+
+    <hr class="bugtracker">
+
+    <div class="description">Описание</div>
+
+    <div content-editor class="ticket_contain">
+        <pre id="ticket_content_pre" ng-bind="currentTicket.contain"></pre>
+    </div>
+</div>

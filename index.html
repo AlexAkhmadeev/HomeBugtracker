@@ -2,24 +2,23 @@
 <html ng-app="homeApp">
 <head>
     <title>Прототип</title>
+    <link type="text/css" rel="stylesheet" href="build.css">
         <!-- bootstrap -->
-        <script type="text/javascript" src="js/lib/jquery-3.1.1.js"></script>
+        <script type="text/javascript" src="old_js/lib/jquery-3.1.1.js"></script>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+        <script type="text/javascript" src="old_js/lib/bootstrap.min.js"></script>
         <!-- /bootstrap -->
     <meta charset="utf-8">
-
 </head>
-<body style="background: #333">
-<nav class="navbar navbar-inverse">
-    <ol class="container-fluid">
-        <div class="btn-group">
-            <button class="btn btn-info">Справочник</button>
-        </div>
-    </ol>
-</nav>
+<body class="body">
 
-<script type="text/javascript" src="bundle.js"></script>
+    <ng-home-title></ng-home-title><!-- navbar -->
+
+    <div class="main">
+        <ui-view></ui-view><!-- router -->
+    </div>
+
+<script type="text/javascript" src="build.js"></script>
 </body>
 </html>

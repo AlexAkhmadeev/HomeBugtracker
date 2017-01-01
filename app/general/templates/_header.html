@@ -1,8 +1,9 @@
-<link href="/app/general/styles/main.css" type="text/css" rel="stylesheet">
-<table class="create_ticket_head">
-    <tr>
-        <td class="title">{{ 1 + 2 + " Название"}}</td>
-        <td><button class="btn btn-success">К списку тикетов</button></td>
-    </tr>
-</table>
-<hr class="white">
+<div>
+    <table class="header">
+        <tr>
+            <td class="title">{{HeaderCtrl.title}}</td>
+            <td ng-repeat="button in HeaderCtrl.buttons"><button ui-sref="{{button.sref}}" class="btn btn-success">{{button.title}}</button></td>
+        </tr>
+    </table>
+    <hr class="white">
+</div>

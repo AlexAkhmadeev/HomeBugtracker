@@ -91,7 +91,7 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
 homeApp.directive('hsHeader', function() {
         return {
             restrict: 'AECM',
-            templateUrl: 'app/general/templates/_header.html',
+            templateUrl: 'app/general/templates/_title.html',
             transinclude: true,
 
             replace: true,

@@ -1,0 +1,8 @@
+<link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
+<table class="select_ticket_head_table">
+    <tr>
+        <td><input style="width: 350px;" ng-model="BTCtrl.currentProject" type="text" placeholder="Фильтр..." class="form-control" ng-model="searchFilter"></td>
+        <td><button ui-sref="createTicket" style="width: 200px; float: right" class="btn btn-success">Новый тикет</button></td>
+    </tr>    
+</table>
+<ng-ticket-list></ng-ticket-list>

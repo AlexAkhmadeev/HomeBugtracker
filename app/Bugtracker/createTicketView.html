@@ -1,29 +1,12 @@
-<link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
+    <link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
 
-<script>
-    /**
-     * Created by Александр on 28.12.2016.
-     */
-    var hServer = angular.module('hServer', []);
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+    </ul>
 
-
-    /** Директива header */
-    hServer.directive('hsHeader', function() {
-        return {
-            restrict: 'AECM',
-            templateUrl: '/app/general/templates/_header.html',
-            replace: true,
-            controller: function($scope, $element) {
-                alert(1111);
-            }
-        }
-    });
-
-</script>
-
-<div ng-app="hServer">
-    <hs-header></hs-header>
-</div>
+    <ng-home-header></ng-home-header>
 
     <form name="create_ticket_form">
         <table class="create_ticket_table">
