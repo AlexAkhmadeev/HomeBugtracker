@@ -52,12 +52,17 @@
 	var angular = __webpack_require__(1); // Angular core
 
 	__webpack_require__(3); // Angular ui.router
+	//require('ui-bootstrap'); // Angular ui.bootstrap
 	var homeApp = angular.module('homeApp', ['ui.router']); // ����������
 
 	__webpack_require__(4)(homeApp); // ���������������� ���� ����������
 	/** ******************** /������� *************************** */
 
-	__webpack_require__(12); // �����
+	/** ******************** ����� *************************** */
+	__webpack_require__(14); // �������
+	__webpack_require__(18); // ���������
+
+	/** ******************** /����� *************************** */
 
 /***/ },
 /* 1 */
@@ -22131,11 +22136,13 @@
 	    __webpack_require__(7)(homeApp);
 	    __webpack_require__(8)(homeApp);
 	    __webpack_require__(9)(homeApp);
+	    __webpack_require__(10)(homeApp);
+	    __webpack_require__(11)(homeApp);
 	    /* /��������� */
 
 	    /* ������� */
-	    __webpack_require__(10)(homeApp);
-	    __webpack_require__(11)(homeApp);
+	    __webpack_require__(12)(homeApp);
+	    __webpack_require__(13)(homeApp);
 	    /* /������� */
 	};
 
@@ -22168,13 +22175,13 @@
 	            }
 	        }).state('ticketList', {
 	            url: '/bugtracker/list',
-	            templateUrl: 'app/Bugtracker/selectTicketView.html',
+	            template: '<ng-ticket-list></ng-ticket-list>',
 	            controller: function () {
 	                console.log('Переход на selectTicketView');
 	            }
 	        }).state('currentTicket', {
 	            url: '/bugtracker/current',
-	            templateUrl: 'app/Bugtracker/currentTicketView.html',
+	            template: '<ng-current-ticket></ng-current-ticket>',
 	            controller: function () {
 	                console.log('Переход на currentTicketView');
 	            }
@@ -22215,25 +22222,33 @@
 	        return {
 	            restrict: 'E',
 	            templateUrl: '/app/general/templates/_header.html',
+	            scope: {
+	                title: '@'
+	            },
 	            replace: true,
 	            controllerAs: 'HeaderCtrl',
 	            bindToController: true,
-	            controller: function () {
+	            controller: function ($scope, $attrs) {
 	                var vm = this;
 
-	                vm.title = "Создание тикета";
+	                vm.controls = stringToControls($attrs['ctrls']);
 
-	                vm.buttons = [{
-	                    "title": "Список тикетов",
-	                    "sref": "ticketList"
-	                }, {
-	                    "title": "Назад к тикету",
-	                    "sref": "currentTicket"
-	                }, {
-	                    "title": "Ещё кнопка",
-	                    "sref": "invalidLink"
-	                }];
+	                function stringToControls(string) {
+
+	                    //var string = $attrs['ctrls'];
+	                    var ctrlsArr = string.split(' ');
+	                    var arr = [];
+
+	                    for (var i = 0; i < ctrlsArr.length; i++) {
+	                        var buttonName = ctrlsArr[i].split('|')[0].split('_').join(' ');
+	                        var state = ctrlsArr[i].split('|')[1];
+	                        arr.push({ "title": buttonName, "sref": state });
+	                    }
+
+	                    return arr;
+	                }
 	            }
+
 	        };
 	    });
 	};
@@ -22274,7 +22289,7 @@
 	            templateUrl: '/app/general/templates/_mainView.html',
 	            replace: true,
 	            link: function (scope, element, attrs) {
-	                var today = scope.currentTime = new Date().toLocaleString();
+	                scope.currentTime = new Date().toLocaleString();
 	            }
 	        };
 	    });
@@ -22285,51 +22300,29 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 01.01.2017.
-	 */
-	/**
-	 * Created by ��������� on 01.01.2017.
+	 * Created by ��������� on 02.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
-	    homeApp.directive("ngTicketList", function () {
+	    homeApp.directive("ngDropDown", function () {
 	        return {
 	            restrict: 'E',
-	            templateUrl: '/app/Bugtracker/_ticketList.html',
+	            templateUrl: '/app/general/templates/_dropDown.html',
 	            replace: true,
-	            controllerAs: 'BTCtrl',
+	            controllerAs: 'DDCtrl',
 	            bindToController: true,
-	            controller: function (BugtrackerService, LOVService) {
+	            controller: function ($scope, $attrs, LOVService) {
 	                var vm = this;
 
-	                BugtrackerService.getListOfTickets().then(function (dataObject) {
-	                    vm.tickets = dataObject.data;
+	                LOVService.getListOfTicketStatus($attrs["lovType"]).then(function (dataObject) {
+	                    vm.items = dataObject.data;
 	                });
-
-	                LOVService.getListOfTicketStatus().then(function (dataObject) {
-	                    alert(dataObject.data);
-	                });
-
-	                vm.typeOfTicket = function (type) {
-	                    console.log(type);
-	                    if (type == "������") {
-	                        return { color: "#1785ee" };
-	                    } else {
-	                        return { color: "#DD4444" };
-	                    }
-	                };
-
-	                vm.statusOfTicket = function (status) {
-	                    console.log(status);
-	                    if (status == "�����") {
-	                        return { color: "#ff1515" };
-	                    } else if (status == "� ������") {
-	                        return { color: "#e6bf27" };
-	                    } else if (status == "������") {
-	                        return { color: "green" };
-	                    }
-	                };
+	            },
+	            link: function (scope, element, attrs) {
+	                var list = element.find("#list");
+	                console.log(list);
 	            }
+
 	        };
 	    });
 	};
@@ -22343,11 +22336,47 @@
 	 */
 	module.exports = function (homeApp) {
 
-	    homeApp.service('BugtrackerService', function ($http) {
+	    homeApp.directive("ngTicketList", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Bugtracker/_ticketList.html',
+	            replace: true,
+	            controllerAs: 'BTCtrl',
+	            bindToController: true,
+	            controller: function (BugtrackerService, LOVService, $location) {
+	                var vm = this;
 
-	        // ��������� ������ �������
-	        this.getListOfTickets = function () {
-	            return $http.get('ajax/bugtracker/get_ticket_list.php');
+	                BugtrackerService.getListOfTickets().then(function (dataObject) {
+	                    vm.tickets = dataObject.data;
+	                });
+
+	                vm.typeOfTicket = function (type) {
+	                    //console.log(type);
+	                    if (type == "������") {
+	                        return { color: "#1785ee" };
+	                    } else {
+	                        return { color: "#DD4444" };
+	                    }
+	                };
+
+	                vm.statusOfTicket = function (status) {
+	                    //console.log(status);
+	                    if (status == "�����") {
+	                        return { color: "#ff1515" };
+	                    } else if (status == "� ������") {
+	                        return { color: "#e6bf27" };
+	                    } else if (status == "������") {
+	                        return { color: "green" };
+	                    }
+	                };
+
+	                // ����� ������ �� ������
+	                vm.selectTicket = function (ticketId, ticketType) {
+
+	                    BugtrackerService.currentTicketId = ticketId;
+	                    $location.path('/bugtracker/current');
+	                };
+	            }
 	        };
 	    });
 	};
@@ -22357,21 +22386,95 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 01.01.2017.
+	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
-	    homeApp.service('LOVService', function ($http) {
+	    homeApp.directive("ngCurrentTicket", function () {
 
-	        // ��������� ������ �������� ������
-	        this.getListOfTicketStatus = function () {
-	            return $http.post("ajax/lov/get_values.php", { "lov_type": "TICKET_STATUS" });
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Bugtracker/_currentTicket.html',
+	            replace: true,
+	            controllerAs: 'BTCtrl',
+	            bindToController: true,
+	            controller: function (BugtrackerService, LOVService, $location) {
+	                var vm = this;
+
+	                BugtrackerService.getCurrentTicket(BugtrackerService.currentTicketId).then(function (objectData) {
+	                    vm.currentTicket = objectData.data;
+	                });
+	            },
+	            link: function (scope, element, attrs) {
+
+	                scope.currentTicketTypeStyle = function (type) {
+	                    console.log("Тип ", type);
+	                    if (type == "Ошибка") return { "color": "red" };
+	                    return { "color": "lightblue" };
+	                };
+
+	                var dd = element.find("#list_of_status").html();
+	                console.log(dd);
+	            }
 	        };
 	    });
 	};
 
 /***/ },
 /* 12 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by Александр on 01.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.service('BugtrackerService', function ($http) {
+
+	        // Получение списка тикетов
+	        this.getListOfTickets = function () {
+	            return $http.get('ajax/bugtracker/get_ticket_list.php');
+	        };
+
+	        // Получение текущего тикета
+	        this.getCurrentTicket = function (id) {
+	            return $http.post("ajax/bugtracker/get_ticket.php", { "ticket_id": id });
+	        };
+	    });
+	};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by Александр on 01.01.2017.
+	 */
+	module.exports = function (homeApp) {
+	    /**
+	     * Get list of values service
+	     */
+	    homeApp.service('LOVService', function ($http) {
+
+	        // Получение списка статусов тикета
+	        this.getListOfTicketStatus = function (lovType) {
+	            console.log("В сервисе", lovType);
+	            return $http.post("ajax/lov/get_values.php", { "lov_type": lovType });
+	        };
+	    });
+	};
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

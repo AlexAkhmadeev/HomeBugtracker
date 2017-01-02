@@ -1,15 +1,17 @@
 /**
- * Created by Александр on 01.01.2017.
+ * Created by РђР»РµРєСЃР°РЅРґСЂ on 01.01.2017.
  */
 module.exports = function(homeApp) {
-
+    /**
+     * Get list of values service
+     */
     homeApp.service('LOVService', function($http) {
 
-        // Получение списка статусов тикета
-        this.getListOfTicketStatus = function() {
-            return $http.post("ajax/lov/get_values.php", {"lov_type" : "TICKET_STATUS"});
+        // РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° СЃС‚Р°С‚СѓСЃРѕРІ С‚РёРєРµС‚Р°
+        this.getListOfTicketStatus = function(lovType) {
+            console.log("Р’ СЃРµСЂРІРёСЃРµ", lovType);
+            return $http.post("ajax/lov/get_values.php", {"lov_type" : lovType});
         };
-
 
     });
 

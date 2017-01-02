@@ -1,13 +1,6 @@
 ﻿.body {
     background: rgba(70, 70, 70, 1);
-    margin-right: 0px;
 }
-
-html {
-    margin-right: 0px;
-    padding-right: 0px;
-}
-
 
 hr.white {
     border-color: ghostwhite;
@@ -15,8 +8,8 @@ hr.white {
 
 div.main {
     background: rgba(70, 70, 70, 1);
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 /******************************* navBar ***********************************/
@@ -62,5 +55,10 @@ p.main_time {
     padding-left: 10px;
     font-size: 25px;
     width: 70%;
+}
+
+.header .controls {
+    float: right;
+    margin-left: 5px;
 }
 /******************************* /Header **********************************/

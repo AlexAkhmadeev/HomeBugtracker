@@ -2,7 +2,7 @@
     <table class="header">
         <tr>
             <td class="title">{{HeaderCtrl.title}}</td>
-            <td ng-repeat="button in HeaderCtrl.buttons"><button ui-sref="{{button.sref}}" class="btn btn-success">{{button.title}}</button></td>
+            <td class="controls" ng-repeat="button in HeaderCtrl.controls track by $index"><button ui-sref="{{button.sref}}" class="btn btn-success">{{button.title}}</button></td>
         </tr>
     </table>
     <hr class="white">

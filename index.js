@@ -6,9 +6,15 @@
 var angular = require('angular'); // Angular core
 
 require('angular-ui-router'); // Angular ui.router
+//require('ui-bootstrap'); // Angular ui.bootstrap
 var homeApp = angular.module('homeApp', ['ui.router']); // Приложение
 
 require('./app')(homeApp); // Конфигурационный файл приложения
 /** ******************** /Ангуляр *************************** */
 
-require('./app/general/styles/main.css'); // Стили
+
+/** ******************** Стили *************************** */
+require('./app/general/styles/main.css'); // Главный
+require('./app/Bugtracker/bugtracker.css'); // Багтрекер
+
+/** ******************** /Стили *************************** */

@@ -9,7 +9,6 @@ module.exports = function(homeApp) {
             templateUrl: '/app/general/templates/_mainView.html',
             replace: true,
             link: function(scope, element, attrs) {
-                var today =
                 scope.currentTime = (new Date()).toLocaleString();
             }
         }

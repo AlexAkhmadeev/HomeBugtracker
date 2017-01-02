@@ -88,7 +88,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
     };
 
 
-    /** / Загрузка текущего тикета
+    // Загрузка текущего тикета
     function reloadCurrentTicket() {
         $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": $scope.currentTicketId}).success(function(data) {
 
@@ -99,7 +99,7 @@ var BugTrackerCtrl = homeApp.controller('BugTrackerCtrl', function ctrl($documen
 
         });
     }
-    */
+
 
     // Переключение экранов
     $scope.getTargetView = function(path) {

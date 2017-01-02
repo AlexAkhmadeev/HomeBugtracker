@@ -1,14 +1,11 @@
 /*===================================================================================================================*/
-/*                                              ¡¿√-“–≈ ≈–                                                           */
+/*                                              –ë–ê–ì-–¢–†–ï–ö–ï–†                                                           */
 /*===================================================================================================================*/
-
-hr.bugtracker {
-    border-color: ghostwhite;
-}
 
 
 /*======================================= currentTicketView ============================================*/
 .ticket_head {
+    margin-top: 15px;
     width: 100%;
 }
 
@@ -80,8 +77,6 @@ td.ticket_create {
     border: 1px solid ghostwhite;
     border-radius: 2px;
     padding: 25px 15px 15px 15px;
-    height: 500px;
-    overflow-y: auto;
     overflow-x: hidden;
     cursor: pointer;
     word-wrap: break-word;
@@ -118,8 +113,6 @@ pre {
 .head {
     background: white;
     font-weight: bold;
-    margin-bottom: 0px;
-    width: 100%;
 }
 
 .tickets .code {
@@ -144,7 +137,7 @@ pre {
 
 .select_ticket_head_table {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .ticket_row:hover {

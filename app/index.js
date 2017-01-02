@@ -9,7 +9,9 @@ module.exports = function(homeApp) {
     require('./general/directives/ngHomeHeader.js')(homeApp);
     require('./general/directives/ngHomeTitle.js')(homeApp);
     require('./general/directives/ngMainView.js')(homeApp);
+    require('./general/directives/ngDropDown.js')(homeApp);
     require('./Bugtracker/ngTicketList.js')(homeApp);
+    require('./Bugtracker/ngCurrentTicket.js')(homeApp);
     /* /Директивы */
 
 

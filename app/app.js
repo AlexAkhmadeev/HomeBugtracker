@@ -24,14 +24,14 @@ module.exports = function(homeApp) {
             })
             .state('ticketList', {
                 url: '/bugtracker/list',
-                templateUrl: 'app/Bugtracker/selectTicketView.html',
+                template: '<ng-ticket-list></ng-ticket-list>',
                 controller: function () {
                     console.log('Переход на selectTicketView');
                 }
             })
             .state('currentTicket', {
                 url: '/bugtracker/current',
-                templateUrl: 'app/Bugtracker/currentTicketView.html',
+                template: '<ng-current-ticket></ng-current-ticket>',
                 controller: function () {
                     console.log('Переход на currentTicketView');
                 }

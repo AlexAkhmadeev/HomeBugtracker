@@ -1,13 +1,6 @@
-    <link href="/css/bugtracker.css" type="text/css" rel="stylesheet">
+    <ng-home-header title="Создание тикета" ctrls="К_списку_тикетов|ticketList"></ng-home-header>
 
-    <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
-    </ul>
-
-    <ng-home-header></ng-home-header>
-
+    <!-- {'title':'Переход','sref':'ticketList' } -->
     <form name="create_ticket_form">
         <table class="create_ticket_table">
             <tr>
@@ -16,8 +9,8 @@
             </tr>
             <tr>
                 <td class="title"><input ng-model="ticket.title" name="title" type="text" class="form-control" required></td>
-                <td class="dd" id="ticket_type"></td>
-                <td class="dd" id="project_list"></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
                 <td colspan="3" class="ticket_form_label">Описание</td>

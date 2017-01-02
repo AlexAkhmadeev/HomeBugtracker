@@ -1,17 +1,22 @@
 /**
- * Created by Александр on 01.01.2017.
+ * Created by РђР»РµРєСЃР°РЅРґСЂ on 01.01.2017.
  */
 module.exports = function(homeApp) {
 
     homeApp.service('BugtrackerService', function($http) {
 
-        // Получение списка тикетов
+
+        // РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° С‚РёРєРµС‚РѕРІ
         this.getListOfTickets = function() {
             return $http.get('ajax/bugtracker/get_ticket_list.php');
         };
 
+        // РџРѕР»СѓС‡РµРЅРёРµ С‚РµРєСѓС‰РµРіРѕ С‚РёРєРµС‚Р°
+        this.getCurrentTicket = function(id) {
+            return $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": id});
+        };
+
 
     });
-
 
 };
