@@ -3,7 +3,7 @@
         <tr>
             <td><span class="ticket">Тикет  </span><span class="ticket_code">{{BTCtrl.currentTicket.code + "-" + BTCtrl.currentTicket.id}}</span></td>
             <td class="ticket_type" ng-style="currentTicketTypeStyle(BTCtrl.currentTicket.type)">{{BTCtrl.currentTicket.type}}</td>
-            <td class="ticket_status" id="list_of_status">You are found me(((</td>
+            <td class="ticket_status" id="list_of_status"><ng-drop-down val="" lov-type="TICKET_STATUS"></ng-drop-down></td>
             <td class="ticket_data"><span>{{BTCtrl.currentTicket.created}}</span></td>
             <td class="ticket_create"><button ng-click="getTargetView('/bugtracker/create')" style="float:right; width: 200px" class="btn btn-success">Новый тикет</button></td>
         </tr>

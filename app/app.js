@@ -17,7 +17,7 @@ module.exports = function(homeApp) {
             // Багтрекер
             .state('createTicket', {
                 url: '/bugtracker/create',
-                templateUrl: 'app/Bugtracker/createTicketView.html',
+                template: '<ng-create-ticket></ng-create-ticket>',
                 controller: function () {
                     console.log('Переход на createTicketView');
                 }

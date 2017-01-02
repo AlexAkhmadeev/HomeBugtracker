@@ -1,0 +1,28 @@
+<div>
+    <ng-home-header title="Создание тикета" ctrls="К_списку_тикетов|ticketList"></ng-home-header>
+
+    <!-- {'title':'Переход','sref':'ticketList' } -->
+    <form name="create_ticket_form">
+        <table class="create_ticket_table">
+            <tr>
+                <td class="ticket_form_label">Название</td>
+                <td class="ticket_form_label">Тип</td>
+                <td class="ticket_form_label">Проект</td>
+            </tr>
+            <tr>
+                <td class="title"><input ng-model="BTCtrl.ticket.title" name="title" type="text" class="form-control"></td>
+                <td class="dd_button"><ng-drop-down lov-type="TICKET_TYPE" ng-model="BTCtrl.ticket.type"></ng-drop-down></td>
+                <td class="dd_button"><ng-drop-down lov-type="PROJECT" ng-model="BTCtrl.ticket.project"></ng-drop-down></td>
+            </tr>
+            <tr>
+                <td colspan="3" class="ticket_form_label">Описание</td>
+            </tr>
+            <tr>
+                <td class="contain" colspan="3"><textarea ng-model="BTCtrl.ticket.contain" name="contain" type="text" class="form-control"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="3"><br><input ng-click="BTCtrl.createTicket(BTCtrl.ticket, create_ticket_form)" type="submit" class="form-control btn-info" value="Создать"></td>
+            </tr>
+        </table>
+    </form>
+</div>

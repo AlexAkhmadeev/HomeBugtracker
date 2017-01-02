@@ -59,8 +59,8 @@
 	/** ******************** /������� *************************** */
 
 	/** ******************** ����� *************************** */
-	__webpack_require__(14); // �������
-	__webpack_require__(18); // ���������
+	__webpack_require__(15); // �������
+	__webpack_require__(19); // ���������
 
 	/** ******************** /����� *************************** */
 
@@ -22138,12 +22138,16 @@
 	    __webpack_require__(9)(homeApp);
 	    __webpack_require__(10)(homeApp);
 	    __webpack_require__(11)(homeApp);
+	    __webpack_require__(12)(homeApp);
 	    /* /��������� */
 
 	    /* ������� */
-	    __webpack_require__(12)(homeApp);
 	    __webpack_require__(13)(homeApp);
+	    __webpack_require__(14)(homeApp);
 	    /* /������� */
+
+	    /* ����������� */
+	    /* ����������� */
 	};
 
 /***/ },
@@ -22169,7 +22173,7 @@
 	        // Багтрекер
 	        .state('createTicket', {
 	            url: '/bugtracker/create',
-	            templateUrl: 'app/Bugtracker/createTicketView.html',
+	            template: '<ng-create-ticket></ng-create-ticket>',
 	            controller: function () {
 	                console.log('Переход на createTicketView');
 	            }
@@ -22308,19 +22312,59 @@
 	        return {
 	            restrict: 'E',
 	            templateUrl: '/app/general/templates/_dropDown.html',
+	            scope: {
+	                ngModel: '='
+	            },
 	            replace: true,
 	            controllerAs: 'DDCtrl',
 	            bindToController: true,
 	            controller: function ($scope, $attrs, LOVService) {
 	                var vm = this;
 
+	                setInterval(function () {
+	                    console.log(this.ngModel);
+	                }, 1000);
+
 	                LOVService.getListOfTicketStatus($attrs["lovType"]).then(function (dataObject) {
 	                    vm.items = dataObject.data;
 	                });
 	            },
 	            link: function (scope, element, attrs) {
+	                var button = element.find("#dd_button");
+	                console.log(button);
 	                var list = element.find("#list");
-	                console.log(list);
+	                var body = angular.element(document.body);
+	                var window = angular.element(window);
+
+	                list.hide();
+	                console.log("button_css", button.css('width'));
+
+	                angular.element('.dd_item').css({
+	                    "width": button.css('width')
+	                });
+
+	                body.on('click', function (e) {
+	                    var target = angular.element(e.target);
+
+	                    if (target[0] == button[0]) {
+	                        list.toggle();
+	                        return;
+	                    }
+
+	                    list.hide();
+	                });
+
+	                list.on('click', function (e) {
+	                    var target = angular.element(e.target);
+	                    this.ngModel = target.html();
+	                    vm.ngModel = target.html();
+	                    if (target.hasClass('dd_item')) button.html(target.html());
+	                });
+
+	                window.on('scroll', function (e) {
+
+	                    list.hide();
+	                });
 	            }
 
 	        };
@@ -22425,6 +22469,35 @@
 /***/ function(module, exports) {
 
 	/**
+	 * Created by ��������� on 01.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngCreateTicket", function () {
+
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Bugtracker/_createTicket.html',
+	            replace: true,
+	            controllerAs: 'BTCtrl',
+	            bindToController: true,
+	            controller: function (BugtrackerService, LOVService, $location) {
+	                var vm = this;
+
+	                vm.createTicket = function (ticket, form) {
+
+	                    alert(JSON.stringify(ticket, null, 8));
+	                };
+	            }
+	        };
+	    });
+	};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	/**
 	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
@@ -22440,11 +22513,23 @@
 	        this.getCurrentTicket = function (id) {
 	            return $http.post("ajax/bugtracker/get_ticket.php", { "ticket_id": id });
 	        };
+
+	        // Создание тикета
+	        this.createTicket = function (ticket, createTicketForm) {
+	            if (createTicketForm.$valid) {
+	                if ($scope.currentProject == "") return;
+	                ticket.code = $scope.currentProject;
+	                ticket.type = $scope.currentTypeOfTicket;
+	                $http.post("ajax/bugtracker/create_ticket.php", ticket).success(function (data) {
+	                    $location.path("/bugtracker/current");
+	                });
+	            }
+	        };
 	    });
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/**
@@ -22456,7 +22541,7 @@
 	     */
 	    homeApp.service('LOVService', function ($http) {
 
-	        // Получение списка статусов тикета
+	        // Получение списка значений
 	        this.getListOfTicketStatus = function (lovType) {
 	            console.log("В сервисе", lovType);
 	            return $http.post("ajax/lov/get_values.php", { "lov_type": lovType });
@@ -22465,16 +22550,16 @@
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 15 */,
 /* 16 */,
 /* 17 */,
-/* 18 */
+/* 18 */,
+/* 19 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

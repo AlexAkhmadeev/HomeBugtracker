@@ -16,6 +16,18 @@ module.exports = function(homeApp) {
             return $http.post("ajax/bugtracker/get_ticket.php", {"ticket_id": id});
         };
 
+        // Создание тикета
+        this.createTicket = function (ticket, createTicketForm) {
+            if(createTicketForm.$valid) {
+                if($scope.currentProject == "") return;
+                ticket.code = $scope.currentProject;
+                ticket.type = $scope.currentTypeOfTicket;
+                $http.post("ajax/bugtracker/create_ticket.php", ticket).success(function(data) {
+                    $location.path("/bugtracker/current");
+                });
+            }
+        };
+
 
     });
 

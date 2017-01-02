@@ -12,6 +12,7 @@ module.exports = function(homeApp) {
     require('./general/directives/ngDropDown.js')(homeApp);
     require('./Bugtracker/ngTicketList.js')(homeApp);
     require('./Bugtracker/ngCurrentTicket.js')(homeApp);
+    require('./Bugtracker/ngCreateTicket.js')(homeApp);
     /* /Директивы */
 
 
@@ -19,5 +20,8 @@ module.exports = function(homeApp) {
     require('./Bugtracker/BugtrackerService.js')(homeApp);
     require('./general/services/LOVService.js')(homeApp);
     /* /Сервисы */
+
+    /* Контроллеры */
+    /* Контроллеры */
 
 };

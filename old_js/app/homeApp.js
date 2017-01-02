@@ -39,7 +39,7 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
         });
     $routeProvider.when('/bugtracker/create',
         {
-            templateUrl: 'views/bugtracker/createTicketView.html',
+            templateUrl: 'views/bugtracker/_createTicket.html',
             controller: 'BugTrackerCtrl'
         });
     $routeProvider.when('/bugtracker/current',

@@ -1,8 +1,8 @@
 <div id="container">
-    <button class="btn btn-primary">Дропдаун</button>
+    <button id="dd_button" class="btn btn-primary dd_button" ng-model="DDCtrl.ddVal">Дропдаун</button>
     <div id="list">
         <ul class="dropdown-list">
-            <li ng-repeat="item in DDCtrl.items">{{item}}</li>
+            <li class="dd_item" ng-repeat="item in DDCtrl.items">{{item}}</li>
         </ul>
     </div>
 </div>
