@@ -19,6 +19,8 @@ module.exports = function(homeApp) {
     require('./Sport/ngAddEx.js')(homeApp);
     require('./Sport/ngDoneEx.js')(homeApp);
     require('./Sport/ngAllEx.js')(homeApp);
+    require('./Directory/ngDirAdd.js')(homeApp);
+    require('./Directory/ngDirSelect.js')(homeApp);
     /* /Директивы */
 
 
@@ -26,6 +28,7 @@ module.exports = function(homeApp) {
     require('./Bugtracker/BugtrackerService.js')(homeApp);
     require('./Sport/SportService.js')(homeApp);
     require('./Keyboard/KeyboardService.js')(homeApp);
+    require('./Directory/DirectoryService.js')(homeApp);
     require('./general/services/LOVService.js')(homeApp);
     require('./general/services/TransportService.js')(homeApp);
     /* /Сервисы */

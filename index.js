@@ -18,6 +18,6 @@ require('./app')(homeApp); // Конфигурационный файл прил
 require('./app/general/styles/main.css'); // Главный
 require('./app/Bugtracker/bugtracker.css'); // Багтрекер
 require('./app/Keyboard/piano.css'); // Клавиши
-require('./app/Sport/sport.css'); // Клавиши
-
+require('./app/Sport/sport.css'); // Спорт
+require('./app/Directory/directory.css'); // Справочник
 /** ******************** /Стили *************************** */

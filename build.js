@@ -59,11 +59,11 @@
 	/** ******************** /Ангуляр *************************** */
 
 	/** ******************** Стили *************************** */
-	__webpack_require__(24); // Главный
-	__webpack_require__(28); // Багтрекер
-	__webpack_require__(30); // Клавиши
-	__webpack_require__(32); // Клавиши
-
+	__webpack_require__(27); // Главный
+	__webpack_require__(31); // Багтрекер
+	__webpack_require__(33); // Клавиши
+	__webpack_require__(35); // Спорт
+	__webpack_require__(37); // Справочник
 	/** ******************** /Стили *************************** */
 
 /***/ },
@@ -22147,14 +22147,17 @@
 	    __webpack_require__(16)(homeApp);
 	    __webpack_require__(17)(homeApp);
 	    __webpack_require__(18)(homeApp);
+	    __webpack_require__(19)(homeApp);
+	    __webpack_require__(20)(homeApp);
 	    /* /��������� */
 
 	    /* ������� */
-	    __webpack_require__(19)(homeApp);
-	    __webpack_require__(20)(homeApp);
 	    __webpack_require__(21)(homeApp);
 	    __webpack_require__(22)(homeApp);
 	    __webpack_require__(23)(homeApp);
+	    __webpack_require__(24)(homeApp);
+	    __webpack_require__(25)(homeApp);
+	    __webpack_require__(26)(homeApp);
 	    /* /������� */
 
 	    /* ����������� */
@@ -22194,12 +22197,12 @@
 	        })
 
 	        // Справочник
-	        .state('directory', {
-	            url: '/directory',
-	            templateUrl: 'app/Directory/directoryView.html',
-	            controller: function () {
-	                console.log('Переход на directoryView');
-	            }
+	        .state('dirAdd', {
+	            url: '/directory/add',
+	            template: '<ng-dir-add></ng-dir-add>'
+	        }).state('dirSel', {
+	            url: '/directory/select',
+	            template: '<ng-dir-select></ng-dir-select>'
 	        })
 
 	        // Клавиши
@@ -22961,6 +22964,52 @@
 /***/ function(module, exports) {
 
 	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngDirAdd", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Directory/_dirAdd.html',
+	            replace: true,
+	            controllerAs: 'DirCtrl',
+	            bindToController: true,
+	            controller: function ($scope, DirectoryService, $location) {
+	                var vm = this;
+	            }
+	        };
+	    });
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngDirSelect", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Directory/_dirSelect.html',
+	            replace: true,
+	            controllerAs: 'DirCtrl',
+	            bindToController: true,
+	            controller: function ($scope, DirectoryService, LOVService, $location) {
+	                var vm = this;
+	            }
+	        };
+	    });
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	/**
 	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
@@ -23007,7 +23056,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports) {
 
 	/**
@@ -23046,7 +23095,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**
@@ -23084,7 +23133,21 @@
 	};
 
 /***/ },
-/* 22 */
+/* 24 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+	  /**
+	   * Get list of values service
+	   */
+	  homeApp.service('DirectoryService', function ($http) {});
+	};
+
+/***/ },
+/* 25 */
 /***/ function(module, exports) {
 
 	/**
@@ -23104,7 +23167,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 26 */
 /***/ function(module, exports) {
 
 	/**
@@ -23118,30 +23181,37 @@
 	};
 
 /***/ },
-/* 24 */
+/* 27 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
+/* 28 */,
 /* 29 */,
-/* 30 */
+/* 30 */,
+/* 31 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 31 */,
-/* 32 */
+/* 32 */,
+/* 33 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 34 */,
+/* 35 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 36 */,
+/* 37 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

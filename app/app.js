@@ -29,12 +29,13 @@ module.exports = function(homeApp) {
             })
 
             // Справочник
-            .state('directory', {
-                url: '/directory',
-                templateUrl: 'app/Directory/directoryView.html',
-                controller: function () {
-                    console.log('Переход на directoryView');
-                }
+            .state('dirAdd', {
+                url: '/directory/add',
+                template: '<ng-dir-add></ng-dir-add>'
+            })
+            .state('dirSel', {
+                url: '/directory/select',
+                template: '<ng-dir-select></ng-dir-select>'
             })
 
 
