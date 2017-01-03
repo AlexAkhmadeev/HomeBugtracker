@@ -11,8 +11,8 @@
             </tr>
             <tr>
                 <td class="title"><input ng-model="BTCtrl.ticket.title" name="title" type="text" class="form-control"></td>
-                <td class="dd_button"><ng-drop-down lov-type="TICKET_TYPE" ng-model="BTCtrl.ticket.type"></ng-drop-down></td>
-                <td class="dd_button"><ng-drop-down lov-type="PROJECT" ng-model="BTCtrl.ticket.project"></ng-drop-down></td>
+                <td class="dd_button"><ng-drop-down type="type" lov-type="TICKET_TYPE"></ng-drop-down></td>
+                <td class="dd_button"><ng-drop-down type="code" lov-type="PROJECT"></ng-drop-down></td>
             </tr>
             <tr>
                 <td colspan="3" class="ticket_form_label">Описание</td>

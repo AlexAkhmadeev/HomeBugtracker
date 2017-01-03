@@ -1,5 +1,5 @@
 /**
- * Created by ��������� on 02.01.2017.
+ * Created by Александр on 02.01.2017.
  */
 module.exports = function(homeApp) {
 
@@ -7,33 +7,36 @@ module.exports = function(homeApp) {
         return {
             restrict: 'E',
             templateUrl: '/app/general/templates/_dropDown.html',
-            scope: {
-                ngModel: '='
-            },
+            scope: true,
             replace: true,
             controllerAs: 'DDCtrl',
             bindToController: true,
-            controller: function($scope, $attrs, LOVService) {
+            controller: function($scope, $attrs, LOVService, TransportService) {
                 var vm = this;
 
-                setInterval(function() {
-                    console.log(this.ngModel);
-                }, 1000);
 
                 LOVService.getListOfTicketStatus($attrs["lovType"]).then(function(dataObject) {
                     vm.items = dataObject.data;
                 });
 
+                var startButtonValue = $scope.$parent.BTCtrl.startValue; // Возвращает promise!
+                startButtonValue($attrs['type']).then(function(result) {
+                    vm.currentItem = result;
+                });
+
+
+
             },
-            link: function(scope, element, attrs) {
+            link: function($scope, element, attrs, TransportService) {
                 var button = element.find("#dd_button");
-                console.log(button);
                 var list = element.find("#list");
                 var body = angular.element(document.body);
                 var window = angular.element(window);
 
+
+
+
                 list.hide();
-                console.log("button_css", button.css('width'));
 
                 angular.element('.dd_item').css({
                    "width" : button.css('width')
@@ -51,9 +54,16 @@ module.exports = function(homeApp) {
 
                 });
 
+                var onSelectListener = $scope.$parent.BTCtrl.onSelectListener; // Должна быть определена в контроллере!
+
                 list.on('click', function(e) {
                     var target = angular.element(e.target);
                     if(target.hasClass('dd_item')) button.html(target.html());
+
+                    if(onSelectListener) {
+                        onSelectListener(attrs['type'], target.html());
+                    }
+
                 });
 
                 window.on('scroll', function(e) {
@@ -61,7 +71,6 @@ module.exports = function(homeApp) {
                     list.hide();
 
                 });
-
 
             }
 

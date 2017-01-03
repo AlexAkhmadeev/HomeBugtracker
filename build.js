@@ -59,8 +59,8 @@
 	/** ******************** /������� *************************** */
 
 	/** ******************** ����� *************************** */
-	__webpack_require__(15); // �������
-	__webpack_require__(19); // ���������
+	__webpack_require__(16); // �������
+	__webpack_require__(20); // ���������
 
 	/** ******************** /����� *************************** */
 
@@ -22144,6 +22144,7 @@
 	    /* ������� */
 	    __webpack_require__(13)(homeApp);
 	    __webpack_require__(14)(homeApp);
+	    __webpack_require__(15)(homeApp);
 	    /* /������� */
 
 	    /* ����������� */
@@ -22304,7 +22305,7 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 02.01.2017.
+	 * Created by Александр on 02.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
@@ -22312,32 +22313,29 @@
 	        return {
 	            restrict: 'E',
 	            templateUrl: '/app/general/templates/_dropDown.html',
-	            scope: {
-	                ngModel: '='
-	            },
+	            scope: true,
 	            replace: true,
 	            controllerAs: 'DDCtrl',
 	            bindToController: true,
-	            controller: function ($scope, $attrs, LOVService) {
+	            controller: function ($scope, $attrs, LOVService, TransportService) {
 	                var vm = this;
-
-	                setInterval(function () {
-	                    console.log(this.ngModel);
-	                }, 1000);
 
 	                LOVService.getListOfTicketStatus($attrs["lovType"]).then(function (dataObject) {
 	                    vm.items = dataObject.data;
 	                });
+
+	                var startButtonValue = $scope.$parent.BTCtrl.startValue; // Возвращает promise!
+	                startButtonValue($attrs['type']).then(function (result) {
+	                    vm.currentItem = result;
+	                });
 	            },
-	            link: function (scope, element, attrs) {
+	            link: function ($scope, element, attrs, TransportService) {
 	                var button = element.find("#dd_button");
-	                console.log(button);
 	                var list = element.find("#list");
 	                var body = angular.element(document.body);
 	                var window = angular.element(window);
 
 	                list.hide();
-	                console.log("button_css", button.css('width'));
 
 	                angular.element('.dd_item').css({
 	                    "width": button.css('width')
@@ -22354,11 +22352,15 @@
 	                    list.hide();
 	                });
 
+	                var onSelectListener = $scope.$parent.BTCtrl.onSelectListener; // Должна быть определена в контроллере!
+
 	                list.on('click', function (e) {
 	                    var target = angular.element(e.target);
-	                    this.ngModel = target.html();
-	                    vm.ngModel = target.html();
 	                    if (target.hasClass('dd_item')) button.html(target.html());
+
+	                    if (onSelectListener) {
+	                        onSelectListener(attrs['type'], target.html());
+	                    }
 	                });
 
 	                window.on('scroll', function (e) {
@@ -22376,7 +22378,7 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 01.01.2017.
+	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
@@ -22394,31 +22396,32 @@
 	                    vm.tickets = dataObject.data;
 	                });
 
-	                vm.typeOfTicket = function (type) {
-	                    //console.log(type);
-	                    if (type == "������") {
+	                // Выбор тикета из списка
+	                vm.selectTicket = function (ticketId, ticketType) {
+
+	                    BugtrackerService.currentTicketId = ticketId;
+	                    $location.path('/bugtracker/current');
+	                };
+	            },
+	            link: function (scope, element, attrs) {
+
+	                scope.typeOfTicket = function (type) {
+	                    if (type == "Задача") {
 	                        return { color: "#1785ee" };
 	                    } else {
 	                        return { color: "#DD4444" };
 	                    }
 	                };
 
-	                vm.statusOfTicket = function (status) {
+	                scope.statusOfTicket = function (status) {
 	                    //console.log(status);
-	                    if (status == "�����") {
+	                    if (status == "Новый") {
 	                        return { color: "#ff1515" };
-	                    } else if (status == "� ������") {
+	                    } else if (status == "В работе") {
 	                        return { color: "#e6bf27" };
-	                    } else if (status == "������") {
+	                    } else if (status == "Готово") {
 	                        return { color: "green" };
 	                    }
-	                };
-
-	                // ����� ������ �� ������
-	                vm.selectTicket = function (ticketId, ticketType) {
-
-	                    BugtrackerService.currentTicketId = ticketId;
-	                    $location.path('/bugtracker/current');
 	                };
 	            }
 	        };
@@ -22439,26 +22442,99 @@
 	        return {
 	            restrict: 'E',
 	            templateUrl: '/app/Bugtracker/_currentTicket.html',
+	            scope: true,
 	            replace: true,
 	            controllerAs: 'BTCtrl',
 	            bindToController: true,
-	            controller: function (BugtrackerService, LOVService, $location) {
+	            controller: function (BugtrackerService, LOVService, $location, $q) {
 	                var vm = this;
+
+	                vm.BTServie = BugtrackerService;
+
+	                vm.onSelectListener = function (type, value) {
+	                    BugtrackerService.updateTicketStatus(vm.currentTicket.id, value);
+	                };
+
+	                /**
+	                 * Возвращает промис с типом
+	                 * @param type
+	                 * @returns {*}
+	                 */
+	                vm.startValue = function (type) {
+
+	                    if (type == 'status') {
+	                        return BugtrackerService.getCurrentTicket(BugtrackerService.currentTicketId).then(function (objectData) {
+	                            return $q(function (resolve) {
+	                                resolve(objectData.data.status);
+	                            });
+	                        });
+	                    }
+	                };
 
 	                BugtrackerService.getCurrentTicket(BugtrackerService.currentTicketId).then(function (objectData) {
 	                    vm.currentTicket = objectData.data;
 	                });
 	            },
-	            link: function (scope, element, attrs) {
+	            link: function (scope, element, attrs, BugtrackerService) {
 
 	                scope.currentTicketTypeStyle = function (type) {
-	                    console.log("Тип ", type);
 	                    if (type == "Ошибка") return { "color": "red" };
 	                    return { "color": "lightblue" };
 	                };
 
-	                var dd = element.find("#list_of_status").html();
-	                console.log(dd);
+	                //======================================РЕДАКТОР КОНТЕНТА========================================//
+	                var contentElem = element.find("#ticket_content");
+	                var textArea = element.find("#new_content");
+	                var pre = element.find("#ticket_content_pre");
+
+	                console.log(textArea);
+
+	                var panelButton = element.find("#panel_button");
+	                var commitButton = element.find("#commit_button");
+	                var rollbackButton = element.find("#rollback_button");
+
+	                panelButton.hide();
+	                textArea.hide();
+
+	                var contentEditor = {};
+
+	                contentElem.on('dblclick', activateEditorMode);
+
+	                commitButton.on('click', commit);
+	                rollbackButton.on('click', rollback);
+
+	                function activateEditorMode() {
+	                    if (contentEditor.isActive) return;
+
+	                    contentEditor.isActive = true;
+	                    textArea.css({
+	                        "width": pre[0].offsetWidth,
+	                        "maxWidth": pre[0].offsetWidth,
+	                        "height": pre[0].offsetHeight
+	                    });
+	                    textArea.show();
+	                    panelButton.show();
+	                    contentEditor.oldHtml = pre.html();
+	                    pre.html(null);
+	                    textArea.val(contentEditor.oldHtml);
+	                }
+
+	                function commit() {
+	                    pre.html(textArea.val());
+	                    scope.BTCtrl.BTServie.saveContent(scope.BTCtrl.currentTicket.id, textArea.val()); // Отправка данных на сервер
+	                    textArea.hide();
+	                    panelButton.hide();
+	                    contentEditor.isActive = false;
+	                }
+
+	                function rollback() {
+	                    pre.html(contentEditor.oldHtml);
+	                    textArea.hide();
+	                    panelButton.hide();
+	                    contentEditor.isActive = false;
+	                }
+
+	                //======================================/РЕДАКТОР КОНТЕНТА========================================//
 	            }
 	        };
 	    });
@@ -22469,7 +22545,7 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 01.01.2017.
+	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
@@ -22479,14 +22555,49 @@
 	            restrict: 'E',
 	            templateUrl: '/app/Bugtracker/_createTicket.html',
 	            replace: true,
+	            scope: {},
 	            controllerAs: 'BTCtrl',
 	            bindToController: true,
-	            controller: function (BugtrackerService, LOVService, $location) {
+	            controller: function (BugtrackerService, TransportService, LOVService, $location, $element, $q) {
 	                var vm = this;
+	                this.ticket = {};
+
+	                vm.onSelectListener = function (type, value) {
+	                    // Обработчик dropDown
+	                    vm.ticket[type] = value;
+	                };
+
+	                /**
+	                 * Возвращает промис с типом
+	                 * @param type
+	                 * @returns {*}
+	                 */
+	                vm.startValue = function (type) {
+
+	                    return $q(function (resolve, reject) {
+
+	                        if (type == 'type') {
+	                            resolve("Выбрать тип");
+	                        }
+	                        if (type == 'code') {
+	                            resolve("Выбрать проект");
+	                        }
+	                    });
+	                };
 
 	                vm.createTicket = function (ticket, form) {
 
-	                    alert(JSON.stringify(ticket, null, 8));
+	                    // alert(JSON.stringify(ticket, null, 8));
+
+	                    if (ticket.code && ticket.contain && ticket.title && ticket.type) {
+
+	                        BugtrackerService.createTicket(ticket).then(function (objectData) {
+	                            BugtrackerService.currentTicketId = objectData.data.newId;
+	                            $location.path("/bugtracker/current");
+	                        });
+	                    } else {
+	                        alert('Не все поля заполнены!');
+	                    }
 	                };
 	            }
 	        };
@@ -22504,6 +22615,11 @@
 
 	    homeApp.service('BugtrackerService', function ($http) {
 
+	        function getToday() {
+	            var d = new Date();
+	            return "" + (d.getDay() + 1 < 10 ? "0" + (d.getDay() + 1) : d.getDay() + 1) + "." + (d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1) + "." + d.getFullYear();
+	        }
+
 	        // Получение списка тикетов
 	        this.getListOfTickets = function () {
 	            return $http.get('ajax/bugtracker/get_ticket_list.php');
@@ -22515,15 +22631,25 @@
 	        };
 
 	        // Создание тикета
-	        this.createTicket = function (ticket, createTicketForm) {
-	            if (createTicketForm.$valid) {
-	                if ($scope.currentProject == "") return;
-	                ticket.code = $scope.currentProject;
-	                ticket.type = $scope.currentTypeOfTicket;
-	                $http.post("ajax/bugtracker/create_ticket.php", ticket).success(function (data) {
-	                    $location.path("/bugtracker/current");
-	                });
+	        this.createTicket = function (ticket) {
+	            if (ticket.code && ticket.contain && ticket.title && ticket.type) {
+	                ticket.date = getToday();
+	                return $http.post("ajax/bugtracker/create_ticket.php", ticket);
+	            } else {
+	                alert('Не все поля заполнены!');
 	            }
+	        };
+
+	        // Апдейт статуса текущего тикета
+	        this.updateTicketStatus = function (id, status) {
+	            return $http.post("ajax/bugtracker/update_ticket_status.php", { "id": id, "status": status });
+	        };
+
+	        // Апдейт контента тикета
+	        this.saveContent = function (id, newContent) {
+	            console.log("Обновляем тикет " + id + " контентом:\n" + newContent);
+
+	            $http.post("ajax/bugtracker/update_ticket_contain.php", { "contain": newContent, "id": id });
 	        };
 	    });
 	};
@@ -22543,7 +22669,6 @@
 
 	        // Получение списка значений
 	        this.getListOfTicketStatus = function (lovType) {
-	            console.log("В сервисе", lovType);
 	            return $http.post("ajax/lov/get_values.php", { "lov_type": lovType });
 	        };
 	    });
@@ -22553,13 +22678,27 @@
 /* 15 */
 /***/ function(module, exports) {
 
+	/**
+	 * Created by Александр on 01.01.2017.
+	 */
+	module.exports = function (homeApp) {
+	  /**
+	   * Get list of values service
+	   */
+	  homeApp.service('TransportService', function ($http) {});
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 16 */,
 /* 17 */,
 /* 18 */,
-/* 19 */
+/* 19 */,
+/* 20 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

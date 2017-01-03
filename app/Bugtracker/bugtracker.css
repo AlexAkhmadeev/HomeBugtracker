@@ -62,7 +62,7 @@ td.ticket_data {
 }
 
 td.ticket_create {
-    width:200px;
+    width:130px;
 }
 
 .description {
@@ -79,6 +79,7 @@ td.ticket_create {
     overflow-x: hidden;
     cursor: pointer;
     word-wrap: break-word;
+    border: 1px solid #777;
     transition-duration: 500ms;
     transition-property: all;
 }
@@ -224,7 +225,22 @@ td.ticket_create {
     padding-left: 20px;
 }
 
+
+
 /*======================================= /createTicketView ============================================*/
 
 
+/* ContentEditor */
+#panel_button {
+    position: relative;
+    top: -14px;
+    left: 7px;
+}
 
+#new_content {
+    background: #e3e3e3;
+    color: #303030;
+    font-size: 18px;
+}
+
+/* /ContentEditor */

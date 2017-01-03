@@ -1,5 +1,5 @@
 /**
- * Created by Александр on 01.01.2017.
+ * Created by РђР»РµРєСЃР°РЅРґСЂ on 01.01.2017.
  */
 module.exports = function(homeApp) {
 
@@ -17,9 +17,20 @@ module.exports = function(homeApp) {
                    vm.tickets = dataObject.data;
                });
 
-                vm.typeOfTicket = function(type) {
-                    //console.log(type);
-                    if(type == "Задача") {
+
+                // Р’С‹Р±РѕСЂ С‚РёРєРµС‚Р° РёР· СЃРїРёСЃРєР°
+                vm.selectTicket = function(ticketId, ticketType) {
+
+                    BugtrackerService.currentTicketId = ticketId;
+                    $location.path('/bugtracker/current');
+
+                };
+
+            },
+            link: function (scope, element, attrs) {
+
+                scope.typeOfTicket = function(type) {
+                    if(type == "Р—Р°РґР°С‡Р°") {
                         return { color: "#1785ee"};
                     } else {
                         return { color: "#DD4444"};
@@ -28,24 +39,15 @@ module.exports = function(homeApp) {
                 };
 
 
-                vm.statusOfTicket = function(status) {
+                scope.statusOfTicket = function(status) {
                     //console.log(status);
-                    if(status == "Новый") {
+                    if(status == "РќРѕРІС‹Р№") {
                         return { color: "#ff1515"};
-                    } else if(status == "В работе") {
+                    } else if(status == "Р’ СЂР°Р±РѕС‚Рµ") {
                         return { color: "#e6bf27"};
-                    } else if(status == "Готово") {
+                    } else if(status == "Р“РѕС‚РѕРІРѕ") {
                         return { color: "green"};
                     }
-                };
-
-
-                // Выбор тикета из списка
-                vm.selectTicket = function(ticketId, ticketType) {
-
-                    BugtrackerService.currentTicketId = ticketId;
-                    $location.path('/bugtracker/current');
-
                 };
 
             }

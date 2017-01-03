@@ -19,6 +19,7 @@ module.exports = function(homeApp) {
     /* Сервисы */
     require('./Bugtracker/BugtrackerService.js')(homeApp);
     require('./general/services/LOVService.js')(homeApp);
+    require('./general/services/TransportService.js')(homeApp);
     /* /Сервисы */
 
     /* Контроллеры */

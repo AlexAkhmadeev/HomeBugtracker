@@ -9,7 +9,6 @@ module.exports = function(homeApp) {
 
         // Получение списка значений
         this.getListOfTicketStatus = function(lovType) {
-            console.log("В сервисе", lovType);
             return $http.post("ajax/lov/get_values.php", {"lov_type" : lovType});
         };
 

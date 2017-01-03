@@ -16,9 +16,9 @@
         </tr>
         <tr ng-click="BTCtrl.selectTicket(ticket.id, ticket.type)" class="ticket_row" ng-repeat="ticket in BTCtrl.tickets | filter:BTCtrl.currentProject">
             <td class="code">{{ticket.code}}-{{ticket.id}}</td>
-            <td ng-style="BTCtrl.typeOfTicket(ticket.type)" class="type">{{ticket.type}}</td>
+            <td ng-style="typeOfTicket(ticket.type)" class="type">{{ticket.type}}</td>
             <td class="title">{{ticket.title}}</td>
-            <td ng-style="BTCtrl.statusOfTicket(ticket.status)" class="created">{{ticket.status}}</td>
+            <td ng-style="statusOfTicket(ticket.status)" class="created">{{ticket.status}}</td>
             <td class="status">{{ticket.created}}</td>
         </tr>
     </table>
