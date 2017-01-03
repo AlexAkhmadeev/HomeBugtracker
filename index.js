@@ -1,21 +1,23 @@
 /**
- * Created by Александр on 31.12.2016.
+ * Created by РђР»РµРєСЃР°РЅРґСЂ on 31.12.2016.
  */
 
-/** ******************** Ангуляр *************************** */
+
+/** ******************** РђРЅРіСѓР»СЏСЂ *************************** */
 var angular = require('angular'); // Angular core
 
 require('angular-ui-router'); // Angular ui.router
 //require('ui-bootstrap'); // Angular ui.bootstrap
-var homeApp = angular.module('homeApp', ['ui.router']); // Приложение
+var homeApp = angular.module('homeApp', ['ui.router']); // РџСЂРёР»РѕР¶РµРЅРёРµ
 
-require('./app')(homeApp); // Конфигурационный файл приложения
-/** ******************** /Ангуляр *************************** */
+require('./app')(homeApp); // РљРѕРЅС„РёРіСѓСЂР°С†РёРѕРЅРЅС‹Р№ С„Р°Р№Р» РїСЂРёР»РѕР¶РµРЅРёСЏ
+/** ******************** /РђРЅРіСѓР»СЏСЂ *************************** */
 
 
-/** ******************** Стили *************************** */
-require('./app/general/styles/main.css'); // Главный
-require('./app/Bugtracker/bugtracker.css'); // Багтрекер
-require('./app/Keyboard/piano.css'); // Клавиши
+/** ******************** РЎС‚РёР»Рё *************************** */
+require('./app/general/styles/main.css'); // Р“Р»Р°РІРЅС‹Р№
+require('./app/Bugtracker/bugtracker.css'); // Р‘Р°РіС‚СЂРµРєРµСЂ
+require('./app/Keyboard/piano.css'); // РљР»Р°РІРёС€Рё
+require('./app/Sport/sport.css'); // РљР»Р°РІРёС€Рё
 
-/** ******************** /Стили *************************** */
+/** ******************** /РЎС‚РёР»Рё *************************** */

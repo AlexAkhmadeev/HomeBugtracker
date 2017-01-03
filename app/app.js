@@ -50,6 +50,20 @@ module.exports = function(homeApp) {
             .state('addBeats', {
                 url: '/keyboard/add',
                 template: '<ng-add-beats></ng-add-beats>'
+            })
+
+            // Спорт
+            .state('allEx', {
+                url: '/sport/all',
+                template: '<ng-all-ex></ng-all-ex>'
+            })
+            .state('doneEx', {
+                url: '/sport/done',
+                template: '<ng-done-ex></ng-done-ex>'
+            })
+            .state('addEx', {
+                url: '/sport/add',
+                template: '<ng-add-ex></ng-add-ex>'
             });
 
 

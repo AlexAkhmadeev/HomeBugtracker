@@ -1,0 +1,23 @@
+<div>
+    <ng-home-header title="Список всех упражнений" ctrls="Сделанные_упражения|doneEx Добавить_упражнение|addEx"></ng-home-header>
+    <table class="table table-bordered exercises head">
+        <tr>
+            <td class="name">№</td>
+            <td class="title">Название</td>
+            <td class="set">Подход</td>
+            <td class="rest">Отдых</td>
+            <td class="repeat">Кол-во повторений</td>
+            <td class="times">Кол-во подходов</td>
+        </tr>
+    </table>
+        <table class="table table-bordered exercises">
+            <tr ng-repeat="exercise in SPCtrl.allExercises" class="ex_row">
+                <td class="name">{{exercise.name}}</td>
+                <td class="title">{{exercise.title}}</td>
+                <td class="set">{{exercise.setTimeSec}}</td>
+                <td class="rest">{{exercise.restTimeSec}}</td>
+                <td class="repeat">{{exercise.repeatNumber}}</td>
+                <td class="times">{{exercise.timesNumber}}</td>
+            </tr>
+        </table>
+</div>

@@ -53,17 +53,17 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
     /* Упражнения */
     $routeProvider.when('/sport/exercises',
         {
-            templateUrl: 'views/sport/exercisesListView.html',
+            templateUrl: 'views/sport/_allEx.html',
             controller: 'SportCtrl'
         });
     $routeProvider.when('/sport/done',
         {
-            templateUrl: 'views/sport/doneExercisesView.html',
+            templateUrl: 'views/sport/_doneEx.html',
             controller: 'SportCtrl'
         });
     $routeProvider.when('/sport/add',
         {
-            templateUrl: 'views/sport/addExerciseView.html',
+            templateUrl: 'views/sport/_addEx.html',
             controller: 'SportCtrl'
         });
     /* /Упражнения */

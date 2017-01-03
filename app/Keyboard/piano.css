@@ -38,6 +38,7 @@ div.table_wrap td {
 
 
 /*-------------------------------------- allBeatsView------------------------------*/
+
 .piano_head_table {
     margin-top: 10px;
     width: 100%;
@@ -178,3 +179,10 @@ div.table_wrap td {
         float: right;
     }
 /*--------------------------------------/addBeatsView------------------------------*/
+
+
+/** editor */
+.edit-cell {
+    position: absolute;
+    border-radius: 0px;
+}

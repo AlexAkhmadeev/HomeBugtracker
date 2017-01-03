@@ -9,7 +9,9 @@
     <file url="file://$PROJECT_DIR$/app/Bugtracker/ngCreateTicket.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Bugtracker/ngCurrentTicket.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Bugtracker/ngTicketList.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Keyboard/ngAllBeats.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Keyboard/piano.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Sport/ngAddEx.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/app.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/general/directives/ngDropDown.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/general/directives/ngHomeHeader.js" charset="UTF-8" />
@@ -21,6 +23,7 @@
     <file url="file://$PROJECT_DIR$/build.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cfg/core.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/index.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/old_js/app/controllers/BugTrackerCtrl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/old_js/app/controllers/MenuCtrl.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/old_js/app/controllers/PianoCtrl.js" charset="UTF-8" />

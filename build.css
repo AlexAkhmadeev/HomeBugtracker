@@ -374,6 +374,7 @@ div.table_wrap td {
 
 
 /*-------------------------------------- allBeatsView------------------------------*/
+
 .piano_head_table {
     margin-top: 10px;
     width: 100%;
@@ -514,3 +515,185 @@ div.table_wrap td {
         float: right;
     }
 /*--------------------------------------/addBeatsView------------------------------*/
+
+
+/** editor */
+.edit-cell {
+    position: absolute;
+    border-radius: 0px;
+}/*===================================================================================================================*/
+/*                                              �����                                                                */
+/*===================================================================================================================*/
+
+hr.white {
+    border-color: ghostwhite;
+}
+
+/*-------------------------------------- doneExercisesView------------------------------*/
+.done_exercises_head_table {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.done_exercises_head_table .list_of_done_exercises {
+    color: #f7f67e;
+    padding-left: 10px;
+    font-size: 25px;
+    width: 70%;
+}
+
+.done_exercises_head_table button{
+    float: right;
+}
+
+.done_exercises_wrap {
+    max-height: 390px;
+    overflow-y: scroll;
+}
+
+table.done_exercises {
+    margin: 0px 0px 0px 0px;
+    background: ghostwhite;
+}
+
+.done_exercises .date {
+    width: 100px;
+}
+
+.done_exercises .ex {
+    width: 100px;
+    margin: 0px 0px 0px 0px;
+}
+
+.done_exercises.head td {
+    font-weight: bold;
+}
+
+.add_done_exercises {
+    margin-top: 0px;
+    border: 0px;
+}
+
+.add_done_exercises > tbody > tr > td {
+    border: 0px;
+    padding: 0px 2px 0px 2px;
+}
+
+.add_done_exercises .date > input {
+    width: 100px;
+}
+
+.add_done_exercises .ex > input{
+
+    margin: 0px 2px 0px 2px;
+}
+
+.add_done_exercises .ex {
+
+}
+
+.add_done_exercises input[type="submit"], .add_done_exercises button {
+    width: 98%;
+    margin-left: 2px;
+    margin-top: 5px;
+    margin-right: 2px;
+}
+/*-------------------------------------- /doneExercisesView------------------------------*/
+
+
+
+
+/*-------------------------------------- exercisesListView------------------------------*/
+.exercises_head_table {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.exercises_head_table .list_of_exercises {
+    color: #f7f67e;
+    padding-left: 10px;
+    font-size: 25px;
+    width: 70%;
+}
+
+.exercises_head_table button {
+    margin-left: 10px;
+}
+
+.exercises {
+    width: 100%;
+}
+
+.exercises .name {
+    width: 70px;
+}
+
+.exercises .title {
+
+}
+
+.exercises .set {
+    width: 90px;
+}
+
+.exercises .rest {
+    width: 70px;
+}
+
+.exercises .repeat {
+    width: 180px;
+}
+
+.exercises .times {
+    width: 180px;
+}
+
+.exercises.head {
+    width: 100%;
+}
+
+.exercises.head td{
+    font-weight: bold;
+}
+
+table.exercises {
+    margin: 0px 0px 0px 0px;
+    background: ghostwhite;
+}
+
+.exercises_wrap {
+    max-height: 510px;
+    overflow-y: scroll;
+}
+/*-------------------------------------- /exercisesListView------------------------------*/
+
+
+
+/*-------------------------------------- addExerciseView------------------------------*/
+
+table.add_exercise_table {
+    margin: 50px 0px 0px 50px;
+}
+
+table.add_exercise_table td {
+    padding: 5px 10px 5px 10px;
+}
+
+
+table.add_exercise_table .label {
+    color: ghostwhite;
+    font-size: 20px;
+}
+
+table.add_exercise_table .ex_input {
+    position: relative;
+    top: -10px;
+    width: 400px;
+}
+
+table.add_exercise_table td input[type="submit"] {
+    width: 100%;
+}
+
+
+/*-------------------------------------- addExerciseView------------------------------*/

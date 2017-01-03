@@ -16,11 +16,15 @@ module.exports = function(homeApp) {
     require('./Keyboard/ngAllBeats.js')(homeApp);
     require('./Keyboard/ngAddBeats.js')(homeApp);
     require('./Keyboard/ngStat.js')(homeApp);
+    require('./Sport/ngAddEx.js')(homeApp);
+    require('./Sport/ngDoneEx.js')(homeApp);
+    require('./Sport/ngAllEx.js')(homeApp);
     /* /Директивы */
 
 
     /* Сервисы */
     require('./Bugtracker/BugtrackerService.js')(homeApp);
+    require('./Sport/SportService.js')(homeApp);
     require('./Keyboard/KeyboardService.js')(homeApp);
     require('./general/services/LOVService.js')(homeApp);
     require('./general/services/TransportService.js')(homeApp);

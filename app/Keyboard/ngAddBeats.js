@@ -10,9 +10,19 @@ module.exports = function(homeApp) {
             replace: true,
             controllerAs: 'KBCtrl',
             bindToController: true,
-            controller: function($scope, KeyboardService) {
+            controller: function($scope, KeyboardService, $location) {
                 var vm = this;
 
+                vm.beat = {};
+
+                // Добавление тактов
+                vm.addBeats = function(beatform) {
+                    if(beatform.$valid) {
+                        KeyboardService.addBeats(vm.beat).then(function(data) {
+                            $location.path('/keyboard/beats');
+                        });
+                    }
+                };
 
 
             }

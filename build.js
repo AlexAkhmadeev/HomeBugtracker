@@ -45,25 +45,26 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
-	 * Created by ��������� on 31.12.2016.
+	 * Created by Александр on 31.12.2016.
 	 */
 
-	/** ******************** ������� *************************** */
+	/** ******************** Ангуляр *************************** */
 	var angular = __webpack_require__(1); // Angular core
 
 	__webpack_require__(3); // Angular ui.router
 	//require('ui-bootstrap'); // Angular ui.bootstrap
-	var homeApp = angular.module('homeApp', ['ui.router']); // ����������
+	var homeApp = angular.module('homeApp', ['ui.router']); // Приложение
 
-	__webpack_require__(4)(homeApp); // ���������������� ���� ����������
-	/** ******************** /������� *************************** */
+	__webpack_require__(4)(homeApp); // Конфигурационный файл приложения
+	/** ******************** /Ангуляр *************************** */
 
-	/** ******************** ����� *************************** */
-	__webpack_require__(20); // �������
-	__webpack_require__(24); // ���������
-	__webpack_require__(26); // �������
+	/** ******************** Стили *************************** */
+	__webpack_require__(24); // Главный
+	__webpack_require__(28); // Багтрекер
+	__webpack_require__(30); // Клавиши
+	__webpack_require__(32); // Клавиши
 
-	/** ******************** /����� *************************** */
+	/** ******************** /Стили *************************** */
 
 /***/ },
 /* 1 */
@@ -22143,13 +22144,17 @@
 	    __webpack_require__(13)(homeApp);
 	    __webpack_require__(14)(homeApp);
 	    __webpack_require__(15)(homeApp);
-	    /* /��������� */
-
-	    /* ������� */
 	    __webpack_require__(16)(homeApp);
 	    __webpack_require__(17)(homeApp);
 	    __webpack_require__(18)(homeApp);
+	    /* /��������� */
+
+	    /* ������� */
 	    __webpack_require__(19)(homeApp);
+	    __webpack_require__(20)(homeApp);
+	    __webpack_require__(21)(homeApp);
+	    __webpack_require__(22)(homeApp);
+	    __webpack_require__(23)(homeApp);
 	    /* /������� */
 
 	    /* ����������� */
@@ -22207,6 +22212,18 @@
 	        }).state('addBeats', {
 	            url: '/keyboard/add',
 	            template: '<ng-add-beats></ng-add-beats>'
+	        })
+
+	        // Спорт
+	        .state('allEx', {
+	            url: '/sport/all',
+	            template: '<ng-all-ex></ng-all-ex>'
+	        }).state('doneEx', {
+	            url: '/sport/done',
+	            template: '<ng-done-ex></ng-done-ex>'
+	        }).state('addEx', {
+	            url: '/sport/add',
+	            template: '<ng-add-ex></ng-add-ex>'
 	        });
 
 	        $urlRouterProvider.otherwise('/main');
@@ -22616,70 +22633,132 @@
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 03.01.2017.
+	 * Created by Александр on 03.01.2017.
 	 */
+
 	module.exports = function (homeApp) {
 
-	                homeApp.directive("ngAllBeats", function () {
-	                                return {
-	                                                restrict: 'E',
-	                                                templateUrl: '/app/Keyboard/_allBeats.html',
-	                                                replace: true,
-	                                                controllerAs: 'KBCtrl',
-	                                                bindToController: true,
-	                                                controller: function ($scope, KeyboardService) {
-	                                                                var vm = this;
+	    homeApp.directive("ngAllBeats", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Keyboard/_allBeats.html',
+	            replace: true,
+	            controllerAs: 'KBCtrl',
+	            bindToController: true,
+	            controller: function ($scope, KeyboardService) {
+	                var vm = this;
 
-	                                                                KeyboardService.getAllBeats().then(function (dataObject) {
-	                                                                                vm.beats = dataObject.data;
-	                                                                });
-
-	                                                                // ��� link
-	                                                                vm.KBService = KeyboardService;
-	                                                },
-	                                                link: function (scope, element, attrs) {
-
-	                                                                var panelButton = element.find("#panel_button");
-	                                                                var commitButton = element.find("#commit_button");
-	                                                                var rollbackButton = element.find("#rollback_button");
-	                                                                var page = angular.element(document.body);
-
-	                                                                var input = angular.element('INPUT');
-	                                                                console.log(input);
-
-	                                                                panelButton.hide();
-
-	                                                                var contentEditor = {};
-
-	                                                                page.on('dblclick', activateEditorMode);
-	                                                                commitButton.on('click', commit);
-	                                                                rollbackButton.on('click', rollback);
-
-	                                                                function activateEditorMode(event) {
-	                                                                                var target = angular.element(event.target);
-	                                                                                console.log(target);
-
-	                                                                                if (contentEditor.isActive) return;
-	                                                                                if (!target.hasClass("editable")) return;
-	                                                                                contentEditor.isActive = true;
-
-	                                                                                panelButton.show();
-	                                                                }
-
-	                                                                function commit() {
-
-	                                                                                panelButton.hide();
-	                                                                                contentEditor.isActive = false;
-	                                                                }
-
-	                                                                function rollback() {
-
-	                                                                                panelButton.hide();
-	                                                                                contentEditor.isActive = false;
-	                                                                }
-	                                                }
-	                                };
+	                KeyboardService.getAllBeats().then(function (dataObject) {
+	                    vm.beats = dataObject.data;
 	                });
+
+	                // Для link
+	                vm.KBService = KeyboardService;
+	            },
+	            link: function (scope, element, attrs) {
+
+	                // Координаты относительно элемента
+	                function getCoords(elem) {
+	                    return {
+	                        top: elem.getBoundingClientRect().top + pageYOffset,
+	                        left: elem.getBoundingClientRect().left + pageXOffset,
+	                        bottom: elem.getBoundingClientRect().bottom + pageYOffset,
+	                        right: elem.getBoundingClientRect().right + pageXOffset
+	                    };
+	                }
+
+	                var panelButton = element.find("#panel_button");
+	                var commitButton = element.find("#commit_button");
+	                var rollbackButton = element.find("#rollback_button");
+	                var page = angular.element(document.body);
+
+	                var input = document.createElement('INPUT');
+	                input.type = 'text';
+	                input.classList.add('form-control');
+	                input.classList.add('edit-cell');
+	                document.body.appendChild(input);
+	                input = angular.element(input);
+	                input.hide();
+
+	                panelButton.css({ "position": "absolute" });
+	                panelButton.hide();
+
+	                var contentEditor = {};
+
+	                angular.element(document)[0].addEventListener('scroll', rollback);
+	                page.on('dblclick', activateEditorMode);
+	                page.on('click', clickHandler);
+	                commitButton.on('click', commit);
+	                rollbackButton.on('click', rollback);
+
+	                function activateEditorMode(event) {
+	                    var target = angular.element(event.target);
+
+	                    if (contentEditor.isActive) return;
+	                    if (!target.hasClass("editable")) return;
+
+	                    contentEditor.currentCell = target;
+
+	                    //Расположение
+	                    panelButton.css({
+	                        "top": getCoords(target[0]).bottom + 2,
+	                        "left": getCoords(target[0]).left - 7
+	                    });
+
+	                    input.css({
+	                        "top": getCoords(target[0]).top + 1,
+	                        "left": getCoords(target[0]).left,
+	                        "width": target[0].offsetWidth,
+	                        "height": target[0].offsetHeight,
+	                        "borderRadius": 0,
+	                        "fontSize": 18
+	                    });
+
+	                    contentEditor.oldValue = target.html();
+	                    input.val(contentEditor.oldValue);
+	                    contentEditor.isActive = true;
+	                    panelButton.show();
+	                    input.show();
+	                    input[0].focus();
+	                }
+
+	                function commit() {
+
+	                    if (contentEditor.oldValue == input.val()) {
+	                        rollback();
+	                        return;
+	                    }
+
+	                    scope.KBCtrl.KBService.editBeats({ // Отправка данных на сервер
+	                        "row_id": contentEditor.currentCell.attr("data-row_id"),
+	                        "col_name": contentEditor.currentCell.attr("data-col_name"),
+	                        "value": input.val()
+	                    }).then(function (d) {
+	                        //alert(JSON.stringify(d.data, null, 8))
+	                    });
+
+	                    contentEditor.currentCell.html(input.val());
+	                    input.val(null);
+	                    input.hide();
+	                    panelButton.hide();
+	                    contentEditor.isActive = false;
+	                }
+
+	                function rollback() {
+	                    input.val(null);
+	                    input.hide();
+	                    panelButton.hide();
+	                    contentEditor.isActive = false;
+	                }
+
+	                function clickHandler(event) {
+	                    var target = angular.element(event.target);
+	                    if (target.hasClass("edit-cell")) return;
+	                    rollback();
+	                }
+	            }
+	        };
+	    });
 	};
 
 /***/ },
@@ -22698,8 +22777,19 @@
 	            replace: true,
 	            controllerAs: 'KBCtrl',
 	            bindToController: true,
-	            controller: function ($scope, KeyboardService) {
+	            controller: function ($scope, KeyboardService, $location) {
 	                var vm = this;
+
+	                vm.beat = {};
+
+	                // ���������� ������
+	                vm.addBeats = function (beatform) {
+	                    if (beatform.$valid) {
+	                        KeyboardService.addBeats(vm.beat).then(function (data) {
+	                            $location.path('/keyboard/beats');
+	                        });
+	                    }
+	                };
 	            }
 	        };
 	    });
@@ -22750,6 +22840,127 @@
 /***/ function(module, exports) {
 
 	/**
+	 * Created by Александр on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngAddEx", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Sport/_addEx.html',
+	            replace: true,
+	            controllerAs: 'SPCtrl',
+	            bindToController: true,
+	            controller: function ($scope, SportService, $location) {
+	                var vm = this;
+
+	                vm.newExercise = function (form) {
+	                    if (form.$valid) {
+
+	                        SportService.addNewExercise(vm.newEx).then(function (d) {
+	                            $location.path("/sport/all");
+	                        });
+	                    }
+	                };
+	            }
+
+	        };
+	    });
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngDoneEx", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Sport/_doneEx.html',
+	            replace: true,
+	            controllerAs: 'SPCtrl',
+	            bindToController: true,
+	            controller: function ($scope, SportService, $location) {
+	                var vm = this;
+
+	                function getToday() {
+	                    var d = new Date();
+	                    return "" + (d.getDay() + 1 < 10 ? "0" + (d.getDay() + 1) : d.getDay() + 1) + "." + (d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1) + "." + d.getFullYear();
+	                }
+
+	                vm.doneExercise = {};
+	                vm.doneExercise.date = getToday();
+
+	                SportService.getDoneExercises().then(function (dataObject) {
+	                    vm.doneExercises = dataObject.data;
+	                });
+
+	                // ��������� ����������
+	                vm.fillLikePrev = function () {
+	                    vm.doneExercise.date = getToday();
+	                    vm.doneExercise.ex1 = "1";
+	                    vm.doneExercise.ex2 = "24";
+	                    vm.doneExercise.ex3 = "2**";
+	                    vm.doneExercise.ex4 = "3";
+	                    vm.doneExercise.ex5 = "9";
+	                    vm.doneExercise.ex6 = "13";
+	                    vm.doneExercise.ex7 = "17";
+	                    vm.doneExercise.ex8 = "15";
+	                };
+
+	                vm.addDoneExercises = function (formName) {
+
+	                    if (formName.$valid) {
+	                        SportService.addDoneExercise(vm.doneExercise).then(function (data) {
+	                            vm.doneExercise = {};
+	                            SportService.getDoneExercises().then(function (dataObject) {
+	                                vm.doneExercises = dataObject.data;
+	                            });
+	                        });
+	                    }
+	                };
+	            }
+
+	        };
+	    });
+	};
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngAllEx", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Sport/_allEx.html',
+	            replace: true,
+	            controllerAs: 'SPCtrl',
+	            bindToController: true,
+	            controller: function ($scope, SportService) {
+	                var vm = this;
+
+	                SportService.getListOfExercises().then(function (dataObject) {
+	                    vm.allExercises = dataObject.data;
+	                });
+	            }
+	        };
+	    });
+	};
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
+	/**
 	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
@@ -22796,7 +23007,46 @@
 	};
 
 /***/ },
-/* 17 */
+/* 20 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.service('SportService', function ($http) {
+
+	        function getToday() {
+	            var d = new Date();
+	            return "" + (d.getDay() + 1 < 10 ? "0" + (d.getDay() + 1) : d.getDay() + 1) + "." + (d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1) + "." + d.getFullYear();
+	        }
+
+	        // �������� ���� ��������� ����������
+	        this.getDoneExercises = function () {
+	            return $http.get('ajax/sport/get_done_exercises.php');
+	        };
+
+	        // �������� ������ ���� ����������
+	        this.getListOfExercises = function () {
+	            return $http.get('ajax/sport/get_list_of_exercises.php');
+	        };
+
+	        // ���������� ��������� ����������
+	        this.addDoneExercise = function (data) {
+	            console.log(data);
+	            return $http.post("ajax/sport/add_done_exercises.php", data);
+	        };
+
+	        // ���������� ������ ����������
+	        this.addNewExercise = function (data) {
+	            return $http.post("ajax/sport/add_exercise.php", data);
+	        };
+	    });
+	};
+
+/***/ },
+/* 21 */
 /***/ function(module, exports) {
 
 	/**
@@ -22820,11 +23070,21 @@
 	        this.getStat = function () {
 	            return $http.get("ajax/piano/get_stat.php");
 	        };
+
+	        // �������������� ������� � �������
+	        this.editBeats = function (data) {
+	            return $http.post("ajax/piano/edit_beats.php", data);
+	        };
+
+	        // ���������� ����� ������
+	        this.addBeats = function (data) {
+	            return $http.post("ajax/piano/addbeats.php", data);
+	        };
 	    });
 	};
 
 /***/ },
-/* 18 */
+/* 22 */
 /***/ function(module, exports) {
 
 	/**
@@ -22844,7 +23104,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**
@@ -22858,15 +23118,6 @@
 	};
 
 /***/ },
-/* 20 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 21 */,
-/* 22 */,
-/* 23 */,
 /* 24 */
 /***/ function(module, exports) {
 
@@ -22874,7 +23125,23 @@
 
 /***/ },
 /* 25 */,
-/* 26 */
+/* 26 */,
+/* 27 */,
+/* 28 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 29 */,
+/* 30 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 31 */,
+/* 32 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
