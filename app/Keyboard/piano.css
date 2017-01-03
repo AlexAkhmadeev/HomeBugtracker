@@ -43,6 +43,10 @@ div.table_wrap td {
     width: 100%;
 }
 
+.table_header {
+    font-weight: bold;
+}
+
 .beats_title {
     color: #f7f67e;
     padding-left: 10px;

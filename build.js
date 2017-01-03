@@ -59,8 +59,9 @@
 	/** ******************** /������� *************************** */
 
 	/** ******************** ����� *************************** */
-	__webpack_require__(16); // �������
-	__webpack_require__(20); // ���������
+	__webpack_require__(20); // �������
+	__webpack_require__(24); // ���������
+	__webpack_require__(26); // �������
 
 	/** ******************** /����� *************************** */
 
@@ -22139,12 +22140,16 @@
 	    __webpack_require__(10)(homeApp);
 	    __webpack_require__(11)(homeApp);
 	    __webpack_require__(12)(homeApp);
-	    /* /��������� */
-
-	    /* ������� */
 	    __webpack_require__(13)(homeApp);
 	    __webpack_require__(14)(homeApp);
 	    __webpack_require__(15)(homeApp);
+	    /* /��������� */
+
+	    /* ������� */
+	    __webpack_require__(16)(homeApp);
+	    __webpack_require__(17)(homeApp);
+	    __webpack_require__(18)(homeApp);
+	    __webpack_require__(19)(homeApp);
 	    /* /������� */
 
 	    /* ����������� */
@@ -22174,22 +22179,13 @@
 	        // Багтрекер
 	        .state('createTicket', {
 	            url: '/bugtracker/create',
-	            template: '<ng-create-ticket></ng-create-ticket>',
-	            controller: function () {
-	                console.log('Переход на createTicketView');
-	            }
+	            template: '<ng-create-ticket></ng-create-ticket>'
 	        }).state('ticketList', {
 	            url: '/bugtracker/list',
-	            template: '<ng-ticket-list></ng-ticket-list>',
-	            controller: function () {
-	                console.log('Переход на selectTicketView');
-	            }
+	            template: '<ng-ticket-list></ng-ticket-list>'
 	        }).state('currentTicket', {
 	            url: '/bugtracker/current',
-	            template: '<ng-current-ticket></ng-current-ticket>',
-	            controller: function () {
-	                console.log('Переход на currentTicketView');
-	            }
+	            template: '<ng-current-ticket></ng-current-ticket>'
 	        })
 
 	        // Справочник
@@ -22199,6 +22195,18 @@
 	            controller: function () {
 	                console.log('Переход на directoryView');
 	            }
+	        })
+
+	        // Клавиши
+	        .state('beats', {
+	            url: '/keyboard/beats',
+	            template: '<ng-all-beats></ng-all-beats>'
+	        }).state('statistics', {
+	            url: '/keyboard/stat',
+	            template: '<ng-stat></ng-stat>'
+	        }).state('addBeats', {
+	            url: '/keyboard/add',
+	            template: '<ng-add-beats></ng-add-beats>'
 	        });
 
 	        $urlRouterProvider.otherwise('/main');
@@ -22483,11 +22491,11 @@
 	                };
 
 	                //======================================РЕДАКТОР КОНТЕНТА========================================//
+
+
 	                var contentElem = element.find("#ticket_content");
 	                var textArea = element.find("#new_content");
 	                var pre = element.find("#ticket_content_pre");
-
-	                console.log(textArea);
 
 	                var panelButton = element.find("#panel_button");
 	                var commitButton = element.find("#commit_button");
@@ -22499,7 +22507,6 @@
 	                var contentEditor = {};
 
 	                contentElem.on('dblclick', activateEditorMode);
-
 	                commitButton.on('click', commit);
 	                rollbackButton.on('click', rollback);
 
@@ -22609,6 +22616,140 @@
 /***/ function(module, exports) {
 
 	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	                homeApp.directive("ngAllBeats", function () {
+	                                return {
+	                                                restrict: 'E',
+	                                                templateUrl: '/app/Keyboard/_allBeats.html',
+	                                                replace: true,
+	                                                controllerAs: 'KBCtrl',
+	                                                bindToController: true,
+	                                                controller: function ($scope, KeyboardService) {
+	                                                                var vm = this;
+
+	                                                                KeyboardService.getAllBeats().then(function (dataObject) {
+	                                                                                vm.beats = dataObject.data;
+	                                                                });
+
+	                                                                // ��� link
+	                                                                vm.KBService = KeyboardService;
+	                                                },
+	                                                link: function (scope, element, attrs) {
+
+	                                                                var panelButton = element.find("#panel_button");
+	                                                                var commitButton = element.find("#commit_button");
+	                                                                var rollbackButton = element.find("#rollback_button");
+	                                                                var page = angular.element(document.body);
+
+	                                                                var input = angular.element('INPUT');
+	                                                                console.log(input);
+
+	                                                                panelButton.hide();
+
+	                                                                var contentEditor = {};
+
+	                                                                page.on('dblclick', activateEditorMode);
+	                                                                commitButton.on('click', commit);
+	                                                                rollbackButton.on('click', rollback);
+
+	                                                                function activateEditorMode(event) {
+	                                                                                var target = angular.element(event.target);
+	                                                                                console.log(target);
+
+	                                                                                if (contentEditor.isActive) return;
+	                                                                                if (!target.hasClass("editable")) return;
+	                                                                                contentEditor.isActive = true;
+
+	                                                                                panelButton.show();
+	                                                                }
+
+	                                                                function commit() {
+
+	                                                                                panelButton.hide();
+	                                                                                contentEditor.isActive = false;
+	                                                                }
+
+	                                                                function rollback() {
+
+	                                                                                panelButton.hide();
+	                                                                                contentEditor.isActive = false;
+	                                                                }
+	                                                }
+	                                };
+	                });
+	};
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngAddBeats", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Keyboard/_addBeats.html',
+	            replace: true,
+	            controllerAs: 'KBCtrl',
+	            bindToController: true,
+	            controller: function ($scope, KeyboardService) {
+	                var vm = this;
+	            }
+	        };
+	    });
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngStat", function () {
+	        return {
+	            restrict: 'E',
+	            templateUrl: '/app/Keyboard/_stat.html',
+	            replace: true,
+	            controllerAs: 'KBCtrl',
+	            bindToController: true,
+	            controller: function ($scope, KeyboardService) {
+	                var vm = this;
+
+	                // ����������
+	                vm.stat = {
+
+	                    "totalBeats": 200,
+	                    "doneBeats": 147,
+	                    "totalHours": null,
+	                    "totalDays": null
+
+	                };
+
+	                KeyboardService.getStat().then(function (objectData) {
+	                    var data = objectData.data;
+
+	                    vm.stat.totalHours = (data / 60).toFixed(1); // ����
+	                    vm.stat.totalDays = (data / (60 * 24)).toFixed(1); // �����
+	                });
+	            }
+	        };
+	    });
+	};
+
+/***/ },
+/* 16 */
+/***/ function(module, exports) {
+
+	/**
 	 * Created by Александр on 01.01.2017.
 	 */
 	module.exports = function (homeApp) {
@@ -22655,7 +22796,35 @@
 	};
 
 /***/ },
-/* 14 */
+/* 17 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 03.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.service('KeyboardService', function ($http) {
+
+	        function getToday() {
+	            var d = new Date();
+	            return "" + (d.getDay() + 1 < 10 ? "0" + (d.getDay() + 1) : d.getDay() + 1) + "." + (d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1) + "." + d.getFullYear();
+	        }
+
+	        // �������� ���� ������
+	        this.getAllBeats = function () {
+	            return $http.get('ajax/piano/loadbeats.php');
+	        };
+
+	        // ��������� ���-�� ����� (��� ����������)
+	        this.getStat = function () {
+	            return $http.get("ajax/piano/get_stat.php");
+	        };
+	    });
+	};
+
+/***/ },
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -22675,7 +22844,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 19 */
 /***/ function(module, exports) {
 
 	/**
@@ -22689,16 +22858,23 @@
 	};
 
 /***/ },
-/* 16 */
+/* 20 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 25 */,
+/* 26 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

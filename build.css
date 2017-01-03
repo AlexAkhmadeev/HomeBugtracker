@@ -253,31 +253,29 @@ td.ticket_create {
 
 
 /*======================================= createTicketView ============================================*/
-.create_ticket_head {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.create_ticket_head .title {
-    color: #f7f67e;
-    padding-left: 10px;
-    font-size: 25px;
-    width: 70%;
-}
-
-.create_ticket_head button {
-    float: right;
-}
-
 .create_ticket_table {
-    width: 100%;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.create_ticket_table td{
+
 }
 
 .create_ticket_table .title {
-    width: 80%;
-    margin-right: 25px;
-    padding-right: 25px;
+    width: 100%;
 }
+
+.dd_title {
+    margin-right: 10px;
+    float: right;
+}
+
+.submit_button {
+
+}
+
 
 .create_ticket_table .dd_button {
 
@@ -297,6 +295,7 @@ td.ticket_create {
 
 .create_ticket_table .contain textarea {
     width: 100%;
+    max-width: 100%;
     height: 400px;
 }
 
@@ -326,7 +325,6 @@ td.ticket_create {
 #panel_button {
     position: relative;
     top: -14px;
-    left: 7px;
 }
 
 #new_content {
@@ -336,3 +334,183 @@ td.ticket_create {
 }
 
 /* /ContentEditor */
+/*===================================================================================================================*/
+/*                                              КЛАВИШИ                                                              */
+/*===================================================================================================================*/
+
+hr.white {
+    border-color: ghostwhite;
+}
+
+div.add_beats_form_wrap {
+    margin-left: 50px;
+}
+
+div.add_beats_form_wrap td {
+    padding: 5px 5px 5px 5px;
+}
+
+div.add_beats_form_wrap input[type=submit] {
+    margin-top: 10px;
+    width: 100%;
+}
+
+div.table_wrap {
+    overflow: auto;
+    height: 500px;
+}
+
+div.table_wrap thead {
+background: linear-gradient(to top, #87c0e7, #9ee0ff);
+}
+
+table#beats {
+    background: ghostwhite;
+}
+
+div.table_wrap td {
+   cursor: pointer;
+}
+
+
+/*-------------------------------------- allBeatsView------------------------------*/
+.piano_head_table {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.table_header {
+    font-weight: bold;
+}
+
+.beats_title {
+    color: #f7f67e;
+    padding-left: 10px;
+    font-size: 25px;
+    width: 70%;
+    transition-property: color;
+    transition-duration: 500ms;
+}
+
+.beats_title:hover {
+    color: #68e3f7;
+}
+
+.add_beats_button {
+    float: right;
+    width: 200px;
+    padding-left: 10px;
+}
+
+.tickets {
+    background: ghostwhite;
+    margin-bottom: 0px;
+    padding-right: 18px;
+}
+
+.head {
+    background: white;
+    font-weight: bold;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.tickets .beats {
+    width: 170px;
+}
+
+.tickets .minutes {
+    width: 170px;
+}
+
+.tickets .complexity {
+
+}
+
+.tickets .status {
+    width: 170px;
+}
+
+.tickets .updated {
+    width: 170px;
+}
+
+.select_ticket_head_table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.beat_row:hover {
+    cursor: pointer;
+    background: white;
+    color: red;
+}
+
+.beats_select_wrap {
+    max-height: 510px;
+    overflow-y: scroll;
+}
+
+.editable {
+    background: #f4fef1;
+}
+/*--------------------------------------/allBeatsView------------------------------*/
+
+
+
+/*--------------------------------------statisticsView------------------------------*/
+   .statistics_wrap {
+
+    }
+
+    .statistics_wrap .add_beats_button {
+        float: right;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    .statistics_wrap .title {
+        text-align: left;
+        font-size: 25px;
+        width: 80%;
+        padding-left: 10px;
+        color: #f7f67e;
+    }
+
+    .statistics_wrap .label {
+        font-size: 25px;
+        color: lightblue;
+    }
+
+     .statistics_wrap .value {
+        font-size: 25px;
+        color: orange;
+    }
+/*--------------------------------------/statisticsView------------------------------*/
+
+
+
+
+/*--------------------------------------addBeatsView------------------------------*/
+    .add_beats_table td {
+
+        color: ghostwhite;
+        font-size: 20px;
+    }
+
+    #add_beats {
+        margin-top: 10px;
+    }
+
+    #add_beats .title {
+        color: #f7f67e;
+        font-size: 25px;
+        width: 90%;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    #add_beats .add_beats_button {
+        float: right;
+    }
+/*--------------------------------------/addBeatsView------------------------------*/

@@ -26,9 +26,9 @@ var PianoCtrl = homeApp.controller('PianoCtrl', function ctrl($rootScope, $scope
 
 
     // Загрузка данных с сервера
-        $http.get('ajax/piano/loadbeats.php').success(function(data) {
-                $scope.beats = data;
-            });
+    $http.get('ajax/piano/loadbeats.php').success(function(data) {
+        $scope.beats = data;
+    });
 
 
     // Загрузка данных на сервер

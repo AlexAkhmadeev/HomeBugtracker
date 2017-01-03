@@ -13,14 +13,19 @@ module.exports = function(homeApp) {
     require('./Bugtracker/ngTicketList.js')(homeApp);
     require('./Bugtracker/ngCurrentTicket.js')(homeApp);
     require('./Bugtracker/ngCreateTicket.js')(homeApp);
+    require('./Keyboard/ngAllBeats.js')(homeApp);
+    require('./Keyboard/ngAddBeats.js')(homeApp);
+    require('./Keyboard/ngStat.js')(homeApp);
     /* /Директивы */
 
 
     /* Сервисы */
     require('./Bugtracker/BugtrackerService.js')(homeApp);
+    require('./Keyboard/KeyboardService.js')(homeApp);
     require('./general/services/LOVService.js')(homeApp);
     require('./general/services/TransportService.js')(homeApp);
     /* /Сервисы */
+
 
     /* Контроллеры */
     /* Контроллеры */

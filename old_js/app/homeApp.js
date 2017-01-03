@@ -15,17 +15,17 @@ var homeApp = angular.module('homeApp', ["ngRoute"]).config(function($routeProvi
     /* Клавиши */
     $routeProvider.when('/piano/all',
         {
-            templateUrl: 'views/piano/allBeatsView.html',
+            templateUrl: 'views/piano/_allBeats.html',
             controller: 'PianoCtrl'
         });
     $routeProvider.when('/piano/add',
         {
-            templateUrl: 'views/piano/addBeatsView.html',
+            templateUrl: 'views/piano/_addBeats.html',
             controller: 'PianoCtrl'
         });
     $routeProvider.when('/piano/stat',
         {
-            templateUrl: 'views/piano/statisticsView.html',
+            templateUrl: 'views/piano/_stat.html',
             controller: 'PianoCtrl'
         });
     /* /Клавиши */

@@ -16,5 +16,6 @@ require('./app')(homeApp); // Конфигурационный файл приложения
 /** ******************** Стили *************************** */
 require('./app/general/styles/main.css'); // Главный
 require('./app/Bugtracker/bugtracker.css'); // Багтрекер
+require('./app/Keyboard/piano.css'); // Клавиши
 
 /** ******************** /Стили *************************** */

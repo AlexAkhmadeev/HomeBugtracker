@@ -53,8 +53,11 @@ module.exports = function(homeApp) {
                     return {"color" : "lightblue" };
                 };
 
-
                 //======================================РЕДАКТОР КОНТЕНТА========================================//
+
+
+
+
                 var contentElem = element.find("#ticket_content");
                 var textArea = element.find("#new_content");
                 var pre = element.find("#ticket_content_pre");

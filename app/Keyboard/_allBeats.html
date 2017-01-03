@@ -1,0 +1,27 @@
+<div>
+<ng-home-header title="Все такты" ctrls="Доавить_такты|addBeats Статистика|statistics"></ng-home-header>
+</table>
+        <table class="table table-bordered tickets">
+
+            <div id="panel_button">
+                <button id="commit_button" class="btn btn-success">Сохранить</button>
+                <button id="rollback_button" class="btn btn-danger">Отменить</button>
+            </div>
+
+            <tr class="table_header">
+                <td id="asdad" class="beats">Такты</td>
+                <td class="minutes">Минуты</td>
+                <td class="complexity">Сложность</td>
+                <td class="status">Статус</td>
+                <td class="updated">Обновлено</td>
+            </tr>
+            <tr ng-repeat="beat in KBCtrl.beats" class="beat_row">
+                <td class="beats">{{beat.beats}}</td>
+                <td data-col_name="SPENT_TIME_MIN" data-row_id="{{beat.id}}" class="minutes editable">{{beat.minutes}}</td>
+                <td class="complexity">{{beat.complexity}}</td>
+                <td data-col_name="STATUS" data-row_id="{{beat.id}}" class="status editable">{{beat.status}}</td>
+                <td class="updated">{{beat.updated}}</td>
+            </tr>
+        </table>
+</div>
+

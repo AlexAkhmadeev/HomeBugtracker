@@ -5,23 +5,25 @@
     <form name="create_ticket_form">
         <table class="create_ticket_table">
             <tr>
-                <td class="ticket_form_label">Название</td>
-                <td class="ticket_form_label">Тип</td>
-                <td class="ticket_form_label">Проект</td>
-            </tr>
-            <tr>
-                <td class="title"><input ng-model="BTCtrl.ticket.title" name="title" type="text" class="form-control"></td>
+                <td class="ticket_form_label dd_title">Тип</td>
                 <td class="dd_button"><ng-drop-down type="type" lov-type="TICKET_TYPE"></ng-drop-down></td>
+                <td class="ticket_form_label dd_title">Проект</td>
                 <td class="dd_button"><ng-drop-down type="code" lov-type="PROJECT"></ng-drop-down></td>
             </tr>
             <tr>
-                <td colspan="3" class="ticket_form_label">Описание</td>
+                <td colspan="4" class="ticket_form_label"><br><br>Название тикета</td>
             </tr>
             <tr>
-                <td class="contain" colspan="3"><textarea ng-model="BTCtrl.ticket.contain" name="contain" type="text" class="form-control"></textarea></td>
+                <td colspan="4" class="title"><input ng-model="BTCtrl.ticket.title" name="title" type="text" class="form-control"></td>
             </tr>
             <tr>
-                <td colspan="3"><br><input ng-click="BTCtrl.createTicket(BTCtrl.ticket, create_ticket_form)" type="submit" class="form-control btn-info" value="Создать"></td>
+                <td colspan="4" class="ticket_form_label"><br>Описание</td>
+            </tr>
+            <tr>
+                <td class="contain" colspan="4"><textarea ng-model="BTCtrl.ticket.contain" name="contain" type="text" class="form-control"></textarea></td>
+            </tr>
+            <tr>
+                <td class="submit_button" colspan="4"><br><br><input ng-click="BTCtrl.createTicket(BTCtrl.ticket, create_ticket_form)" type="submit" class="form-control btn-info" value="Создать"></td>
             </tr>
         </table>
     </form>

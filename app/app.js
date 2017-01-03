@@ -17,24 +17,15 @@ module.exports = function(homeApp) {
             // Багтрекер
             .state('createTicket', {
                 url: '/bugtracker/create',
-                template: '<ng-create-ticket></ng-create-ticket>',
-                controller: function () {
-                    console.log('Переход на createTicketView');
-                }
+                template: '<ng-create-ticket></ng-create-ticket>'
             })
             .state('ticketList', {
                 url: '/bugtracker/list',
-                template: '<ng-ticket-list></ng-ticket-list>',
-                controller: function () {
-                    console.log('Переход на selectTicketView');
-                }
+                template: '<ng-ticket-list></ng-ticket-list>'
             })
             .state('currentTicket', {
                 url: '/bugtracker/current',
-                template: '<ng-current-ticket></ng-current-ticket>',
-                controller: function () {
-                    console.log('Переход на currentTicketView');
-                }
+                template: '<ng-current-ticket></ng-current-ticket>'
             })
 
             // Справочник
@@ -44,7 +35,23 @@ module.exports = function(homeApp) {
                 controller: function () {
                     console.log('Переход на directoryView');
                 }
+            })
+
+
+            // Клавиши
+            .state('beats', {
+                url: '/keyboard/beats',
+                template: '<ng-all-beats></ng-all-beats>'
+            })
+            .state('statistics', {
+                url: '/keyboard/stat',
+                template: '<ng-stat></ng-stat>'
+            })
+            .state('addBeats', {
+                url: '/keyboard/add',
+                template: '<ng-add-beats></ng-add-beats>'
             });
+
 
 
 
