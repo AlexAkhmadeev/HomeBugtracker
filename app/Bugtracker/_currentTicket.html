@@ -1,0 +1,30 @@
+<div id="curViewTemplate">
+    <table class="ticket_head">
+        <tr>
+            <td><span class="ticket">Тикет  </span><span class="ticket_code">{{BTCtrl.currentTicket.code + "-" + BTCtrl.currentTicket.id}}</span></td>
+            <td class="ticket_type" ng-style="currentTicketTypeStyle(BTCtrl.currentTicket.type)">{{BTCtrl.currentTicket.type}}</td>
+            <td class="ticket_status" id="list_of_status"><ng-drop-down current="Выбрать тип" type="status" lov-type="TICKET_STATUS"></ng-drop-down></td>
+            <td class="ticket_data"><span>{{BTCtrl.currentTicket.created}}</span></td>
+            <td class="ticket_create"><button ui-sref="createTicket" style="float:right; width: 120px" class="btn btn-success">Новый тикет</button></td>
+            <td class="ticket_create"><button ui-sref="ticketList" style="float:right; width: 120px" class="btn btn-success">Список тикетов</button></td>
+        </tr>
+        <tr>
+            <td colspan="5" class="ticket_name">{{BTCtrl.currentTicket.title}}</td>
+        </tr>
+    </table>
+    <hr class="white">
+
+    <div class="description">Описание</div>
+
+    <div id="ticket_content" class="ticket_contain">
+        <div id="panel_button">
+            <button id="commit_button" class="btn btn-success">Сохранить</button>
+            <button id="rollback_button" class="btn btn-danger">Отменить</button>
+        </div>
+        <pre id="ticket_content_pre" ng-bind="BTCtrl.currentTicket.contain"></pre>
+        <textarea id="new_content"></textarea>
+    </div>
+
+
+
+</div>

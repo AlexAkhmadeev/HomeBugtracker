@@ -1,0 +1,27 @@
+<div>
+    <ng-home-header title="Статистика" ctrls="Статистика|statistics Все_такты|beats"></ng-home-header>
+    <div class="add_beats_form_wrap">
+        <form name="add_beats_form">
+            <table class="add_beats_table">
+                <tr>
+                    <td>Такты</td>
+                    <td><input ng-model="KBCtrl.beat.beat_from" name="beat_from" type="text" class="form-control" placeholder="С..." required></td>
+                    <td>-</td>
+                    <td><input ng-model="KBCtrl.beat.beat_to" name="beat_to" type="text" class="form-control" placeholder="...ПО" required></td>
+                </tr>
+                <tr>
+                    <td>Сложность</td>
+                    <td><input  ng-model="KBCtrl.beat.complexity" name="complexity" type="text" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <td>Статус</td>
+                    <td><input  ng-model="KBCtrl.beat.status" name="status" type="text" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input ng-click="KBCtrl.addBeats(add_beats_form)" type="submit" value="Добавить такты" class="btn btn-primary"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

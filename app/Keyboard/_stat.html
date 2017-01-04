@@ -1,0 +1,21 @@
+<div class="statistics_wrap">
+    <ng-home-header title="Статистика" ctrls="Доавить_такты|addBeats Все_такты|beats"></ng-home-header>
+    <table>
+        <tr>
+            <td class="label">Всего тактов</td>
+            <td ng-bind="KBCtrl.stat.totalBeats" class="value"></td>
+        </tr>
+        <tr>
+            <td class="label">Изучено тактов</td>
+            <td ng-bind="KBCtrl.stat.doneBeats" class="value"></td>
+        </tr>
+        <tr>
+            <td class="label">Всего часов</td>
+            <td ng-bind="KBCtrl.stat.totalHours" class="value"></td>
+        </tr>
+        <tr>
+            <td class="label">Всего суток</td>
+            <td ng-bind="KBCtrl.stat.totalDays" class="value"></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,25 @@
+<div>
+    <table class="select_ticket_head_table">
+        <tr>
+            <td><input style="width: 350px;" ng-model="BTCtrl.currentProject" type="text" placeholder="Фильтр..." class="form-control" ng-model="BTCtrl.searchFilter"></td>
+            <td><button ui-sref="createTicket" style="width: 200px; float: right" class="btn btn-success">Новый тикет</button></td>
+        </tr>
+    </table>
+    <hr class="white">
+    <table class="table table-bordered tickets">
+        <tr class="head">
+            <td class="code">Код</td>
+            <td class="type">Тип</td>
+            <td class="title">Название</td>
+            <td class="created">Статус</td>
+            <td class="status">Создан</td>
+        </tr>
+        <tr ng-click="BTCtrl.selectTicket(ticket.id, ticket.type)" class="ticket_row" ng-repeat="ticket in BTCtrl.tickets | filter:BTCtrl.currentProject">
+            <td class="code">{{ticket.code}}-{{ticket.id}}</td>
+            <td ng-style="typeOfTicket(ticket.type)" class="type">{{ticket.type}}</td>
+            <td class="title">{{ticket.title}}</td>
+            <td ng-style="statusOfTicket(ticket.status)" class="created">{{ticket.status}}</td>
+            <td class="status">{{ticket.created}}</td>
+        </tr>
+    </table>
+</div>

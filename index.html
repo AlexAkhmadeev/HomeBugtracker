@@ -2,60 +2,23 @@
 <html ng-app="homeApp">
 <head>
     <title>Прототип</title>
-    <!-- lib -->
-    <script type="text/javascript" src="js/lib/jquery-3.1.1.js"></script>
-    <script type="text/javascript" src="js/lib/angular.min.js"></script>
-    <script type="text/javascript" src="js/lib/angular-route.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="build.css">
         <!-- bootstrap -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-        <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+        <script type="text/javascript" src="app/lib/jquery-3.1.1.js"></script>
+        <link rel="stylesheet" href="app/general/styles/bootstrap.min.css">
+        <link rel="stylesheet" href="app/general/styles/bootstrap-theme.min.css">
+        <script type="text/javascript" src="app/lib/bootstrap.min.js"></script>
         <!-- /bootstrap -->
-    <!-- /lib -->
-
-    <!-- app files -->
-    <script type="text/javascript" src="js/app/homeApp.js"></script>
-    <script type="text/javascript" src="js/app/controllers/MenuCtrl.js"></script>
-    <script type="text/javascript" src="js/app/controllers/SportCtrl.js"></script>
-    <script type="text/javascript" src="js/app/controllers/PianoCtrl.js"></script>
-    <script type="text/javascript" src="js/app/controllers/BugTrackerCtrl.js"></script>
-    <script type="text/javascript" src="js/app/controllers/DirectoryCtrl.js"></script>
-    <script type="text/javascript" src="js/app/directives/contentEditor.js"></script>
-    <!-- /app files -->
-    
     <meta charset="utf-8">
-    <meta http-equiv="Cache-Control" content="private" about="Запрет кэширования">
-    
-    <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/components/dropdown.js"></script>
-    <script type="text/javascript" src="js/components/tableEditor.js"></script>
-    <script src="/js/components/contentEditor.js" type="text/javascript"></script>
-    
-    <link href="css/main.css" type="text/css" rel="stylesheet">
 </head>
-<body>
-<header class="navbar-inverse">
-       <p>HSERVER</p>
-</header>
-<div id="main">
+<body class="body">
 
-    <div ng-controller="MenuCtrl" id="menu">
-        <br>
-        <a href="#/main"><button class="btn btn-primary">Главная</button></a>
-        <hr>
-        <a href="#/dir/select"><button class="btn btn-warning menu-button">Справочник</button></a>
-        <a href="#/bugtracker/select"><button class="btn btn-warning menu-button">Баг-трекер</button></a>
-        <a href="#/piano/all"><button class="btn btn-warning menu-button">Клавиши</button></a>
-        <a href="#/sport/done"><button class="btn btn-warning menu-button">Спорт</button></a>
+    <ng-home-title></ng-home-title><!-- navbar -->
+
+    <div class="main">
+        <ui-view></ui-view><!-- router -->
     </div>
 
-
-    <div id="mainfield">
-        <ng-view></ng-view>
-    </div>
-
-</div>
-<footer class="navbar-inverse">
-</footer>
+<script type="text/javascript" src="build.js"></script>
 </body>
 </html>

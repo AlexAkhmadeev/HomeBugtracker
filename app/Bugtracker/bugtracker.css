@@ -1,0 +1,244 @@
+/*===================================================================================================================*/
+/*                                              БАГ-ТРЕКЕР                                                           */
+/*===================================================================================================================*/
+
+
+/*======================================= currentTicketView ============================================*/
+.ticket_head {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.ticket_head label{
+    text-align: center;
+    color:ghostwhite;
+}
+
+.ticket_head .ticket_name {
+    padding-top: 10px;
+    padding-left: 10px;
+    color: #1cdaff;
+    font-size: 20px;
+}
+
+.ticket_head .ticket_code {
+    color: #7ecacd;
+    font-size: 25px;
+}
+
+.ticket_head .ticket {
+    color: #e4dd83;
+    font-size: 25px;
+}
+
+.ticket_head .ticket_code:hover {
+    color: #abfcff;
+    cursor: pointer;
+}
+
+td.ticket_status {
+    color: #7ecacd;
+    font-size: 25px;
+    width: 300px;
+}
+
+td.ticket_type {
+    font-size: 25px;
+}
+
+td.ticket_status option {
+    color: #414443;
+    background: linear-gradient(to top, #577eba, #79e7ff);
+    padding: 2px 5px 2px 5px;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+td.ticket_data {
+    color: #fffc9b;
+    padding: 2px 5px 2px 5px;
+    font-size: 20px;
+    text-align: center;
+}
+
+td.ticket_create {
+    width:130px;
+}
+
+.description {
+    padding-left: 5px;
+    color: #fffc9b;
+    font-size: 20px;
+}
+
+.ticket_contain {
+    color: #cacaca;
+    background: #434343;
+    border-radius: 2px;
+    padding: 25px 15px 15px 15px;
+    overflow-x: hidden;
+    cursor: pointer;
+    word-wrap: break-word;
+    border: 1px solid #777;
+    transition-duration: 500ms;
+    transition-property: all;
+}
+
+.ticket_contain pre {
+    border: 0px solid red;
+    border-radius: 0px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    color: ghostwhite;
+    background: inherit;
+    font-size: 18px;
+    overflow-x: hidden;
+    font-family: "Helvetica Neue";
+    white-space: pre-wrap;
+}
+
+.ticket_contain:hover {
+    border: 1px solid ghostwhite;
+}
+/*======================================= /currentTicketView ============================================*/
+
+
+
+
+
+
+/*======================================= selectTicketView ============================================*/
+.tickets {
+    background: ghostwhite;
+    margin-bottom: 0px;
+    padding-right: 18px;
+}
+
+.head {
+    background: white;
+    font-weight: bold;
+}
+
+.tickets .code {
+    width: 80px;
+}
+
+.tickets .type {
+    width: 80px;
+}
+
+.tickets .title {
+
+}
+
+.tickets .created {
+    width: 100px;
+}
+
+.tickets .status {
+    width: 100px;
+}
+
+.select_ticket_head_table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.ticket_row:hover {
+    cursor: pointer;
+    background: white;
+    color: red;
+}
+
+.ticket_select_wrap {
+    border: 0px solid #e6b634;
+    max-height: 510px;
+    overflow-y: scroll;
+}
+
+/*======================================= /selectTicketView ============================================*/
+
+
+
+/*======================================= createTicketView ============================================*/
+.create_ticket_table {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.create_ticket_table td{
+
+}
+
+.create_ticket_table .title {
+    width: 100%;
+}
+
+.dd_title {
+    margin-right: 10px;
+    float: right;
+}
+
+.submit_button {
+
+}
+
+
+.create_ticket_table .dd_button {
+
+}
+
+.create_ticket_table .dd  {
+    float: right;
+}
+
+.create_ticket_table .dd > * {
+    margin: 0px 15px 0px 15px;
+}
+
+.create_ticket_table .contain {
+    width: 100%;
+}
+
+.create_ticket_table .contain textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+}
+
+.ticket_create_wrap {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.ticket_create_wrap button {
+    margin-left: 50px;
+    width: 300px;
+    text-align: center;
+}
+
+.ticket_form_label {
+    color: ghostwhite;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+
+
+/*======================================= /createTicketView ============================================*/
+
+
+/* ContentEditor */
+#panel_button {
+    position: relative;
+    top: -14px;
+}
+
+#new_content {
+    background: #e3e3e3;
+    color: #303030;
+    font-size: 18px;
+}
+
+/* /ContentEditor */
