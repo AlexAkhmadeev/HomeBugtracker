@@ -743,8 +743,7 @@ table.add_exercise_table td input[type="submit"] {
     white-space: pre-wrap;
 }
 
-.contain:hover {
-    border-radius: 2px;
+.yellow_shadow {
     box-shadow: 0 0 7px 3px yellow;
 }
 
@@ -756,7 +755,15 @@ table.add_exercise_table td input[type="submit"] {
     width: 220px;
     margin-top: 15px;
     margin-bottom: 15px;
+    transition-duration: 500ms;
+    transition-property: all;
 }
+
+#copy_button:hover {
+    box-shadow: 0 0 7px 3px #68eb67;
+}
+
+
 
 /* ContentEditor */
 #panel_button {

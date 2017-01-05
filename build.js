@@ -23165,8 +23165,6 @@
 	            link: function (scope, element, attrs) {
 
 	                //======================================РЕДАКТОР КОНТЕНТА========================================//
-
-
 	                var contentElem = element.find("#dir_content");
 	                var textArea = element.find("#new_content");
 	                var pre = element.find("#content_pre");
@@ -23193,11 +23191,11 @@
 	                        "maxWidth": pre[0].offsetWidth + 20,
 	                        "height": pre[0].offsetHeight + 20
 	                    });
+	                    contentElem.removeClass('yellow_shadow');
 	                    textArea.show();
 	                    panelButton.show();
 	                    console.log(pre[0].textContent);
 	                    contentEditor.oldHtml = pre[0].textContent;
-	                    //contentEditor.oldHtml = pre.html();
 	                    pre.html(null);
 	                    textArea.val(contentEditor.oldHtml);
 	                    console.log(textArea.val());
@@ -23217,12 +23215,25 @@
 	                    panelButton.hide();
 	                    contentEditor.isActive = false;
 	                }
+
+	                contentElem.on('mouseenter', function (event) {
+	                    if (contentEditor.isActive) return;
+	                    contentElem.addClass('yellow_shadow');
+	                });
+
+	                contentElem.on('mouseleave', function (event) {
+	                    contentElem.removeClass('yellow_shadow');
+	                });
+
 	                //======================================/РЕДАКТОР КОНТЕНТА========================================//
+
+	                //====================================== Копирование в буфер обмена ===============================//
 	                var timerId;
 	                var copyTextareaBtn = document.querySelector('#copy_button');
 	                var alertPanel = angular.element(document.querySelector("#copy_alert_panel"));
 
 	                copyTextareaBtn.addEventListener('click', function (event) {
+	                    if (pre.html() == "") return;
 	                    var copyTextarea = pre;
 	                    copyTextarea.select();
 
@@ -23240,9 +23251,6 @@
 	                        alertPanel.hide();
 	                    }, 2000);
 	                });
-
-	                //====================================== Копирование в буфер обмена ===============================//
-
 	                /**
 	                var copyEmailBtn = document.querySelector('#copy_button');
 	                var timerId;

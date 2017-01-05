@@ -7,14 +7,15 @@
         </tr>
     </table>
 
-    <table class="copy_table">
-        <tr>
-            <td class="copy_button_cell"><button class="btn btn-success" id="copy_button">Скопировать всё содержимое</button></td>
-            <td><div id="copy_alert_panel" role="alert" class="alert alert-success copy_alert" style="margin-bottom: 0px">Скопировано!</div></td>
-        </tr>
-    </table>
+    <div ng-show="DirCtrl.currentSubIssue.contain">
+        <table class="copy_table">
+            <tr>
+                <td class="copy_button_cell"><button class="btn btn-success" id="copy_button">Скопировать всё содержимое</button></td>
+                <td><div id="copy_alert_panel" role="alert" class="alert alert-success copy_alert" style="margin-bottom: 0px">Скопировано!</div></td>
+            </tr>
+        </table>
 
-        <div id="dir_content" class="contain">
+        <div id="dir_content" class="contain" data-toggle="tooltip" data-placement="top" title="Кликните дважды для редактирования">
             <div id="panel_button">
                 <button id="commit_button" class="btn btn-success">Сохранить</button>
                 <button id="rollback_button" class="btn btn-danger">Отменить</button>
@@ -22,4 +23,5 @@
             <pre id="content_pre" style="border: 0px" ng-bind="DirCtrl.currentSubIssue.contain"></pre>
             <textarea id="new_content"></textarea>
         </div>
+    </div>
 </div>
