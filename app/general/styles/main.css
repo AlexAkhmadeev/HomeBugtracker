@@ -83,6 +83,7 @@ li.dd_item {
     color:black;
     padding: 2px 5px 2px 5px;
     font-size: 16px;
+    border: 1px solid gray;
 }
 
 li.dd_item:hover {

@@ -16,15 +16,10 @@ module.exports = function(homeApp) {
                 var vm = this;
                 this.ticket = {};
 
+                // Дропдаун
                 vm.onSelectListener = function(type, value) { // Обработчик dropDown
                     vm.ticket[type] = value;
                 };
-
-                /**
-                 * Возвращает промис с типом
-                 * @param type
-                 * @returns {*}
-                 */
                 vm.startValue = function(type) {
 
                     return $q(function(resolve, reject) {
@@ -38,7 +33,7 @@ module.exports = function(homeApp) {
                     });
 
                 };
-
+                // /Дропдаун
 
                 vm.createTicket = function(ticket, form) {
 

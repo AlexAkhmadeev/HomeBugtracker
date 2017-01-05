@@ -1,5 +1,5 @@
 <div>
-    <ng-home-header title="Список сделанных упражнений" ctrls="Все_упражнения|allEx Добавить_упражнение|addEx"></ng-home-header>
+    <ng-home-header title="Список сделанных упражнений" ctrls="Все_упражнения|allexercises Добавить_упражнение|addexercises"></ng-home-header>
     <div class="add_done_exercises_wrap">
         <form name="add_done_exercises_from">
             <table class="table table-bordered add_done_exercises head">
@@ -20,8 +20,8 @@
                     <td class="ex">Упр 13</td>
                 </tr>
                 <tr>
-                    <td class="date"><input ng-model="SPCtrl.doneExercise.date" class="form-control" type="text" name="date"></td>
-                    <td class="ex"><input ng-model="SPCtrl.doneExercise.ex1" class="form-control" type="text" name="ex1"></td>
+                    <td class="date"><input ng-model="SPCtrl.doneExercise.date" class="form-control" type="text" name="date" required></td>
+                    <td class="ex"><input ng-model="SPCtrl.doneExercise.ex1" class="form-control" type="text" name="ex1" required></td>
                     <td class="ex"><input ng-model="SPCtrl.doneExercise.ex2"  class="form-control" type="text" name="ex2"></td>
                     <td class="ex"><input ng-model="SPCtrl.doneExercise.ex3"  class="form-control" type="text" name="ex3"></td>
                     <td class="ex"><input ng-model="SPCtrl.doneExercise.ex4"  class="form-control" type="text" name="ex4"></td>

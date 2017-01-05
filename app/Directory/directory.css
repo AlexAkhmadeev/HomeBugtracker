@@ -1,0 +1,93 @@
+.select_thematics {
+    margin-top: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
+
+.select_thematics td {
+
+}
+
+.select_thematics td.issue {
+    float: left;
+}
+
+.select_thematics td.subissue {
+    float: right;
+}
+
+.contain {
+    margin: 10px 10% 100px 10%;
+    width: 80%;
+    color: #262626;
+    background: #f4f4f4;
+    border-radius: 2px;
+    padding: 25px 15px 15px 15px;
+    overflow-x: hidden;
+    cursor: pointer;
+    word-wrap: break-word;
+    transition-duration: 500ms;
+    transition-property: all;
+}
+
+.contain pre {
+    border-radius: 0px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    color: inherit;
+    background: inherit;
+    font-size: 18px;
+    overflow-x: hidden;
+    font-family: "Helvetica Neue";
+    white-space: pre-wrap;
+}
+
+.contain:hover {
+    border-radius: 2px;
+    box-shadow: 0 0 7px 3px yellow;
+}
+
+.copy_button_cell {
+    width: 20%;
+}
+
+#copy_button {
+    width: 220px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* ContentEditor */
+#panel_button {
+    position: relative;
+    top: -14px;
+}
+
+#new_content {
+    background: ghostwhite;
+    color: #303030;
+    font-size: 18px;
+}
+
+/* /ContentEditor */
+
+.copy_table {
+    margin-top: 75px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
+
+.copy_alert {
+    display: none;
+    width: 200px;
+    margin-bottom: 0px;
+}
+
+.copy_table td {
+
+}
+
+/** ===================== Добавление новой подтемы ===================== */
+

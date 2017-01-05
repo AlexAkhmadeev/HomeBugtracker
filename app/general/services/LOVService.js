@@ -8,7 +8,7 @@ module.exports = function(homeApp) {
     homeApp.service('LOVService', function($http) {
 
         // Получение списка значений
-        this.getListOfTicketStatus = function(lovType) {
+        this.getListOfValues = function(lovType) {
             return $http.post("ajax/lov/get_values.php", {"lov_type" : lovType});
         };
 

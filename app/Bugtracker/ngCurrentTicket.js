@@ -12,20 +12,13 @@ module.exports = function(homeApp) {
             replace: true,
             controllerAs: 'BTCtrl',
             bindToController: true,
-            controller: function(BugtrackerService, LOVService, $location, $q) {
+            controller: function($location, $q, DropDownFactory, BugtrackerService, LOVService) {
                 var vm = this;
 
-                vm.BTServie = BugtrackerService;
-
+                // Дропдаун
                 vm.onSelectListener = function(type, value) {
                     BugtrackerService.updateTicketStatus(vm.currentTicket.id, value);
                 };
-
-                /**
-                 * Возвращает промис с типом
-                 * @param type
-                 * @returns {*}
-                 */
                 vm.startValue = function(type) {
 
                     if(type == 'status') {
@@ -37,6 +30,20 @@ module.exports = function(homeApp) {
                     }
 
                 };
+                /**
+                vm.getListOfItems = function(type) {
+                    return LOVService.getListOfValues(type).then(function(objectData) {
+                        return $q(function(resolve) {
+                            //resolve(objectData.data);
+                            resolve(DropDownFactory.ticketStatus);
+                        })
+                    });
+                };
+                 */
+                // /Дропдаун
+
+                vm.BTServie = BugtrackerService;
+
 
 
 

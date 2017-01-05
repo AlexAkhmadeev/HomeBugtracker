@@ -16,7 +16,7 @@ module.exports = function(homeApp) {
                 vm.newExercise = function(form) {
                     if(form.$valid) {
 
-                        SportService.addNewExercise(vm.newEx).then(function (d) {
+                        SportService.addNewExercise(vm.newEx).then(function(d) {
                             $location.path("/sport/all");
                         });
                     }

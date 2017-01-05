@@ -1,5 +1,5 @@
 /**
- * Created by ��������� on 03.01.2017.
+ * Created by Александр on 03.01.2017.
  */
 module.exports = function(homeApp) {
 
@@ -10,10 +10,33 @@ module.exports = function(homeApp) {
             replace: true,
             controllerAs: 'DirCtrl',
             bindToController: true,
-            controller: function($scope, DirectoryService, $location) {
+            controller: function($scope, $q, $location, DropDownFactory, DirectoryService) {
                 var vm = this;
+                vm.subissue = {};
 
+                vm.onSelectListener = function(type, value) { // Обработчик dropDown
+                    vm.subissue.issue = value;
+                };
+                vm.startValue = function(type) {
+                    return $q(function(resolve) {
+                            resolve("Выбрать тему");
+                    });
+                };
 
+                vm.addSubIssue = function(formData, form) {
+
+                    //alert(JSON.stringify(formData, null, 8));
+                    if(!vm.subissue.issue) {
+                        alert("Пожалуйста, выберите тему!");
+                        return;
+                    }
+
+                    DirectoryService.addSubIssue(formData).then(function(data) {
+
+                        $location.path('/directory/select');
+                    });
+
+                }
 
             }
         }

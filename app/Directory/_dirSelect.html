@@ -1,4 +1,25 @@
 <div>
-    <ng-home-header title="Выбор данных" ctrls="Внесение_данных_в_справочник|dirAdd"></ng-home-header>
+    <ng-home-header title="Выбор данных" ctrls="Внесение_данных|add"></ng-home-header>
+    <table class="select_thematics">
+        <tr>
+            <td class="issue"><ng-drop-down width="450" type="issue" lov-type="issues"></ng-drop-down></td>
+            <td class="subissue"><ng-drop-down width="450" type="subissue" lov-type="subIssues" beh="dynamic"></ng-drop-down></td>
+        </tr>
+    </table>
 
+    <table class="copy_table">
+        <tr>
+            <td class="copy_button_cell"><button class="btn btn-success" id="copy_button">Скопировать всё содержимое</button></td>
+            <td><div id="copy_alert_panel" role="alert" class="alert alert-success copy_alert" style="margin-bottom: 0px">Скопировано!</div></td>
+        </tr>
+    </table>
+
+        <div id="dir_content" class="contain">
+            <div id="panel_button">
+                <button id="commit_button" class="btn btn-success">Сохранить</button>
+                <button id="rollback_button" class="btn btn-danger">Отменить</button>
+            </div>
+            <pre id="content_pre" style="border: 0px" ng-bind="DirCtrl.currentSubIssue.contain"></pre>
+            <textarea id="new_content"></textarea>
+        </div>
 </div>

@@ -54,16 +54,17 @@
 	__webpack_require__(3); // Angular ui.router
 	//require('ui-bootstrap'); // Angular ui.bootstrap
 	var homeApp = angular.module('homeApp', ['ui.router']); // Приложение
+	//require('angular-sanitize');
 
 	__webpack_require__(4)(homeApp); // Конфигурационный файл приложения
 	/** ******************** /Ангуляр *************************** */
 
 	/** ******************** Стили *************************** */
-	__webpack_require__(27); // Главный
-	__webpack_require__(31); // Багтрекер
-	__webpack_require__(33); // Клавиши
-	__webpack_require__(35); // Спорт
-	__webpack_require__(37); // Справочник
+	__webpack_require__(29); // Главный
+	__webpack_require__(33); // Багтрекер
+	__webpack_require__(35); // Клавиши
+	__webpack_require__(37); // Спорт
+	__webpack_require__(39); // Справочник
 	/** ******************** /Стили *************************** */
 
 /***/ },
@@ -22149,15 +22150,17 @@
 	    __webpack_require__(18)(homeApp);
 	    __webpack_require__(19)(homeApp);
 	    __webpack_require__(20)(homeApp);
+	    __webpack_require__(21)(homeApp);
 	    /* /��������� */
 
 	    /* ������� */
-	    __webpack_require__(21)(homeApp);
 	    __webpack_require__(22)(homeApp);
 	    __webpack_require__(23)(homeApp);
 	    __webpack_require__(24)(homeApp);
 	    __webpack_require__(25)(homeApp);
 	    __webpack_require__(26)(homeApp);
+	    __webpack_require__(27)(homeApp);
+	    __webpack_require__(28)(homeApp);
 	    /* /������� */
 
 	    /* ����������� */
@@ -22180,52 +22183,79 @@
 	            url: '/main',
 	            template: '<ng-main-view></ng-main-view>',
 	            controller: function () {
-	                console.log('Переход на createTicketView');
+	                console.log('Переход на Main View');
 	            }
 	        })
 
 	        // Багтрекер
-	        .state('createTicket', {
-	            url: '/bugtracker/create',
+	        .state('bugtracker', {
+	            url: '/bugtracker',
+	            abstract: true,
+	            template: '<ui-view></ui-view>'
+	        }).state('create', {
+	            parent: 'bugtracker',
+	            url: '/create',
 	            template: '<ng-create-ticket></ng-create-ticket>'
-	        }).state('ticketList', {
-	            url: '/bugtracker/list',
+	        }).state('list', {
+	            parent: 'bugtracker',
+	            url: '/list',
 	            template: '<ng-ticket-list></ng-ticket-list>'
-	        }).state('currentTicket', {
-	            url: '/bugtracker/current',
+	        }).state('current', {
+	            parent: 'bugtracker',
+	            url: '/current',
 	            template: '<ng-current-ticket></ng-current-ticket>'
 	        })
 
 	        // Справочник
-	        .state('dirAdd', {
-	            url: '/directory/add',
+	        .state('directory', {
+	            abstract: true,
+	            url: '/directory',
+	            template: '<ui-view></ui-view>'
+	        }).state('add', {
+	            parent: 'directory',
+	            url: '/add',
 	            template: '<ng-dir-add></ng-dir-add>'
-	        }).state('dirSel', {
-	            url: '/directory/select',
+	        }).state('select', {
+	            parent: 'directory',
+	            url: '/select',
 	            template: '<ng-dir-select></ng-dir-select>'
 	        })
 
 	        // Клавиши
-	        .state('beats', {
-	            url: '/keyboard/beats',
+	        .state('keyboard', {
+	            url: '/keyboard',
+	            abstract: true,
+	            template: '<ui-view></ui-view>'
+	        }).state('beats', {
+	            parent: 'keyboard',
+	            url: '/beats',
 	            template: '<ng-all-beats></ng-all-beats>'
 	        }).state('statistics', {
-	            url: '/keyboard/stat',
+	            parent: 'keyboard',
+	            url: '/statistics',
 	            template: '<ng-stat></ng-stat>'
-	        }).state('addBeats', {
-	            url: '/keyboard/add',
+	        }).state('addbeats', {
+	            parent: 'keyboard',
+	            url: '/addbeats',
 	            template: '<ng-add-beats></ng-add-beats>'
 	        })
 
 	        // Спорт
-	        .state('allEx', {
-	            url: '/sport/all',
+	        .state('sport', {
+	            abstract: true,
+	            url: '/sport',
+	            template: '<ui-view></ui-view>'
+	        }).state('allexercises', {
+	            parent: 'sport',
+	            url: '/allexercises',
 	            template: '<ng-all-ex></ng-all-ex>'
-	        }).state('doneEx', {
-	            url: '/sport/done',
+	        }).state('doneexercises', {
+	            parent: 'sport',
+	            url: '/doneexercises',
 	            template: '<ng-done-ex></ng-done-ex>'
-	        }).state('addEx', {
-	            url: '/sport/add',
+	        }).state('addexercises', {
+	            parent: 'sport',
+	            url: '/addexercises',
 	            template: '<ng-add-ex></ng-add-ex>'
 	        });
 
@@ -22302,7 +22332,9 @@
 	            replace: true,
 	            controllerAs: 'TitleCtrl',
 	            bindToController: true,
-	            controller: function () {}
+	            controller: function ($scope, $state, $location) {
+	                var vm = this;
+	            }
 	        };
 	    });
 	};
@@ -22337,72 +22369,127 @@
 	 */
 	module.exports = function (homeApp) {
 
-	    homeApp.directive("ngDropDown", function () {
+	                homeApp.directive("ngDropDown", function () {
+	                                return {
+	                                                restrict: 'E',
+	                                                templateUrl: '/app/general/templates/_dropDown.html',
+	                                                scope: true,
+	                                                replace: true,
+	                                                controllerAs: 'DDCtrl',
+	                                                bindToController: true,
+	                                                controller: function ($scope, $attrs, $q, LOVService, TransportService, DropDownFactory) {
+	                                                                var vm = this;
+	                                                                $scope.thisCtrl = null;
+	                                                                vm.items = {};
+	                                                                vm.currentItem = {};
+
+	                                                                // Проверка на наличие дропдауна в контроллере
+	                                                                var parentScope = $scope.$parent;
+	                                                                var controller = null;
+	                                                                for (var key in parentScope) {
+
+	                                                                                if (!parentScope[key]) continue;
+
+	                                                                                if (parentScope[key].startValue) {
+	                                                                                                controller = parentScope[key];
+	                                                                                                $scope.thisCtrl = controller;
+	                                                                                                break;
+	                                                                                }
+	                                                                }
+	                                                                if (!controller) {
+	                                                                                console.log("Контроллер не найден!");
+	                                                                }
+
+	                                                                var startButtonValue = controller.startValue; // Начальное значение. Присылает контроллер
+
+
+	                                                                startButtonValue($attrs['type']).then(function (result) {
+	                                                                                vm.currentItem.header = result;
+	                                                                });
+
+	                                                                // Статическое и динамическое поведение директивы
+	                                                                if ($attrs['beh'] == "dynamic") {
+
+	                                                                                vm.items = DropDownFactory;
+	                                                                                vm.currentItem = DropDownFactory;
+	                                                                } else {
+
+	                                                                                DropDownFactory[$attrs["lovType"]].then(function (result) {
+	                                                                                                vm.items.list = result;
+	                                                                                });
+	                                                                }
+	                                                },
+	                                                link: function ($scope, element, attrs, TransportService) {
+	                                                                var button = element.find("#dd_button");
+	                                                                var list = element.find("#list");
+	                                                                var body = angular.element(document.body);
+	                                                                var window = angular.element(window);
+
+	                                                                if (attrs['width']) {
+	                                                                                button.css({ "width": attrs['width'] });
+	                                                                                list.css({ "width": attrs['width'] });
+	                                                                }
+
+	                                                                list.hide();
+
+	                                                                body.on('click', function (e) {
+	                                                                                var target = angular.element(e.target);
+
+	                                                                                if (target[0] == button[0]) {
+	                                                                                                list.toggle();
+	                                                                                                if (attrs['width']) {
+	                                                                                                                $('.dd_item').css({ "width": attrs['width'] });
+	                                                                                                }
+	                                                                                                return;
+	                                                                                }
+
+	                                                                                list.hide();
+	                                                                });
+
+	                                                                var onSelectListener = $scope.thisCtrl.onSelectListener; // Должна быть определена в контроллере!
+
+	                                                                list.on('click', function (e) {
+	                                                                                var target = angular.element(e.target);
+	                                                                                if (target.hasClass('dd_item')) button.html(target.html());
+
+	                                                                                if (onSelectListener) {
+	                                                                                                onSelectListener(attrs['type'], target.html());
+	                                                                                }
+	                                                                });
+
+	                                                                window.on('scroll', function (e) {
+
+	                                                                                list.hide();
+	                                                                });
+	                                                }
+
+	                                };
+	                });
+	};
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by ��������� on 04.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.directive("ngLoadIndicator", function () {
 	        return {
 	            restrict: 'E',
-	            templateUrl: '/app/general/templates/_dropDown.html',
-	            scope: true,
+	            templateUrl: '/app/general/templates/_loadIndicator.html',
 	            replace: true,
-	            controllerAs: 'DDCtrl',
+	            controllerAs: 'TitleCtrl',
 	            bindToController: true,
-	            controller: function ($scope, $attrs, LOVService, TransportService) {
-	                var vm = this;
-
-	                LOVService.getListOfTicketStatus($attrs["lovType"]).then(function (dataObject) {
-	                    vm.items = dataObject.data;
-	                });
-
-	                var startButtonValue = $scope.$parent.BTCtrl.startValue; // Возвращает promise!
-	                startButtonValue($attrs['type']).then(function (result) {
-	                    vm.currentItem = result;
-	                });
-	            },
-	            link: function ($scope, element, attrs, TransportService) {
-	                var button = element.find("#dd_button");
-	                var list = element.find("#list");
-	                var body = angular.element(document.body);
-	                var window = angular.element(window);
-
-	                list.hide();
-
-	                angular.element('.dd_item').css({
-	                    "width": button.css('width')
-	                });
-
-	                body.on('click', function (e) {
-	                    var target = angular.element(e.target);
-
-	                    if (target[0] == button[0]) {
-	                        list.toggle();
-	                        return;
-	                    }
-
-	                    list.hide();
-	                });
-
-	                var onSelectListener = $scope.$parent.BTCtrl.onSelectListener; // Должна быть определена в контроллере!
-
-	                list.on('click', function (e) {
-	                    var target = angular.element(e.target);
-	                    if (target.hasClass('dd_item')) button.html(target.html());
-
-	                    if (onSelectListener) {
-	                        onSelectListener(attrs['type'], target.html());
-	                    }
-	                });
-
-	                window.on('scroll', function (e) {
-
-	                    list.hide();
-	                });
-	            }
-
+	            controller: function () {}
 	        };
 	    });
 	};
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/**
@@ -22457,7 +22544,7 @@
 	};
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/**
@@ -22474,20 +22561,13 @@
 	            replace: true,
 	            controllerAs: 'BTCtrl',
 	            bindToController: true,
-	            controller: function (BugtrackerService, LOVService, $location, $q) {
+	            controller: function ($location, $q, DropDownFactory, BugtrackerService, LOVService) {
 	                var vm = this;
 
-	                vm.BTServie = BugtrackerService;
-
+	                // Дропдаун
 	                vm.onSelectListener = function (type, value) {
 	                    BugtrackerService.updateTicketStatus(vm.currentTicket.id, value);
 	                };
-
-	                /**
-	                 * Возвращает промис с типом
-	                 * @param type
-	                 * @returns {*}
-	                 */
 	                vm.startValue = function (type) {
 
 	                    if (type == 'status') {
@@ -22498,6 +22578,19 @@
 	                        });
 	                    }
 	                };
+	                /**
+	                vm.getListOfItems = function(type) {
+	                    return LOVService.getListOfValues(type).then(function(objectData) {
+	                        return $q(function(resolve) {
+	                            //resolve(objectData.data);
+	                            resolve(DropDownFactory.ticketStatus);
+	                        })
+	                    });
+	                };
+	                 */
+	                // /Дропдаун
+
+	                vm.BTServie = BugtrackerService;
 
 	                BugtrackerService.getCurrentTicket(BugtrackerService.currentTicketId).then(function (objectData) {
 	                    vm.currentTicket = objectData.data;
@@ -22568,7 +22661,7 @@
 	};
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/**
@@ -22589,16 +22682,11 @@
 	                var vm = this;
 	                this.ticket = {};
 
+	                // Дропдаун
 	                vm.onSelectListener = function (type, value) {
 	                    // Обработчик dropDown
 	                    vm.ticket[type] = value;
 	                };
-
-	                /**
-	                 * Возвращает промис с типом
-	                 * @param type
-	                 * @returns {*}
-	                 */
 	                vm.startValue = function (type) {
 
 	                    return $q(function (resolve, reject) {
@@ -22611,6 +22699,7 @@
 	                        }
 	                    });
 	                };
+	                // /Дропдаун
 
 	                vm.createTicket = function (ticket, form) {
 
@@ -22632,7 +22721,7 @@
 	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/**
@@ -22765,7 +22854,7 @@
 	};
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/**
@@ -22799,7 +22888,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/**
@@ -22839,7 +22928,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	/**
@@ -22872,7 +22961,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
@@ -22933,7 +23022,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	/**
@@ -22960,11 +23049,11 @@
 	};
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 03.01.2017.
+	 * Created by Александр on 03.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
@@ -22975,19 +23064,44 @@
 	            replace: true,
 	            controllerAs: 'DirCtrl',
 	            bindToController: true,
-	            controller: function ($scope, DirectoryService, $location) {
+	            controller: function ($scope, $q, $location, DropDownFactory, DirectoryService) {
 	                var vm = this;
+	                vm.subissue = {};
+
+	                vm.onSelectListener = function (type, value) {
+	                    // Обработчик dropDown
+	                    vm.subissue.issue = value;
+	                };
+	                vm.startValue = function (type) {
+	                    return $q(function (resolve) {
+	                        resolve("Выбрать тему");
+	                    });
+	                };
+
+	                vm.addSubIssue = function (formData, form) {
+
+	                    //alert(JSON.stringify(formData, null, 8));
+	                    if (!vm.subissue.issue) {
+	                        alert("Пожалуйста, выберите тему!");
+	                        return;
+	                    }
+
+	                    DirectoryService.addSubIssue(formData).then(function (data) {
+
+	                        $location.path('/directory/select');
+	                    });
+	                };
 	            }
 	        };
 	    });
 	};
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	/**
-	 * Created by ��������� on 03.01.2017.
+	 * Created by Александр on 03.01.2017.
 	 */
 	module.exports = function (homeApp) {
 
@@ -22998,15 +23112,167 @@
 	            replace: true,
 	            controllerAs: 'DirCtrl',
 	            bindToController: true,
-	            controller: function ($scope, DirectoryService, LOVService, $location) {
+	            controller: function ($scope, $location, $q, $timeout, DirectoryService, LOVService, DropDownFactory) {
 	                var vm = this;
+	                vm.issue = null;
+	                vm.subissue = null;
+	                vm.currentSubIssue = {};
+
+	                vm.onSelectListener = function (type, value) {
+	                    // Обработчик dropDown
+	                    console.log(type);
+	                    console.log(value);
+
+	                    if (type == 'issue') {
+	                        DirectoryService.getSubIssues(value).then(function (objectData) {
+	                            DropDownFactory.list = objectData.data;
+	                            DropDownFactory.header = "Выбрать подтему"; // $digest!!!
+	                            console.log("ВЫБОР ТЕМЫ");
+	                        });
+	                    }
+
+	                    if (type == 'subissue') {
+	                        DirectoryService.getContent(value).then(function (objectData) {
+	                            DropDownFactory.header = value;
+	                            vm.currentSubIssue.title = value;
+	                            vm.currentSubIssue.contain = objectData.data.textData;
+	                        });
+	                    }
+	                };
+	                vm.startValue = function (type) {
+
+	                    return $q(function (resolve, reject) {
+
+	                        if (type == 'issue') {
+	                            resolve("Выбрать тему");
+	                        }
+	                        if (type == 'subissue') {
+	                            resolve("Выбрать подтему");
+	                        }
+	                    });
+	                };
+
+	                vm.updateData = function (newValue) {
+
+	                    var data = {
+	                        "subIssue": vm.currentSubIssue.title,
+	                        "content": newValue
+	                    };
+
+	                    DirectoryService.updateSubIssue(data).then(function (data) {});
+	                };
+	            },
+	            link: function (scope, element, attrs) {
+
+	                //======================================РЕДАКТОР КОНТЕНТА========================================//
+
+
+	                var contentElem = element.find("#dir_content");
+	                var textArea = element.find("#new_content");
+	                var pre = element.find("#content_pre");
+
+	                var panelButton = element.find("#panel_button");
+	                var commitButton = element.find("#commit_button");
+	                var rollbackButton = element.find("#rollback_button");
+
+	                panelButton.hide();
+	                textArea.hide();
+
+	                var contentEditor = {};
+
+	                contentElem.on('dblclick', activateEditorMode);
+	                commitButton.on('click', commit);
+	                rollbackButton.on('click', rollback);
+
+	                function activateEditorMode() {
+	                    if (contentEditor.isActive || pre.html() == "") return;
+
+	                    contentEditor.isActive = true;
+	                    textArea.css({
+	                        "width": pre[0].offsetWidth,
+	                        "maxWidth": pre[0].offsetWidth + 20,
+	                        "height": pre[0].offsetHeight + 20
+	                    });
+	                    textArea.show();
+	                    panelButton.show();
+	                    console.log(pre[0].textContent);
+	                    contentEditor.oldHtml = pre[0].textContent;
+	                    //contentEditor.oldHtml = pre.html();
+	                    pre.html(null);
+	                    textArea.val(contentEditor.oldHtml);
+	                    console.log(textArea.val());
+	                }
+
+	                function commit() {
+	                    pre.text(textArea.val());
+	                    scope.DirCtrl.updateData(textArea.val());
+	                    textArea.hide();
+	                    panelButton.hide();
+	                    contentEditor.isActive = false;
+	                }
+
+	                function rollback() {
+	                    pre.text(contentEditor.oldHtml);
+	                    textArea.hide();
+	                    panelButton.hide();
+	                    contentEditor.isActive = false;
+	                }
+	                //======================================/РЕДАКТОР КОНТЕНТА========================================//
+	                var timerId;
+	                var copyTextareaBtn = document.querySelector('#copy_button');
+	                var alertPanel = angular.element(document.querySelector("#copy_alert_panel"));
+
+	                copyTextareaBtn.addEventListener('click', function (event) {
+	                    var copyTextarea = pre;
+	                    copyTextarea.select();
+
+	                    try {
+	                        var successful = document.execCommand('copy');
+	                        var msg = successful ? 'successful' : 'unsuccessful';
+	                        console.log('Copying text command was ' + msg);
+	                    } catch (err) {
+	                        console.log('Oops, unable to copy');
+	                    }
+
+	                    alertPanel.show();
+	                    clearTimeout(timerId);
+	                    timerId = setTimeout(function () {
+	                        alertPanel.hide();
+	                    }, 2000);
+	                });
+
+	                //====================================== Копирование в буфер обмена ===============================//
+
+	                /**
+	                var copyEmailBtn = document.querySelector('#copy_button');
+	                var timerId;
+	                copyEmailBtn.addEventListener('click', function(event) {
+	                    if(pre.html() == "") return;
+	                    var alertPanel = angular.element(document.querySelector("#copy_alert_panel"));
+	                    var range = document.createRange();
+	                    range.selectNode(pre[0]);
+	                    window.getSelection().addRange(range);
+	                      try {
+	                        var successful = document.execCommand('copy');
+	                        var msg = successful ? 'successful' : 'unsuccessful';
+	                    } catch(err) {
+	                        console.log('Oops, unable to copy');
+	                    }
+	                     window.getSelection().removeAllRanges();
+	                     alertPanel.show();
+	                    clearTimeout(timerId);
+	                    timerId = setTimeout(function() {
+	                        alertPanel.hide();
+	                    }, 2000)
+	                  });
+	                  */
 	            }
 	        };
 	    });
 	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	/**
@@ -23056,7 +23322,7 @@
 	};
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**
@@ -23095,7 +23361,7 @@
 	};
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	/**
@@ -23133,21 +23399,47 @@
 	};
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	/**
 	 * Created by ��������� on 03.01.2017.
 	 */
 	module.exports = function (homeApp) {
-	  /**
-	   * Get list of values service
-	   */
-	  homeApp.service('DirectoryService', function ($http) {});
+	    /**
+	     * Get list of values service
+	     */
+	    homeApp.service('DirectoryService', function ($http) {
+
+	        // ��������� ������ ���� ���
+	        this.getIssues = function () {
+	            return $http.get("ajax/directory/get_issues.php");
+	        };
+
+	        // ��������� ������ ������ ������ ����
+	        this.getSubIssues = function (issue) {
+	            return $http.post("ajax/directory/get_subissues.php", { "issue": issue });
+	        };
+
+	        // ��������� ����������� ������ �������
+	        this.getContent = function (subIssue) {
+	            return $http.post("ajax/directory/get_contain.php", { "subIssue": subIssue });
+	        };
+
+	        // ���������� ����� �������
+	        this.addSubIssue = function (formData) {
+	            return $http.post("ajax/directory/add_subissue.php", formData);
+	        };
+
+	        // ���������� ����������� �������
+	        this.updateSubIssue = function (data) {
+	            return $http.post("ajax/directory/update_content.php", data);
+	        };
+	    });
 	};
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	/**
@@ -23160,14 +23452,14 @@
 	    homeApp.service('LOVService', function ($http) {
 
 	        // Получение списка значений
-	        this.getListOfTicketStatus = function (lovType) {
+	        this.getListOfValues = function (lovType) {
 	            return $http.post("ajax/lov/get_values.php", { "lov_type": lovType });
 	        };
 	    });
 	};
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	/**
@@ -23181,21 +23473,52 @@
 	};
 
 /***/ },
-/* 27 */
+/* 28 */
+/***/ function(module, exports) {
+
+	/**
+	 * Created by Александр on 04.01.2017.
+	 */
+	module.exports = function (homeApp) {
+
+	    homeApp.factory("DropDownFactory", function ($http, LOVService, DirectoryService) {
+	        return {
+
+	            ticketStatus: LOVService.getListOfValues("TICKET_STATUS").then(function (result) {
+	                return result.data;
+	            }),
+
+	            ticketType: LOVService.getListOfValues("TICKET_TYPE").then(function (result) {
+	                return result.data;
+	            }),
+
+	            project: LOVService.getListOfValues("PROJECT").then(function (result) {
+	                return result.data;
+	            }),
+
+	            issues: DirectoryService.getIssues().then(function (result) {
+	                return result.data;
+	            }),
+
+	            subIssues: ["Жир", "Сало", "Маргарин"], //null // Динамически подтягивается,
+
+	            list: [],
+
+	            header: "Выбрать подтему"
+
+	        };
+	    });
+	};
+
+/***/ },
+/* 29 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 28 */,
-/* 29 */,
 /* 30 */,
-/* 31 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
+/* 31 */,
 /* 32 */,
 /* 33 */
 /***/ function(module, exports) {
@@ -23212,6 +23535,13 @@
 /***/ },
 /* 36 */,
 /* 37 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 38 */,
+/* 39 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

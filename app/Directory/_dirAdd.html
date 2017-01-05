@@ -1,4 +1,39 @@
 <div>
-    <ng-home-header title="Внесение данных в справочник" ctrls="Выбор_данных_из_справочника|dirSel"></ng-home-header>
-
+    <ng-home-header title="Внесение данных" ctrls="Выбор_данных|select"></ng-home-header>
+    <style>
+        .add_subissue_form {
+            width: 80%;
+            margin: 0% 10% 100px 10%;
+        }
+        .add_subissue_form .button_issues {
+            width: 50%;
+        }
+        .add_subissue_form .button_submit {
+            width: 50%;
+        }
+        .add_subissue_form .button_submit input {
+            float: right;
+            width: 450px;
+        }
+        .add_subissue_form textarea {
+            height: 400px;
+            width: 100%;
+            max-width: inherit;
+        }
+    </style>
+    <form name="add_subissue_form">
+        <table class="add_subissue_form">
+            <tr>
+                <td class="button_issues"><ng-drop-down width="450" type="issue" lov-type="issues"></ng-drop-down></td>
+                <td class="button_submit"><input type="submit" class="btn btn-info" value="Добавить" ng-click="DirCtrl.addSubIssue(DirCtrl.subissue, add_subissue_form)"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><br><input class="form-control" name="title" type="text" ng-model="DirCtrl.subissue.title" placeholder="Введите название подтемы..." required></td>
+            </tr>
+            <tr>
+                <td colspan="2"><br><textarea class="form-control" name="contain" type="text" ng-model="DirCtrl.subissue.contain" placeholder="Введите данные..." required></textarea></td>
+            </tr>
+        </table>
+    </form>
 </div>
+

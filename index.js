@@ -9,6 +9,7 @@ var angular = require('angular'); // Angular core
 require('angular-ui-router'); // Angular ui.router
 //require('ui-bootstrap'); // Angular ui.bootstrap
 var homeApp = angular.module('homeApp', ['ui.router']); // Приложение
+//require('angular-sanitize');
 
 require('./app')(homeApp); // Конфигурационный файл приложения
 /** ******************** /Ангуляр *************************** */

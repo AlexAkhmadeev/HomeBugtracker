@@ -1,14 +1,14 @@
 <div>
-    <ng-home-header title="Создание тикета" ctrls="К_списку_тикетов|ticketList"></ng-home-header>
+    <ng-home-header title="Создание тикета" ctrls="К_списку_тикетов|list"></ng-home-header>
 
     <!-- {'title':'Переход','sref':'ticketList' } -->
     <form name="create_ticket_form">
         <table class="create_ticket_table">
             <tr>
                 <td class="ticket_form_label dd_title">Тип</td>
-                <td class="dd_button"><ng-drop-down type="type" lov-type="TICKET_TYPE"></ng-drop-down></td>
+                <td class="dd_button"><ng-drop-down type="type" lov-type="ticketType"></ng-drop-down></td>
                 <td class="ticket_form_label dd_title">Проект</td>
-                <td class="dd_button"><ng-drop-down type="code" lov-type="PROJECT"></ng-drop-down></td>
+                <td class="dd_button"><ng-drop-down type="code" lov-type="project"></ng-drop-down></td>
             </tr>
             <tr>
                 <td colspan="4" class="ticket_form_label"><br><br>Название тикета</td>

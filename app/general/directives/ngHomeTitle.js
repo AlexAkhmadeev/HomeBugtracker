@@ -10,7 +10,9 @@ module.exports = function(homeApp) {
             replace: true,
             controllerAs: 'TitleCtrl',
             bindToController: true,
-            controller: function() {
+            controller: function($scope, $state, $location) {
+                var vm = this;
+
 
             }
         }
